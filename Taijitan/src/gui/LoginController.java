@@ -12,9 +12,9 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 
-public class LoginController extends GridPane
+public class LoginController extends AnchorPane
 {
     @FXML
     private JFXPasswordField txtEmail;

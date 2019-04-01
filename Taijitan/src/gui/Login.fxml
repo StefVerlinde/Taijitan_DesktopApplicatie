@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/logo.png" />
+         </image>
+      </ImageView>
+      <JFXPasswordField alignment="CENTER" focusColor="#336566" layoutX="232.0" layoutY="245.0" promptText="Wachtwoord" />
+      <JFXTextField alignment="CENTER" focusColor="#336566" layoutX="232.0" layoutY="200.0" promptText="E-mailadres" />
+      <JFXButton buttonType="RAISED" layoutX="243.0" layoutY="301.0" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #336566;" text="Inloggen" textFill="WHITE" />
+   </children>
+</AnchorPane>

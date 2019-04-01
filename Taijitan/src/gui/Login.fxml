@@ -14,9 +14,9 @@
             <Image url="@../assets/img/logo.png" />
          </image>
       </ImageView>
-      <JFXPasswordField alignment="CENTER" focusColor="#336566" layoutX="200.0" layoutY="185.0" prefHeight="30.0" prefWidth="200.0" promptText="E-mailadres" unFocusColor="#848484" />
-      <JFXTextField alignment="CENTER" focusColor="#336566" layoutX="200.0" layoutY="237.0" prefHeight="30.0" prefWidth="200.0" promptText="Wachtwoord" unFocusColor="#848484" />
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="212.0" layoutY="301.0" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #336566;" text="Inloggen" textAlignment="CENTER" textFill="WHITE">
+      <JFXPasswordField fx:id="txtEmail" alignment="CENTER" focusColor="#336566" layoutX="200.0" layoutY="185.0" prefHeight="30.0" prefWidth="200.0" promptText="E-mailadres" unFocusColor="#848484" />
+      <JFXTextField fx:id="txtPassword" alignment="CENTER" focusColor="#336566" layoutX="200.0" layoutY="237.0" prefHeight="30.0" prefWidth="200.0" promptText="Wachtwoord" unFocusColor="#848484" />
+      <JFXButton fx:id="btnLogin" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="212.0" layoutY="301.0" onAction="#login" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #336566;" text="Inloggen" textAlignment="CENTER" textFill="WHITE">
       </JFXButton>
    </children>
 </fx:root>

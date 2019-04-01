@@ -40,6 +40,10 @@ public class LoginController extends AnchorPane
     @FXML
     private void login(ActionEvent event)
     {
-        
+        FrameController controller = new FrameController();
+        Scene scene = new Scene(controller);
+        Stage stage = (Stage) getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 }

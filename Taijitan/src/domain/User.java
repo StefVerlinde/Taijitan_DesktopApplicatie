@@ -18,7 +18,7 @@ import javax.persistence.*;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
-
+//testcomment
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

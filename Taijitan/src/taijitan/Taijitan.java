@@ -5,13 +5,10 @@
  */
 package taijitan;
 
-import gui.LoginController;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import domain.Domaincontroller;
+import gui.FrameController;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -22,10 +19,10 @@ import javafx.stage.WindowEvent;
  */
 public class Taijitan extends Application
 {
-    
+    private Domaincontroller dc = new Domaincontroller();
     @Override
     public void start(Stage stage) {
-        Scene scene = new Scene(new LoginController());
+        Scene scene = new Scene(new FrameController(dc));
         stage.setScene(scene);
 
         // The stage will not get smaller than its preferred (initial) size.

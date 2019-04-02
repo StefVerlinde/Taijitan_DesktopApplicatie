@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domain.Domaincontroller;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 
@@ -14,12 +15,14 @@ import javafx.scene.layout.HBox;
  */
 public class FrameController extends HBox
 {
+    private Domaincontroller dc;
     private NavController nav;
     private WelcomeController welcome;
     private MembersController members;
     private Object current;
     
-    public FrameController() {
+    public FrameController(Domaincontroller dc) {
+        this.dc = dc;
         nav = new NavController(this);
         welcome = new WelcomeController();
         members = new MembersController();

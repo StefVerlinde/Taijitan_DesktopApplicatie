@@ -12,6 +12,10 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import util.JPAUtil;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -19,9 +23,12 @@ import javafx.stage.WindowEvent;
  */
 public class Taijitan extends Application
 {
+    private EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+    private EntityManager em = emf.createEntityManager();
     private Domaincontroller dc = new Domaincontroller();
     @Override
     public void start(Stage stage) {
+        dc.getAllUsers();
         Scene scene = new Scene(new FrameController(dc));
         stage.setScene(scene);
 

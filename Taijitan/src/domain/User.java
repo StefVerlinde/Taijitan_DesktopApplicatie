@@ -5,87 +5,120 @@
  */
 package domain;
 
+import repository.UserDao;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
+
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "User")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
+        @NamedQuery(name = "User.findByName", query = "SELECT u FROM user u WHERE u.name = :userName")
+})
 public class User implements Serializable {
 
+    //region DBProperties
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "UserId")
     private Integer userId;
+
     @Column(name = "Name")
     private String name;
+
     @Column(name = "FirstName")
     private String firstName;
+
     @Basic(optional = false)
     @Column(name = "DateOfBirth")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfBirth;
+
     @Column(name = "Street")
     private String street;
+
     @Basic(optional = false)
     @Column(name = "Country")
     private int country;
+
     @Column(name = "HouseNumber")
     private String houseNumber;
+
     @Column(name = "PhoneNumber")
     private String phoneNumber;
+
     @Column(name = "Email")
     private String email;
+
     @Basic(optional = false)
     @Column(name = "DateRegistred")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRegistred;
+
     @Basic(optional = false)
     @Column(name = "Gender")
     private int gender;
+
     @Basic(optional = false)
     @Column(name = "Nationality")
     private int nationality;
+
     @Column(name = "PersonalNationalNumber")
     private String personalNationalNumber;
+
     @Column(name = "BirthPlace")
     private String birthPlace;
+
     @Column(name = "LandlineNumber")
     private String landlineNumber;
+
     @Column(name = "MailParent")
     private String mailParent;
+
     @Basic(optional = false)
     @Column(name = "Discriminator")
     private String discriminator;
+
     @Column(name = "Rank")
     private Integer rank;
+
     @ManyToMany(mappedBy = "userCollection")
     private Collection<Session> sessionCollection;
+
     @OneToMany(mappedBy = "memberUserId")
     private Collection<Comment> commentCollection;
+
     @OneToMany(mappedBy = "userId")
     private Collection<Comment> commentCollection1;
+
     @JoinColumn(name = "CityPostalcode", referencedColumnName = "Postalcode")
     @ManyToOne(optional = false)
     private City cityPostalcode;
+
     @JoinColumn(name = "FormulaId", referencedColumnName = "FormulaId")
     @ManyToOne
     private Formula formulaId;
+
     @JoinColumn(name = "SessionId", referencedColumnName = "SessionId")
     @ManyToOne
     private Session sessionId;
+
     @JoinColumn(name = "SessionId1", referencedColumnName = "SessionId")
     @ManyToOne
     private Session sessionId1;
+
     @OneToMany(mappedBy = "teacherUserId")
     private Collection<Session> sessionCollection1;
+    //endregion
+
 
     public User() {
     }
@@ -108,6 +141,8 @@ public class User implements Serializable {
         return userId;
     }
 
+
+    //region Getters and Setters
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
@@ -311,6 +346,7 @@ public class User implements Serializable {
     public void setSessionCollection1(Collection<Session> sessionCollection1) {
         this.sessionCollection1 = sessionCollection1;
     }
+    //endregion
 
     @Override
     public int hashCode() {
@@ -336,5 +372,5 @@ public class User implements Serializable {
     public String toString() {
         return "domain.User[ userId=" + userId + " ]";
     }
-    
+
 }

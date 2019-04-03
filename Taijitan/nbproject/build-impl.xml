@@ -272,7 +272,7 @@ is divided into following sections:
         <property name="jar.index" value="false"/>
         <property name="jar.index.metainf" value="${jar.index}"/>
         <property name="copylibs.rebase" value="true"/>
-        <available file="${meta.inf.dir}/persistence.xml" property="has.persistence.xml"/>
+        <available file="${meta.inf.dir}/persistence.xml" property="has.repository.xml"/>
         <condition property="junit.available">
             <or>
                 <available classname="org.junit.Test" classpath="${run.test.classpath}"/>
@@ -1111,10 +1111,10 @@ is divided into following sections:
             <fileset dir="${src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
         </copy>
     </target>
-    <target if="has.persistence.xml" name="-copy-persistence-xml">
+    <target if="has.persistence.xml" name="-copy-repository-xml">
         <mkdir dir="${build.classes.dir}/META-INF"/>
         <copy todir="${build.classes.dir}/META-INF">
-            <fileset dir="${meta.inf.dir}" includes="persistence.xml orm.xml"/>
+            <fileset dir="${meta.inf.dir}" includes="repository.xml orm.xml"/>
         </copy>
     </target>
     <target name="-post-compile">

@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "Formula")
+@Table(name = "formula")
 @NamedQueries({
     @NamedQuery(name = "Formula.findAll", query = "SELECT f FROM Formula f")})
 public class Formula implements Serializable {

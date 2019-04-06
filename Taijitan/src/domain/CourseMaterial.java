@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "CourseMaterial")
+@Table(name = "courseMaterial")
 @NamedQueries({
     @NamedQuery(name = "CourseMaterial.findAll", query = "SELECT c FROM CourseMaterial c")})
 public class CourseMaterial implements Serializable {

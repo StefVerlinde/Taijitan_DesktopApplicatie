@@ -18,9 +18,9 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 @NamedQueries({
-        @NamedQuery(name = "User.findByName", query = "SELECT u FROM user u WHERE u.name = :userName")
+//        @NamedQuery(name = "User.findByName", query = "SELECT u FROM user u WHERE u.name = :userName")
 })
 public class User implements Serializable {
 
@@ -370,7 +370,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.User[ userId=" + userId + " ]";
+        return firstName + " " + name;
     }
 
 }

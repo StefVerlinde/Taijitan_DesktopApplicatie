@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "TrainingDay")
+@Table(name = "trainingDay")
 @NamedQueries({
     @NamedQuery(name = "TrainingDay.findAll", query = "SELECT t FROM TrainingDay t")})
 public class TrainingDay implements Serializable {

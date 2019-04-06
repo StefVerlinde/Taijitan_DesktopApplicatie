@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "Image")
+@Table(name = "image")
 @NamedQueries({
     @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i")})
 public class Image implements Serializable {

@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "NonMember")
+@Table(name = "nonMember")
 @NamedQueries({
     @NamedQuery(name = "NonMember.findAll", query = "SELECT n FROM NonMember n")})
 public class NonMember implements Serializable {

@@ -14,7 +14,7 @@
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://taijitanmysql.mysql.database.azure.com:3306/taijitan?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="taijitanadmin@taijitanmysql"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="P2P1819_G08"/>
     </properties>
   </persistence-unit>

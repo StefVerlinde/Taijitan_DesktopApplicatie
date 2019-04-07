@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="TaijitanNB.jnlp">
+    <information>
+        <title>TaijitanNB</title>
+        <vendor>robbe</vendor>
+        <description>null</description>
+        <offline-allowed/>
+    </information>
+    <update check="always"/>
+    <resources>
+        <j2se version="10.0.2+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="TaijitanNB.jar" size="296654" download="eager"/>
+        <jar href="lib\derbyclient-10.14.2.0.jar" size="588394" download="eager"/>
+        <jar href="lib\eclipselink.jar" size="9230449" download="eager"/>
+        <jar href="lib\javax.annotation_1.2.0.v201602091430.jar" size="29148" download="eager"/>
+        <jar href="lib\javax.persistence-2.1.0.jar" size="162126" download="eager"/>
+        <jar href="lib\javax.persistence.jar" size="129793" download="eager"/>
+        <jar href="lib\jfoenix-9.0.8.jar" size="2419463" download="eager"/>
+        <jar href="lib\mysql-connector-java-8.0.15.jar" size="2134905" download="eager"/>
+        <jar href="lib\org.eclipse.persistence.antlr-2.5.2.jar" size="189645" download="eager"/>
+        <jar href="lib\org.eclipse.persistence.asm-2.5.2.jar" size="271204" download="eager"/>
+        <jar href="lib\org.eclipse.persistence.core-2.5.2.jar" size="5056217" download="eager"/>
+        <jar href="lib\org.eclipse.persistence.jpa-2.5.2.jar" size="1364245" download="eager"/>
+        <jar href="lib\org.eclipse.persistence.jpa.jpql-2.5.2.jar" size="1366247" download="eager"/>
+    </resources>
+    <jfx:javafx-desc width="800" height="600" main-class="taijitan.Taijitan" name="Taijitan"/>
+</jnlp>
+

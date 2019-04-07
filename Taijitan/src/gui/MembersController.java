@@ -7,7 +7,6 @@ package gui;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -17,7 +16,6 @@ import javafx.scene.layout.BorderPane;
  */
 public class MembersController extends BorderPane
 {
-
     public MembersController()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members.fxml"));

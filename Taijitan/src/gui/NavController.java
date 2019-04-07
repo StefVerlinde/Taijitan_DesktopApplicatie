@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
  */
 public class NavController extends VBox
 {
+
     @FXML
     private JFXButton btnMembers;
     @FXML

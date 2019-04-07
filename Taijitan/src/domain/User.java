@@ -18,7 +18,7 @@ import javax.persistence.*;
  * @author tijsm
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @NamedQueries({
 //        @NamedQuery(name = "User.findByName", query = "SELECT u FROM user u WHERE u.name = :userName")
 })

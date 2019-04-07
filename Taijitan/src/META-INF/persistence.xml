@@ -12,9 +12,9 @@
     <class>domain.TrainingDay</class>
     <class>domain.User</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://taijitanmysql.mysql.database.azure.com:3306/taijitan?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"/>
-      <property name="javax.persistence.jdbc.user" value="taijitanadmin@taijitanmysql"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://taijitandbserver.database.windows.net:1433;database=TaijitanG08_db;user=taijitanadmin@taijitandbserver;password=P2P1819_G08;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>
+      <property name="javax.persistence.jdbc.user" value="taijitanadmin"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="P2P1819_G08"/>
     </properties>
   </persistence-unit>

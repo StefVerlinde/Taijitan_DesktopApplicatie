@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="derbyclient-10.14.2.0">
     <CLASSES>
-      <root url="jar://C:/jars/derbyclient-10.14.2.0.jar!/" />
-      <root url="jar://C:/jars/eclipselink.jar!/" />
-      <root url="jar://C:/jars/javax.annotation_1.2.0.v201602091430.jar!/" />
-      <root url="jar://C:/jars/javax.persistence.jar!/" />
-      <root url="jar://C:/jars/jfoenix-9.0.8.jar!/" />
-      <root url="jar://C:/jars/mysql-connector-java-8.0.15.jar!/" />
+      <root url="jar://C:/Jars/derbyclient-10.14.2.0.jar!/" />
+      <root url="jar://C:/Jars/eclipselink.jar!/" />
+      <root url="jar://C:/Jars/javax.annotation_1.2.0.v201602091430.jar!/" />
+      <root url="jar://C:/Jars/javax.persistence.jar!/" />
+      <root url="jar://C:/Jars/jfoenix-9.0.8.jar!/" />
+      <root url="jar://C:/Jars/mysql-connector-java-8.0.15.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

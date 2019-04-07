@@ -24,8 +24,8 @@ public class PresentsConttroller extends AnchorPane {
         this.dc = dc;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Presents.fxml"));
-        //loader.setRoot(this);
-        //loader.setController(this);
+        loader.setRoot(this);
+        loader.setController(this);
 
         try{
             loader.load();
@@ -46,6 +46,8 @@ public class PresentsConttroller extends AnchorPane {
         System.out.println(dummyLijst.toString());
 
         lstSessions = new JFXListView();
+        // deze initialisatie zou normaal niet moeten?
+
         lstSessions.setItems((FXCollections.observableArrayList((dummyLijst))));
     }
 }

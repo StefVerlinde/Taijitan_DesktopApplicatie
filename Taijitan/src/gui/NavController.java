@@ -23,6 +23,8 @@ public class NavController extends VBox
     @FXML
     private JFXButton btnMembers;
     @FXML
+    private JFXButton btnPresents;
+    @FXML
     private JFXButton btnActivities;
     @FXML
     private JFXButton btnCourseMaterial;
@@ -52,7 +54,13 @@ public class NavController extends VBox
     @FXML
     private void loadMembers(ActionEvent event)
     {
+
         controller.changeContent("members");
+    }
+
+    @FXML
+    private void loadPresents(ActionEvent event) {
+        controller.changeContent("presents");
     }
     @FXML
     private void loadActivities(ActionEvent event)
@@ -72,7 +80,9 @@ public class NavController extends VBox
     @FXML
     private void loadLeaderBoard(ActionEvent event)
     {
-    } 
+    }
+
+
 
     @FXML
     private void loadWelcome(MouseEvent event)

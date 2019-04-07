@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="738.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXListView fx:id="lstSessions" layoutX="14.0" layoutY="139.0" prefHeight="374.0" prefWidth="348.0" />
+      <Label layoutX="182.0" layoutY="14.0" text="Aanwezigheden" textAlignment="CENTER" textFill="#336566">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="148.0" layoutY="95.0" prefHeight="38.0" prefWidth="80.0" text="Sessies" textAlignment="CENTER" textFill="#336566">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="501.0" layoutY="95.0" prefHeight="38.0" prefWidth="80.0" text="Details" textAlignment="CENTER" textFill="#336566">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

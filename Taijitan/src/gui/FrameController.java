@@ -11,32 +11,57 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Screen;
 
-/**
- *
- * @author Jarne
- */
 public class FrameController extends HBox
 {
     private Domaincontroller dc;
     private NavController nav;
     private WelcomeController welcome;
     private MembersController members;
+    private PresentsConttroller presents;
     private Object current;
+    Rectangle2D bounds;
     
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
+        setupStart();
+    }
+
+    private void setupStart(){
         nav = new NavController(this);
-        welcome = new WelcomeController();
-        members = new MembersController(dc);
-        current = welcome;
+
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        bounds = screen.getVisualBounds();
         setWidth(bounds.getWidth());
         setHeight(bounds.getHeight());
-        welcome.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
-        members.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
-        getChildren().addAll(nav,welcome);
+
+        getChildren().add(nav);
+        setupWelcome();
     }
+
+    private void setupWelcome(){
+        welcome = new WelcomeController();
+        current = welcome;
+        welcome.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
+
+        getChildren().add(welcome);
+    }
+
+    private void setupMember(){
+        members = new MembersController(dc);
+        current = members;
+        members.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
+
+        getChildren().add(members);
+    }
+
+    private void setupPresents(){
+        presents = new PresentsConttroller(dc);
+        current = presents;
+        presents.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
+
+        getChildren().add(presents);
+    }
+
     public void changeContent(String string)
     {
         getChildren().remove(current);
@@ -44,12 +69,13 @@ public class FrameController extends HBox
         switch(string.toLowerCase())
         {
             case "members":
-                current = members;
-                getChildren().add(members);
+                setupMember();
                 break;
             case "welcome":
-                current = welcome;
-                getChildren().add(welcome);
+               setupWelcome();
+                break;
+            case "presents":
+                setupPresents();
                 break;
         }
         

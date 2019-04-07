@@ -1,5 +1,7 @@
 package domain;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import repository.UserDao;
 import repository.UserDaoJpa;
 
@@ -24,5 +26,9 @@ public class Domaincontroller {
             System.out.println(u.toString());
         }
         return users;
+    }
+    public ObservableList<User> GetAllUsersFX()
+    {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllUsers()));
     }
 }

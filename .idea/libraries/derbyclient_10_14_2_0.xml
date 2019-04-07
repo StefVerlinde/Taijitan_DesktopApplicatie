@@ -9,6 +9,8 @@
       <root url="jar://C:/Jars/mysql-connector-java-8.0.15.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/Taijitan/src" />
+    </SOURCES>
   </library>
 </component>

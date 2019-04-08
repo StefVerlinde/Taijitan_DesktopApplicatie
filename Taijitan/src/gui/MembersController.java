@@ -2,6 +2,12 @@
 package gui;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
@@ -23,9 +29,35 @@ public class MembersController extends BorderPane
     @FXML
     private JFXTextField txtLastName;
     @FXML
+    private JFXTextField txtDateRegistered;
+    @FXML
+    private JFXTextField txtNationality;
+    @FXML
+    private JFXTextField txtDateOfBirth;
+    @FXML
+    private JFXTextField txtPersonalNationalNumber;
+    @FXML
+    private JFXTextField txtBirthPlace;
+    @FXML
+    private JFXTextField txtGender;
+    @FXML
+    private JFXTextField txtStreet;
+    @FXML
+    private JFXTextField txtPostalCode;
+    @FXML
+    private JFXTextField txtCountry;
+    @FXML
+    private JFXTextField txtHouseNumber;
+    @FXML
+    private JFXTextField txtCityName;
+    @FXML
     private JFXTextField txtEmail;
     @FXML
+    private JFXTextField txtLandLineNumber;
+    @FXML
     private JFXTextField txtPhoneNumber;
+    @FXML
+    private JFXTextField txtMailParent;
 
 
     public MembersController(Domaincontroller dc)
@@ -49,16 +81,36 @@ public class MembersController extends BorderPane
 
     private void buildGui(){
         lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+
         lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
         {
             if(newValue != null)
             {
                 User u = (User) newValue;
-                txtEmail.setText(u.getEmail());
                 txtFirstName.setText(u.getFirstName());
                 txtLastName.setText(u.getName());
+                txtDateOfBirth.setText(formatDate(u.getDateOfBirth()));
+                txtDateRegistered.setText(formatDate(u.getDateRegistred()));
+                txtNationality.setText(String.format("%d",u.getNationality())); //TODO
+                txtBirthPlace.setText(u.getBirthPlace());
+                txtGender.setText(String.format("%d",u.getGender())); //TODO
+                txtPersonalNationalNumber.setText(u.getPersonalNationalNumber());
+                txtStreet.setText(u.getStreet());
+                txtPostalCode.setText(u.getCityPostalcode().getPostalcode());
+                txtCountry.setText(String.format("%d",u.getCountry())); //TODO
+                txtHouseNumber.setText(u.getHouseNumber());
+                txtCityName.setText(u.getCityPostalcode().getName());
+                txtEmail.setText(u.getEmail());
+                txtLandLineNumber.setText(u.getLandlineNumber());
                 txtPhoneNumber.setText(u.getPhoneNumber());
+                txtMailParent.setText(u.getMailParent());
+
             }
         });
+    }
+    public static String formatDate(Date date) {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String output = formatter.format(date);
+        return output;
     }
 }

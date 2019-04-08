@@ -6,6 +6,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
@@ -17,8 +18,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "session")
-@NamedQueries({
-    @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s")})
+//@NamedQueries({
+  //  @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s")})
 public class Session implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -189,7 +190,22 @@ public class Session implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Session[ sessionId=" + sessionId + " ]";
+        String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        System.out.println(newstring); // 2011-01-18
+        return String.format("%s", dateFormatter(getDate()));
+    }
+
+
+    private String dateFormatter(Date date){
+        int minutes = date.getMinutes();
+        int hours = date.getHours();
+        int days = date.getDay();
+        int months = date.getMonth();
+        int years = date.getYear();
+
+        String formatted = String.format("%d/%d/%d  --  %d:%d", years, months, days, hours, minutes);
+
+        return formatted;
     }
     
 }

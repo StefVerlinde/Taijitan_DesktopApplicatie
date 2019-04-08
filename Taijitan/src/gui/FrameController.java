@@ -8,7 +8,6 @@ package gui;
 import domain.Domaincontroller;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.stage.Screen;
 
 public class FrameController extends HBox
@@ -17,7 +16,7 @@ public class FrameController extends HBox
     private NavController nav;
     private WelcomeController welcome;
     private MembersController members;
-    private PresentsConttroller presents;
+    private PresentsController presents;
     private Object current;
     Rectangle2D bounds;
     
@@ -55,7 +54,7 @@ public class FrameController extends HBox
     }
 
     private void setupPresents(){
-        presents = new PresentsConttroller(dc);
+        presents = new PresentsController(dc);
         current = presents;
         presents.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
 

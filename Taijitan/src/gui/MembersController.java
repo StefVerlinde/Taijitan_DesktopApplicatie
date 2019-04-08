@@ -10,8 +10,6 @@ import domain.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
 import javafx.scene.layout.BorderPane;
 
 

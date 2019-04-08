@@ -1,0 +1,76 @@
+package gui;
+
+import domain.Domaincontroller;
+import domain.Session;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import com.jfoenix.controls.JFXListView;
+import javafx.fxml.FXML;
+
+import java.awt.*;
+import java.io.IOException;
+
+
+public class PresentsController extends AnchorPane {
+
+    @FXML
+    private JFXListView lstSessions;
+
+    @FXML
+    private Label lblTeacher;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    private JFXListView<?> lstPressents;
+
+
+    private Domaincontroller dc;
+
+
+    public PresentsController(Domaincontroller dc){
+        this.dc = dc;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Presents.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+
+
+
+        try{
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        buildGui();
+    }
+
+    private void buildGui(){
+      lstSessions.setItems(FXCollections.observableArrayList(dc.getAllSessions()));
+
+
+
+        lstSessions.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
+        {
+            if(newValue != null)
+            {
+                Session sellectedSession = (Session) newValue;
+
+
+                System.out.println("tekst voor in lbl: " + sellectedSession.toString());
+                System.out.println("tekst voor in lbl2: " + sellectedSession.getTeacherUserId().getFirstName());
+
+                lblDate = new Label(sellectedSession.toString());
+                lblTeacher = new Label(sellectedSession.getTeacherUserId().getFirstName());
+
+
+            }
+        });
+
+
+    }
+}

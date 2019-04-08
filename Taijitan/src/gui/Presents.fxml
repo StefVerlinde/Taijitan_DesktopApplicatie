@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="738.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="540.0" prefWidth="1017.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXListView fx:id="lstSessions" layoutX="14.0" layoutY="139.0" prefHeight="374.0" prefWidth="348.0" />
       <Label layoutX="182.0" layoutY="14.0" text="Aanwezigheden" textAlignment="CENTER" textFill="#336566">
@@ -23,5 +23,9 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <Label fx:id="lblTeacher" layoutX="393.0" layoutY="152.0" text="Lesgever:" />
+      <Label fx:id="lblDate" layoutX="393.0" layoutY="169.0" text="Datum:" />
+      <Label layoutX="393.0" layoutY="200.0" text="Aanwezigen:" />
+      <JFXListView fx:id="lstPressents" layoutX="392.0" layoutY="218.0" prefHeight="294.0" prefWidth="602.0" />
    </children>
-</AnchorPane>
+</fx:root>

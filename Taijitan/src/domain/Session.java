@@ -7,6 +7,7 @@ package domain;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.*;
@@ -196,15 +197,18 @@ public class Session implements Serializable {
 
 
     private String dateFormatter(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
         int minutes = date.getMinutes();
         int hours = date.getHours();
         int days = date.getDay();
         int months = date.getMonth();
-        int years = date.getYear();
+        int years = cal.get(Calendar.YEAR);
 
-        String formatted = String.format("%d/%d/%d  --  %d:%d", years, months, days, hours, minutes);
-
-        return formatted;
+        return  String.format("%d/%d/%d  --  %d:%d", years, months, days, hours, minutes);
     }
+
+
     
 }

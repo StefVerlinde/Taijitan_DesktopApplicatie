@@ -17,6 +17,7 @@ public class FrameController extends HBox
     private WelcomeController welcome;
     private MembersController members;
     private PresentsController presents;
+    private OverviewsController overviews;
     private Object current;
     Rectangle2D bounds;
     
@@ -53,12 +54,13 @@ public class FrameController extends HBox
         getChildren().add(members);
     }
 
-    private void setupPresents(){
-        presents = new PresentsController(dc);
-        current = presents;
-        presents.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
+    private void setupOverviews() {
+        overviews = new OverviewsController(dc);
+        current = overviews;
 
-        getChildren().add(presents);
+
+        getChildren().add(overviews);
+
     }
 
     public void changeContent(String string)
@@ -73,11 +75,13 @@ public class FrameController extends HBox
             case "welcome":
                setupWelcome();
                 break;
-            case "presents":
-                setupPresents();
-                break;
+            case "overviews":
+                    setupOverviews();
+                    break;
         }
         
         
     }
+
+
 }

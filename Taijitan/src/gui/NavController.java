@@ -75,11 +75,13 @@ public class NavController extends VBox
     @FXML
     private void loadOverviews(ActionEvent event)
     {
+        controller.changeContent("overviews");
     }
 
     @FXML
     private void loadLeaderBoard(ActionEvent event)
     {
+
     }
 
 

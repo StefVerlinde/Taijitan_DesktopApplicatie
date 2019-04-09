@@ -7,6 +7,8 @@ import repository.SessionDaoJpa;
 import repository.UserDao;
 import repository.UserDaoJpa;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Domaincontroller {
@@ -51,5 +53,16 @@ public class Domaincontroller {
         }
 
         return sessions;
+    }
+
+    public List<String> getNamesMembersFromSession(Session session){
+        List<User> users = new ArrayList<>(session.getUserCollection());
+
+        List<String> userNames = new ArrayList<>();
+        for(User u : users){
+            userNames.add(String.format("%s %s", u.getFirstName(), u.getName()));
+        }
+
+        return userNames;
     }
 }

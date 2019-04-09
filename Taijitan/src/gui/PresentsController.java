@@ -5,11 +5,12 @@ import domain.Session;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 
-import java.awt.*;
+
 import java.io.IOException;
 
 
@@ -25,7 +26,7 @@ public class PresentsController extends AnchorPane {
     private Label lblDate;
 
     @FXML
-    private JFXListView<?> lstPressents;
+    private JFXListView<String> lstPressents;
 
 
     private Domaincontroller dc;
@@ -64,8 +65,12 @@ public class PresentsController extends AnchorPane {
                 System.out.println("tekst voor in lbl: " + sellectedSession.toString());
                 System.out.println("tekst voor in lbl2: " + sellectedSession.getTeacherUserId().getFirstName());
 
-                lblDate = new Label(sellectedSession.toString());
+
+                lblDate.setText(String.format("Datum: %s", sellectedSession.toString()));
+                lblTeacher.setText(String.format("Trainer: %s %s", sellectedSession.getTeacherUserId().getFirstName(), sellectedSession.getTeacherUserId().getName()));
                 lblTeacher = new Label(sellectedSession.getTeacherUserId().getFirstName());
+
+                lstPressents.setItems(FXCollections.observableArrayList(dc.getNamesMembersFromSession(sellectedSession)));
 
 
             }

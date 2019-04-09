@@ -16,7 +16,7 @@ public class FrameController extends HBox
     private NavController nav;
     private WelcomeController welcome;
     private MembersController members;
-    private PresentsController presents;
+    private _OverviewPresentsController presents;
     private OverviewsController overviews;
     private Object current;
     Rectangle2D bounds;

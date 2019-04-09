@@ -2,7 +2,6 @@ package gui;
 
 import domain.Domaincontroller;
 import domain.Session;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -14,7 +13,7 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 
 
-public class PresentsController extends AnchorPane {
+public class _OverviewPresentsController extends AnchorPane {
 
     @FXML
     private JFXListView lstSessions;
@@ -32,10 +31,10 @@ public class PresentsController extends AnchorPane {
     private Domaincontroller dc;
 
 
-    public PresentsController(Domaincontroller dc){
+    public _OverviewPresentsController(Domaincontroller dc){
         this.dc = dc;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Presents.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewPresents.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 

@@ -11,7 +11,9 @@ import java.util.Date;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import domain.Country;
 import domain.Domaincontroller;
+import domain.Gender;
 import domain.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -91,13 +93,13 @@ public class MembersController extends BorderPane
                 txtLastName.setText(u.getName());
                 txtDateOfBirth.setText(formatDate(u.getDateOfBirth()));
                 txtDateRegistered.setText(formatDate(u.getDateRegistred()));
-                txtNationality.setText(String.format("%d",u.getNationality())); //TODO
+                txtNationality.setText(Country.getById(u.getNationality()).name());
                 txtBirthPlace.setText(u.getBirthPlace());
-                txtGender.setText(String.format("%d",u.getGender())); //TODO
+                txtGender.setText(Gender.getById(u.getGender()).name());
                 txtPersonalNationalNumber.setText(u.getPersonalNationalNumber());
                 txtStreet.setText(u.getStreet());
                 txtPostalCode.setText(u.getCityPostalcode().getPostalcode());
-                txtCountry.setText(String.format("%d",u.getCountry())); //TODO
+                txtCountry.setText(Country.getById(u.getCountry()).name());
                 txtHouseNumber.setText(u.getHouseNumber());
                 txtCityName.setText(u.getCityPostalcode().getName());
                 txtEmail.setText(u.getEmail());

@@ -65,4 +65,9 @@ public class Domaincontroller {
 
         return userNames;
     }
+    public void updateUser(User user)
+    {
+        userDao.update(user);
+        System.out.println("update success");
+    }
 }

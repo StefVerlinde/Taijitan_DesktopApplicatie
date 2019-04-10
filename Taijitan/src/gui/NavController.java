@@ -91,4 +91,10 @@ public class NavController extends VBox
     {
         controller.changeContent("welcome");
     }
+
+    @FXML
+    private void exit()
+    {
+        System.exit(0);
+    }
 }

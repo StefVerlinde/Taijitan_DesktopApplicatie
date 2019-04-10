@@ -5,25 +5,22 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
+import java.time.ZoneId;
 import java.util.Date;
 
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextField;
-import domain.Country;
-import domain.Domaincontroller;
-import domain.Gender;
-import domain.User;
+import com.jfoenix.controls.*;
+import domain.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 
 public class MembersController extends BorderPane
 {
     private Domaincontroller dc;
+    private User user;
     @FXML
     private JFXListView lstMembers;
     @FXML
@@ -31,23 +28,23 @@ public class MembersController extends BorderPane
     @FXML
     private JFXTextField txtLastName;
     @FXML
-    private JFXTextField txtDateRegistered;
+    private Label lblDateRegistered;
     @FXML
-    private JFXTextField txtNationality;
+    private JFXComboBox cmbNationality;
     @FXML
-    private JFXTextField txtDateOfBirth;
+    private JFXDatePicker dpBirthDate;
     @FXML
     private JFXTextField txtPersonalNationalNumber;
     @FXML
     private JFXTextField txtBirthPlace;
     @FXML
-    private JFXTextField txtGender;
+    private JFXComboBox cmbGender;
     @FXML
     private JFXTextField txtStreet;
     @FXML
     private JFXTextField txtPostalCode;
     @FXML
-    private JFXTextField txtCountry;
+    private JFXComboBox cmbCountry;
     @FXML
     private JFXTextField txtHouseNumber;
     @FXML
@@ -60,6 +57,8 @@ public class MembersController extends BorderPane
     private JFXTextField txtPhoneNumber;
     @FXML
     private JFXTextField txtMailParent;
+    @FXML
+    private JFXButton btnEdit;
 
 
     public MembersController(Domaincontroller dc)
@@ -88,31 +87,76 @@ public class MembersController extends BorderPane
         {
             if(newValue != null)
             {
-                User u = (User) newValue;
-                txtFirstName.setText(u.getFirstName());
-                txtLastName.setText(u.getName());
-                txtDateOfBirth.setText(formatDate(u.getDateOfBirth()));
-                txtDateRegistered.setText(formatDate(u.getDateRegistred()));
-                txtNationality.setText(Country.getById(u.getNationality()).name());
-                txtBirthPlace.setText(u.getBirthPlace());
-                txtGender.setText(Gender.getById(u.getGender()).name());
-                txtPersonalNationalNumber.setText(u.getPersonalNationalNumber());
-                txtStreet.setText(u.getStreet());
-                txtPostalCode.setText(u.getCityPostalcode().getPostalcode());
-                txtCountry.setText(Country.getById(u.getCountry()).name());
-                txtHouseNumber.setText(u.getHouseNumber());
-                txtCityName.setText(u.getCityPostalcode().getName());
-                txtEmail.setText(u.getEmail());
-                txtLandLineNumber.setText(u.getLandlineNumber());
-                txtPhoneNumber.setText(u.getPhoneNumber());
-                txtMailParent.setText(u.getMailParent());
+                setUser((User) newValue);
+                txtFirstName.setText(user.getFirstName());
+                txtLastName.setText(user.getName());
+                txtBirthPlace.setText(user.getBirthPlace());
+                txtPersonalNationalNumber.setText(user.getPersonalNationalNumber());
+                txtStreet.setText(user.getStreet());
+                txtPostalCode.setText(user.getCityPostalcode().getPostalcode());
+                txtHouseNumber.setText(user.getHouseNumber());
+                txtCityName.setText(user.getCityPostalcode().getName());
+                txtEmail.setText(user.getEmail());
+                txtLandLineNumber.setText(user.getLandlineNumber());
+                txtPhoneNumber.setText(user.getPhoneNumber());
+                txtMailParent.setText(user.getMailParent());
 
+                cmbGender.getItems().setAll(Gender.values());
+                cmbGender.getSelectionModel().select(user.getGender());
+                cmbNationality.getItems().setAll(Country.values());
+                cmbNationality.getSelectionModel().select(user.getNationality());
+                cmbCountry.getItems().setAll(Country.values());
+                cmbCountry.getSelectionModel().select(user.getCountry());
+
+                dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
+                lblDateRegistered.setText(formatDate(user.getDateRegistred()));
             }
         });
     }
-    public static String formatDate(Date date) {
+    private void setUser(User user) {
+        if(user != null)
+            this.user = user;
+    }
+    @FXML
+    private void edit()
+    {
+        if(user != null) {
+            user.setFirstName(txtFirstName.getText());
+            user.setName(txtLastName.getText());
+            user.setBirthPlace(txtBirthPlace.getText());
+            user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
+            user.setStreet(txtStreet.getText());
+            if(!user.getCityPostalcode().getPostalcode().equals(txtPostalCode.getText()))
+            {
+                City newCity = new City(txtPostalCode.getText());
+                newCity.setName(txtCityName.getText());
+                user.setCityPostalcode(newCity);
+            }
+            user.setHouseNumber(txtHouseNumber.getText());
+            user.setEmail(txtEmail.getText());
+            user.setLandlineNumber(txtLandLineNumber.getText());
+            user.setMailParent(txtMailParent.getText());
+            user.setPhoneNumber(txtPhoneNumber.getText());
+            user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
+            user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
+            user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
+            user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
+
+            dc.updateUser(user);
+        }
+    }
+    private String formatDate(Date date) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String output = formatter.format(date);
         return output;
+    }
+    private LocalDate convertToLocalDate(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+    private Date convertToDate(LocalDate localDate)
+    {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 }

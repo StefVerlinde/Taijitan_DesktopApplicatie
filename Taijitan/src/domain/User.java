@@ -5,6 +5,7 @@
  */
 package domain;
 
+import javafx.beans.property.SimpleStringProperty;
 import repository.UserDao;
 
 import java.io.Serializable;
@@ -119,6 +120,12 @@ public class User implements Serializable {
     private Collection<Session> sessionCollection1;
     //endregion
 
+
+    private final SimpleStringProperty familyNameProperty = new SimpleStringProperty();
+    private final SimpleStringProperty firstNameProperty = new SimpleStringProperty();
+    private final SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
+    private final SimpleStringProperty telephoneProperty = new SimpleStringProperty();
+    private final SimpleStringProperty emailProperty = new SimpleStringProperty();
 
     public User() {
     }
@@ -371,5 +378,24 @@ public class User implements Serializable {
     public String toString() {
         return firstName + " " + name;
     }
+
+    public SimpleStringProperty  familyNameProperty(){
+        return this.familyNameProperty;
+    }
+    public SimpleStringProperty  firstNameProperty(){
+        return this.firstNameProperty;
+    }
+    public SimpleStringProperty  dateOfBirthProperty(){
+        return this.dateOfBirthProperty;
+    }
+    public SimpleStringProperty  telephoneProperty(){
+        return this.telephoneProperty;
+    }
+    public SimpleStringProperty  emailProperty(){
+        return this.emailProperty;
+    }
+
+
+
 
 }

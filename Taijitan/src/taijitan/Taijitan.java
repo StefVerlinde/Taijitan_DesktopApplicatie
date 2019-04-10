@@ -37,7 +37,7 @@ public class Taijitan extends Application
             stage.setMinWidth(stage.getWidth());
             stage.setMinHeight(stage.getHeight());
         });
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.show();
     }
 

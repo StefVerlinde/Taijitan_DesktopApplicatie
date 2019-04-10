@@ -43,20 +43,20 @@ public class _OverViewRegisteredUsersController {
             throw new RuntimeException(ex);
         }
 
-        colFamilyName.setCellValueFactory(cellData ->
-                cellData.getValue().familyNameProperty());
-
-        colFirstName.setCellValueFactory(cellData ->
-                cellData.getValue().firstNameProperty());
-
-        colDateOfBirth.setCellValueFactory(cellData ->
-                cellData.getValue().dateOfBirthProperty());
-
-        colTelephone.setCellValueFactory(cellData ->
-                cellData.getValue().telephoneProperty());
-
-        colEmail.setCellValueFactory(cellData ->
-                cellData.getValue().emailProperty());
+//        colFamilyName.setCellValueFactory(cellData ->
+//                cellData.getValue().familyNameProperty());
+//
+//        colFirstName.setCellValueFactory(cellData ->
+//                cellData.getValue().firstNameProperty());
+//
+//        colDateOfBirth.setCellValueFactory(cellData ->
+//                cellData.getValue().dateOfBirthProperty());
+//
+//        colTelephone.setCellValueFactory(cellData ->
+//                cellData.getValue().telephoneProperty());
+//
+//        colEmail.setCellValueFactory(cellData ->
+//                cellData.getValue().emailProperty());
 
         tblRegistredUsers.setItems(dc.GetAllUsersFX());
 

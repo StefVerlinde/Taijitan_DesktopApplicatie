@@ -121,11 +121,11 @@ public class User implements Serializable {
     //endregion
 
 
-    private final SimpleStringProperty familyNameProperty = new SimpleStringProperty();
-    private final SimpleStringProperty firstNameProperty = new SimpleStringProperty();
-    private final SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
-    private final SimpleStringProperty telephoneProperty = new SimpleStringProperty();
-    private final SimpleStringProperty emailProperty = new SimpleStringProperty();
+//    private final SimpleStringProperty familyNameProperty = new SimpleStringProperty();
+//    private final SimpleStringProperty firstNameProperty = new SimpleStringProperty();
+//    private final SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
+//    private final SimpleStringProperty telephoneProperty = new SimpleStringProperty();
+//    private final SimpleStringProperty emailProperty = new SimpleStringProperty();
 
     public User() {
     }
@@ -379,21 +379,21 @@ public class User implements Serializable {
         return firstName + " " + name;
     }
 
-    public SimpleStringProperty  familyNameProperty(){
-        return this.familyNameProperty;
-    }
-    public SimpleStringProperty  firstNameProperty(){
-        return this.firstNameProperty;
-    }
-    public SimpleStringProperty  dateOfBirthProperty(){
-        return this.dateOfBirthProperty;
-    }
-    public SimpleStringProperty  telephoneProperty(){
-        return this.telephoneProperty;
-    }
-    public SimpleStringProperty  emailProperty(){
-        return this.emailProperty;
-    }
+//    public SimpleStringProperty  familyNameProperty(){
+//        return this.familyNameProperty;
+//    }
+//    public SimpleStringProperty  firstNameProperty(){
+//        return this.firstNameProperty;
+//    }
+//    public SimpleStringProperty  dateOfBirthProperty(){
+//        return this.dateOfBirthProperty;
+//    }
+//    public SimpleStringProperty  telephoneProperty(){
+//        return this.telephoneProperty;
+//    }
+//    public SimpleStringProperty  emailProperty(){
+//        return this.emailProperty;
+//    }
 
 
 

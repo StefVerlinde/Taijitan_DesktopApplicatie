@@ -55,11 +55,11 @@ public class FrameController extends HBox
     }
 
     private void setupOverviews() {
-        overviews = new OverviewsController(dc);
-        current = overviews;
-
-
-        getChildren().add(overviews);
+//        overviews = new OverviewsController(dc);
+//        current = overviews;
+//
+//
+//        getChildren().add(overviews);
 
     }
 

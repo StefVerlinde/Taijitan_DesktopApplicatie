@@ -70,4 +70,10 @@ public class Domaincontroller {
         userDao.update(user);
         System.out.println("update success");
     }
+
+    public void deleteUser(User user)
+    {
+        userDao.delete(user);
+        System.out.println("delete success");
+    }
 }

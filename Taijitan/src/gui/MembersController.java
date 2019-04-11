@@ -58,7 +58,11 @@ public class MembersController extends BorderPane
     @FXML
     private JFXTextField txtMailParent;
     @FXML
+    private JFXButton btnDelete;
+    @FXML
     private JFXButton btnEdit;
+    @FXML
+    private JFXButton btnAdd;
 
 
     public MembersController(Domaincontroller dc)
@@ -83,11 +87,33 @@ public class MembersController extends BorderPane
     private void buildGui(){
         lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
 
+
         lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
         {
             if(newValue != null)
             {
                 setUser((User) newValue);
+
+                txtFirstName.setDisable(false);
+                txtLastName.setDisable(false);
+                txtBirthPlace.setDisable(false);
+                txtPersonalNationalNumber.setDisable(false);
+                txtStreet.setDisable(false);
+                txtPostalCode.setDisable(false);
+                txtHouseNumber.setDisable(false);
+                txtCityName.setDisable(false);
+                txtEmail.setDisable(false);
+                txtLandLineNumber.setDisable(false);
+                txtPhoneNumber.setDisable(false);
+                txtMailParent.setDisable(false);
+                cmbGender.setDisable(false);
+                cmbNationality.setDisable(false);
+                cmbCountry.setDisable(false);
+                dpBirthDate.setDisable(false);
+                btnEdit.setDisable(false);
+                btnAdd.setDisable(false);
+                btnDelete.setDisable(false);
+
                 txtFirstName.setText(user.getFirstName());
                 txtLastName.setText(user.getName());
                 txtBirthPlace.setText(user.getBirthPlace());
@@ -116,6 +142,14 @@ public class MembersController extends BorderPane
     private void setUser(User user) {
         if(user != null)
             this.user = user;
+    }
+
+    @FXML
+    private void delete(){
+        if(user != null){
+            AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
+            dc.deleteUser(user);
+        }
     }
     @FXML
     private void edit()

@@ -5,18 +5,17 @@
  */
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.*;
 
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "courseMaterial")
 @NamedQueries({
-    @NamedQuery(name = "CourseMaterial.findAll", query = "SELECT c FROM CourseMaterial c")})
+        @NamedQuery(name = "CourseMaterial.findAll", query = "SELECT c FROM CourseMaterial c")})
 public class CourseMaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -129,5 +128,5 @@ public class CourseMaterial implements Serializable {
     public String toString() {
         return "domain.CourseMaterial[ materialId=" + materialId + " ]";
     }
-    
+
 }

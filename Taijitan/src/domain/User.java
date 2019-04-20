@@ -7,7 +7,6 @@ package domain;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -122,15 +121,15 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     //properties voor table
     @Transient
-    private  SimpleStringProperty familyNameProperty = new SimpleStringProperty();
+    private SimpleStringProperty familyNameProperty = new SimpleStringProperty();
     @Transient
-    private  SimpleStringProperty firstNameProperty = new SimpleStringProperty();
+    private SimpleStringProperty firstNameProperty = new SimpleStringProperty();
     @Transient
-    private  SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
+    private SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
     @Transient
-    private  SimpleStringProperty telephoneProperty = new SimpleStringProperty();
+    private SimpleStringProperty telephoneProperty = new SimpleStringProperty();
     @Transient
-    private  SimpleStringProperty emailProperty = new SimpleStringProperty();
+    private SimpleStringProperty emailProperty = new SimpleStringProperty();
 
     public User() {
     }
@@ -392,7 +391,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     }
 
-    private String dateFormatter(Date date){
+    public String dateFormatter(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
@@ -400,7 +399,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         int months = date.getMonth();
         int years = cal.get(Calendar.YEAR);
 
-        return  String.format("%d/%d/%d ", years, months, days);
+        return String.format("%d/%d/%d ", years, months, days);
     }
 
     public SimpleStringProperty firstNameProperty() {
@@ -422,10 +421,6 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.emailProperty = new SimpleStringProperty(email);
         return this.emailProperty;
     }
-
-
-
-
 
 
 }

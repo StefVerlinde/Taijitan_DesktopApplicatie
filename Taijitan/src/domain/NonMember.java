@@ -5,16 +5,16 @@
  */
 package domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
+
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "nonMember")
 @NamedQueries({
-    @NamedQuery(name = "NonMember.findAll", query = "SELECT n FROM NonMember n")})
+        @NamedQuery(name = "NonMember.findAll", query = "SELECT n FROM NonMember n")})
 public class NonMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -102,5 +102,5 @@ public class NonMember implements Serializable {
     public String toString() {
         return "domain.NonMember[ id=" + id + " ]";
     }
-    
+
 }

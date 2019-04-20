@@ -3,14 +3,10 @@ package gui;
 import com.jfoenix.controls.JFXButton;
 import domain.Domaincontroller;
 import domain.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -37,7 +33,7 @@ public class OverviewsController extends VBox {
     @FXML
     private TableView<User> table = new TableView();
 
-    public OverviewsController(Domaincontroller dc){
+    public OverviewsController(Domaincontroller dc) {
         this.dc = dc;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("overviews.fxml"));
@@ -45,8 +41,7 @@ public class OverviewsController extends VBox {
         loader.setController(this);
 
 
-
-        try{
+        try {
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,11 +82,9 @@ public class OverviewsController extends VBox {
         this.getChildren().add(oru);
 
 
-
-
     }
 
-    private void buildGui(){
+    private void buildGui() {
 
     }
 }

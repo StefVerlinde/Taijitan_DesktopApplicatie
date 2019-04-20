@@ -5,14 +5,13 @@
  */
 package gui;
 
-import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
-public class WelcomeController extends BorderPane
-{  
-    public WelcomeController()
-    {
+import java.io.IOException;
+
+public class WelcomeController extends BorderPane {
+    public WelcomeController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
         loader.setRoot(this);
         loader.setController(this);

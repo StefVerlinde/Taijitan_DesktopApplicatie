@@ -5,18 +5,17 @@
  */
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.*;
 
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "formula")
 @NamedQueries({
-    @NamedQuery(name = "Formula.findAll", query = "SELECT f FROM Formula f")})
+        @NamedQuery(name = "Formula.findAll", query = "SELECT f FROM Formula f")})
 public class Formula implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,13 +26,13 @@ public class Formula implements Serializable {
     @Column(name = "Name")
     private String name;
     @JoinTable(name = "SessionFormula", joinColumns = {
-        @JoinColumn(name = "FormulaId", referencedColumnName = "FormulaId")}, inverseJoinColumns = {
-        @JoinColumn(name = "SessionId", referencedColumnName = "SessionId")})
+            @JoinColumn(name = "FormulaId", referencedColumnName = "FormulaId")}, inverseJoinColumns = {
+            @JoinColumn(name = "SessionId", referencedColumnName = "SessionId")})
     @ManyToMany
     private Collection<Session> sessionCollection;
     @JoinTable(name = "FormulaTrainingDay", joinColumns = {
-        @JoinColumn(name = "FormulaId", referencedColumnName = "FormulaId")}, inverseJoinColumns = {
-        @JoinColumn(name = "TrainingsDayId", referencedColumnName = "TrainingDayId")})
+            @JoinColumn(name = "FormulaId", referencedColumnName = "FormulaId")}, inverseJoinColumns = {
+            @JoinColumn(name = "TrainingsDayId", referencedColumnName = "TrainingDayId")})
     @ManyToMany
     private Collection<TrainingDay> trainingDayCollection;
     @JoinColumn(name = "SessionId", referencedColumnName = "SessionId")
@@ -140,5 +139,5 @@ public class Formula implements Serializable {
     public String toString() {
         return "domain.Formula[ formulaId=" + formulaId + " ]";
     }
-    
+
 }

@@ -5,22 +5,21 @@
  */
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.*;
 
 
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "session")
 //@NamedQueries({
-  //  @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s")})
+//  @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s")})
 public class Session implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,8 +35,8 @@ public class Session implements Serializable {
     @Column(name = "SessionStarted")
     private boolean sessionStarted;
     @JoinTable(name = "SessionMember", joinColumns = {
-        @JoinColumn(name = "SessionId", referencedColumnName = "SessionId")}, inverseJoinColumns = {
-        @JoinColumn(name = "MemberId", referencedColumnName = "UserId")})
+            @JoinColumn(name = "SessionId", referencedColumnName = "SessionId")}, inverseJoinColumns = {
+            @JoinColumn(name = "MemberId", referencedColumnName = "UserId")})
     @ManyToMany
     private Collection<User> userCollection;
     @ManyToMany(mappedBy = "sessionCollection")
@@ -196,7 +195,7 @@ public class Session implements Serializable {
     }
 
 
-    private String dateFormatter(Date date){
+    private String dateFormatter(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
@@ -206,9 +205,8 @@ public class Session implements Serializable {
         int months = date.getMonth();
         int years = cal.get(Calendar.YEAR);
 
-        return  String.format("%d/%d/%d  --  %d:%d", years, months, days, hours, minutes);
+        return String.format("%d/%d/%d  --  %d:%d", years, months, days, hours, minutes);
     }
 
 
-    
 }

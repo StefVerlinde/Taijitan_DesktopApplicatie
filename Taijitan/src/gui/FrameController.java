@@ -10,8 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 
-public class FrameController extends HBox
-{
+public class FrameController extends HBox {
     private Domaincontroller dc;
     private NavController nav;
     private WelcomeController welcome;
@@ -20,13 +19,13 @@ public class FrameController extends HBox
     private OverviewsController overviews;
     private Object current;
     Rectangle2D bounds;
-    
+
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
         setupStart();
     }
 
-    private void setupStart(){
+    private void setupStart() {
         nav = new NavController(this);
 
         Screen screen = Screen.getPrimary();
@@ -38,49 +37,47 @@ public class FrameController extends HBox
         setupWelcome();
     }
 
-    private void setupWelcome(){
+    private void setupWelcome() {
         welcome = new WelcomeController();
         current = welcome;
-        welcome.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
+        welcome.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
 
         getChildren().add(welcome);
     }
 
-    private void setupMember(){
+    private void setupMember() {
         members = new MembersController(dc);
         current = members;
-        members.setMinWidth(bounds.getWidth()-nav.getPrefWidth());
+        members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
 
         getChildren().add(members);
     }
 
     private void setupOverviews() {
-       overviews = new OverviewsController(dc);
-       current = overviews;
+        overviews = new OverviewsController(dc);
+        current = overviews;
 
 
         getChildren().add(overviews);
 
     }
 
-    public void changeContent(String string)
-    {
+    public void changeContent(String string) {
         getChildren().remove(current);
-        
-        switch(string.toLowerCase())
-        {
+
+        switch (string.toLowerCase()) {
             case "members":
                 setupMember();
                 break;
             case "welcome":
-               setupWelcome();
+                setupWelcome();
                 break;
             case "overviews":
-                    setupOverviews();
-                    break;
+                setupOverviews();
+                break;
         }
-        
-        
+
+
     }
 
 

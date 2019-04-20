@@ -5,9 +5,9 @@
  */
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.*;
 
 
 /*
@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "trainingDay")
 @NamedQueries({
-    @NamedQuery(name = "TrainingDay.findAll", query = "SELECT t FROM TrainingDay t")})
+        @NamedQuery(name = "TrainingDay.findAll", query = "SELECT t FROM TrainingDay t")})
 public class TrainingDay implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -156,5 +156,5 @@ public class TrainingDay implements Serializable {
     public String toString() {
         return "domain.TrainingDay[ trainingDayId=" + trainingDayId + " ]";
     }
-    
+
 }

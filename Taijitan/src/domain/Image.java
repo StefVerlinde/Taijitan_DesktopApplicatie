@@ -5,16 +5,16 @@
  */
 package domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
+
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "image")
 @NamedQueries({
-    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i")})
+        @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i")})
 public class Image implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -92,5 +92,5 @@ public class Image implements Serializable {
     public String toString() {
         return "domain.Image[ imageId=" + imageId + " ]";
     }
-    
+
 }

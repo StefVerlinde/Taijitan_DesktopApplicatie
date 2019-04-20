@@ -7,7 +7,6 @@ package taijitan;
 
 import domain.Domaincontroller;
 import gui.FrameController;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -19,14 +18,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
- *
  * @author Jarne
  */
-public class Taijitan extends Application
-{
+public class Taijitan extends Application {
     private EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
     private EntityManager em = emf.createEntityManager();
     private Domaincontroller dc = new Domaincontroller();
+
     @Override
     public void start(Stage stage) {
         dc.getAllUsers();
@@ -47,5 +45,5 @@ public class Taijitan extends Application
     public static void main(String... args) {
         Application.launch(Taijitan.class, args);
     }
-    
+
 }

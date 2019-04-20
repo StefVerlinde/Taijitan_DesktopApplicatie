@@ -1,12 +1,4 @@
-
 package gui;
-
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 import com.jfoenix.controls.*;
 import domain.*;
@@ -16,9 +8,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
-public class MembersController extends BorderPane
-{
+
+public class MembersController extends BorderPane {
     private Domaincontroller dc;
     private User user;
     @FXML
@@ -65,18 +63,15 @@ public class MembersController extends BorderPane
     private JFXButton btnAdd;
 
 
-    public MembersController(Domaincontroller dc)
-    {
+    public MembersController(Domaincontroller dc) {
         this.dc = dc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
-        try
-        {
+        try {
             loader.load();
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
 
@@ -84,14 +79,13 @@ public class MembersController extends BorderPane
         buildGui();
     }
 
-    private void buildGui(){
+    private void buildGui() {
         lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
 
 
-        lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
+        lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) ->
         {
-            if(newValue != null)
-            {
+            if (newValue != null) {
                 setUser((User) newValue);
 
                 txtFirstName.setDisable(false);
@@ -140,7 +134,7 @@ public class MembersController extends BorderPane
         });
     }
 
-    private void emptyFields(){
+    private void emptyFields() {
         txtFirstName.clear();
         txtLastName.clear();
         txtBirthPlace.clear();
@@ -166,13 +160,13 @@ public class MembersController extends BorderPane
     }
 
     private void setUser(User user) {
-        if(user != null)
+        if (user != null)
             this.user = user;
     }
 
     @FXML
-    private void delete(){
-        if(user != null){
+    private void delete() {
+        if (user != null) {
             AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
             dc.deleteUser(user);
             lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
@@ -182,17 +176,16 @@ public class MembersController extends BorderPane
             this.btnAdd.setDisable(true);
         }
     }
+
     @FXML
-    private void edit()
-    {
-        if(user != null) {
+    private void edit() {
+        if (user != null) {
             user.setFirstName(txtFirstName.getText());
             user.setName(txtLastName.getText());
             user.setBirthPlace(txtBirthPlace.getText());
             user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
             user.setStreet(txtStreet.getText());
-            if(!user.getCityPostalcode().getPostalcode().equals(txtPostalCode.getText()))
-            {
+            if (!user.getCityPostalcode().getPostalcode().equals(txtPostalCode.getText())) {
                 City newCity = new City(txtPostalCode.getText());
                 newCity.setName(txtCityName.getText());
                 user.setCityPostalcode(newCity);
@@ -210,18 +203,20 @@ public class MembersController extends BorderPane
             dc.updateUser(user);
         }
     }
+
     private String formatDate(Date date) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String output = formatter.format(date);
         return output;
     }
+
     private LocalDate convertToLocalDate(Date date) {
         return date.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
     }
-    private Date convertToDate(LocalDate localDate)
-    {
+
+    private Date convertToDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 }

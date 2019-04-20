@@ -1,14 +1,13 @@
 package gui;
 
+import com.jfoenix.controls.JFXListView;
 import domain.Domaincontroller;
 import domain.Session;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import com.jfoenix.controls.JFXListView;
-import javafx.fxml.FXML;
-
 
 import java.io.IOException;
 
@@ -31,7 +30,7 @@ public class _OverviewPresentsController extends AnchorPane {
     private Domaincontroller dc;
 
 
-    public _OverviewPresentsController(Domaincontroller dc){
+    public _OverviewPresentsController(Domaincontroller dc) {
         this.dc = dc;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewPresents.fxml"));
@@ -39,8 +38,7 @@ public class _OverviewPresentsController extends AnchorPane {
         loader.setController(this);
 
 
-
-        try{
+        try {
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,13 +47,12 @@ public class _OverviewPresentsController extends AnchorPane {
         buildGui();
     }
 
-    private void buildGui(){
-      lstSessions.setItems(FXCollections.observableArrayList(dc.getAllSessions()));
+    private void buildGui() {
+        lstSessions.setItems(FXCollections.observableArrayList(dc.getAllSessions()));
 
-        lstSessions.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
+        lstSessions.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) ->
         {
-            if(newValue != null)
-            {
+            if (newValue != null) {
                 Session sellectedSession = (Session) newValue;
 
 

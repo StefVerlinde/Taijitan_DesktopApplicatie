@@ -1,6 +1,6 @@
 package domain;
 
-public enum  Country {
+public enum Country {
     Afghanistan(0),
     Albania(1),
     Algeria(2),
@@ -187,7 +187,7 @@ public enum  Country {
     Tokelau(183),
     Tonga(184),
     Tunisia(185),
-    Turkey (186),
+    Turkey(186),
     Tuvalu(188), //187?
     UnitedArabEmirates(189),
     Uganda(190),
@@ -208,7 +208,7 @@ public enum  Country {
 
     private int id;
 
-    Country(int id){
+    Country(int id) {
         this.id = id;
     }
 
@@ -216,9 +216,9 @@ public enum  Country {
         return id;
     }
 
-    public static Country getById(int id){
-        for(Country c: values()){
-            if(c.id == id) return c;
+    public static Country getById(int id) {
+        for (Country c : values()) {
+            if (c.id == id) return c;
         }
         return null;
     }

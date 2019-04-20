@@ -9,11 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
  * @author tijsm
  */
 public class JPAUtil {
-      private final static EntityManagerFactory entityManagerFactory
+    private final static EntityManagerFactory entityManagerFactory
             = Persistence.createEntityManagerFactory("TaijitanPU");
 
     public static EntityManagerFactory getEntityManagerFactory() {

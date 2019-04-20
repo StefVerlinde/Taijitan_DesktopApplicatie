@@ -5,18 +5,17 @@
  */
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
 /**
- *
  * @author tijsm
  */
 @Entity
 @Table(name = "comment")
 @NamedQueries({
-    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")})
+        @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -135,5 +134,5 @@ public class Comment implements Serializable {
     public String toString() {
         return "domain.Comment[ commentId=" + commentId + " ]";
     }
-    
+
 }

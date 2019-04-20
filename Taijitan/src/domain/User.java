@@ -11,6 +11,7 @@ import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -146,8 +147,6 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.gender = gender;
         this.nationality = nationality;
         this.discriminator = discriminator;
-
-        initSmpleStringProperties();
 
     }
 
@@ -389,48 +388,42 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     //properties zijn nodig voor een tabel
     public SimpleStringProperty familyNameProperty() {
         this.familyNameProperty = new SimpleStringProperty(name);
-        System.out.print("famnaam: ");
-        System.out.println(firstNameProperty.toString());
         return this.familyNameProperty;
 
     }
 
+    private String dateFormatter(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        int days = date.getDay();
+        int months = date.getMonth();
+        int years = cal.get(Calendar.YEAR);
+
+        return  String.format("%d/%d/%d ", years, months, days);
+    }
+
     public SimpleStringProperty firstNameProperty() {
         this.firstNameProperty = new SimpleStringProperty(firstName);
-        System.out.print("firstname:");
-        System.out.println(firstNameProperty.toString());
         return this.firstNameProperty;
     }
 
     public SimpleStringProperty dateOfBirthProperty() {
-        this.dateOfBirthProperty = new SimpleStringProperty(dateOfBirth.toString());
-        System.out.print("date:");
-        System.out.println(dateOfBirthProperty.toString());
+        this.dateOfBirthProperty = new SimpleStringProperty(dateFormatter(dateOfBirth));
         return this.dateOfBirthProperty;
     }
 
     public SimpleStringProperty telephoneProperty() {
         this.telephoneProperty = new SimpleStringProperty(phoneNumber);
-        System.out.print("telephone:");
-        System.out.println(telephoneProperty.toString());
         return this.telephoneProperty;
     }
 
     public SimpleStringProperty emailProperty() {
         this.emailProperty = new SimpleStringProperty(email);
-        System.out.print("mail:");
-        System.out.println(emailProperty.toString());
         return this.emailProperty;
     }
 
-    private void initSmpleStringProperties(){
 
-
-
-
-
-
-    }
 
 
 

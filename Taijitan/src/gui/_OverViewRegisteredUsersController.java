@@ -71,7 +71,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 
 
     private void buildColumns(){
-        clmUserFirstName.setPrefWidth(150);
+        clmUserFirstName.setPrefWidth(200);
         clmUserFirstName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -79,7 +79,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserFamilyName.setPrefWidth(150);
+        clmUserFamilyName.setPrefWidth(200);
         clmUserFamilyName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -87,7 +87,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserDateOfBirth.setPrefWidth(150);
+        clmUserDateOfBirth.setPrefWidth(200);
         clmUserDateOfBirth.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -95,7 +95,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserTelephone.setPrefWidth(150);
+        clmUserTelephone.setPrefWidth(240);
         clmUserTelephone.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -103,7 +103,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserEmail.setPrefWidth(150);
+        clmUserEmail.setPrefWidth(300);
         clmUserEmail.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {

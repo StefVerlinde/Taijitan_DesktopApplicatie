@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTreeTableView fx:id="tblRegistredUsers" layoutX="117.0" layoutY="123.0" prefHeight="500.0" prefWidth="1165.0" stylesheets="@style.css" />
+      <JFXTextField fx:id="txtSearch" layoutX="117.0" layoutY="65.0" prefHeight="27.0" prefWidth="454.0" promptText="Zoeken (op naam, voornaam of telefoonnummer)" />
    </children>
 </fx:root>

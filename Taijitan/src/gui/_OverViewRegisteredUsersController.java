@@ -1,65 +1,115 @@
 package gui;
 
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import domain.Domaincontroller;
+import domain.Session;
 import domain.User;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
-public class _OverViewRegisteredUsersController {
-
-    private final Domaincontroller dc;
-    @FXML
-    private TableView<User> tblRegistredUsers;
+public class _OverViewRegisteredUsersController extends AnchorPane {
 
     @FXML
-    private TableColumn<User,String> colFamilyName;
+    private JFXTreeTableView<User> tblRegistredUsers;
 
-    @FXML
-    private TableColumn<User,String> colFirstName;
+    JFXTreeTableColumn<User, String>  clmUserFirstName = new JFXTreeTableColumn<>("Voornaam");
+    JFXTreeTableColumn<User, String>  clmUserFamilyName = new JFXTreeTableColumn<>("Familienaam");
+    JFXTreeTableColumn<User, String>  clmUserDateOfBirth = new JFXTreeTableColumn<>("Geboortedatum");
+    JFXTreeTableColumn<User, String>  clmUserTelephone = new JFXTreeTableColumn<>("Telefoonnummer");
+    JFXTreeTableColumn<User, String>  clmUserEmail = new JFXTreeTableColumn<>("Email adres");
 
-    @FXML
-    private TableColumn<User,String> colDateOfBirth;
 
-    @FXML
-    private TableColumn<User,String> colTelephone;
 
-    @FXML
-    private TableColumn<User,String> colEmail;
-    
+    private Domaincontroller dc;
+
+
     public _OverViewRegisteredUsersController(Domaincontroller dc){
         this.dc = dc;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                        "AddressBookFrame.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewRegisteredUsers.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
+
+        try{
             loader.load();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-//        colFamilyName.setCellValueFactory(cellData ->
-//                cellData.getValue().familyNameProperty());
-//
-//        colFirstName.setCellValueFactory(cellData ->
-//                cellData.getValue().firstNameProperty());
-//
-//        colDateOfBirth.setCellValueFactory(cellData ->
-//                cellData.getValue().dateOfBirthProperty());
-//
-//        colTelephone.setCellValueFactory(cellData ->
-//                cellData.getValue().telephoneProperty());
-//
-//        colEmail.setCellValueFactory(cellData ->
-//                cellData.getValue().emailProperty());
+        buildGui();
+    }
 
-        tblRegistredUsers.setItems(dc.GetAllUsersFX());
+    private void buildGui(){
+        buildColumns();
 
+        ObservableList<User> users = FXCollections.observableArrayList(dc.getAllUsers());
+
+        //opvullen tabel
+        final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
+        System.out.println(users.size());
+
+//        tblRegistredUsers = new JFXTreeTableView<>();
+        tblRegistredUsers.getColumns().setAll(clmUserFamilyName, clmUserFirstName, clmUserDateOfBirth, clmUserEmail, clmUserTelephone);
+        tblRegistredUsers.setRoot(root);
+        tblRegistredUsers.setShowRoot(false);
+
+    }
+
+
+    private void buildColumns(){
+        clmUserFirstName.setPrefWidth(150);
+        clmUserFirstName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().firstNameProperty();
+            }
+        });
+
+        clmUserFamilyName.setPrefWidth(150);
+        clmUserFamilyName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().familyNameProperty();
+            }
+        });
+
+        clmUserDateOfBirth.setPrefWidth(150);
+        clmUserDateOfBirth.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().dateOfBirthProperty();
+            }
+        });
+
+        clmUserTelephone.setPrefWidth(150);
+        clmUserTelephone.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().telephoneProperty();
+            }
+        });
+
+        clmUserEmail.setPrefWidth(150);
+        clmUserEmail.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().emailProperty();
+            }
+        });
     }
 
 }

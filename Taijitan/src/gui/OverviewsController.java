@@ -75,45 +75,17 @@ public class OverviewsController extends VBox {
     void showPresents(ActionEvent event) {
         _OverviewPresentsController pc = new _OverviewPresentsController(this.dc);
 
-
         this.getChildren().add(pc);
 
     }
 
     @FXML
     void showRegistrations(ActionEvent event) {
+        _OverViewRegisteredUsersController oru = new _OverViewRegisteredUsersController(this.dc);
 
-//        //aanmaken kolommen
-//        TableColumn<User, String> familyName = new TableColumn<User, String>("name");
-//        TableColumn<User, String> firstName = new TableColumn<User, String>("firstName");
-//        TableColumn<User, String> dateOfBirth = new TableColumn<User, String>("dateOfBirth");
-//        //adres
-//        TableColumn<User, String> phoneNumber = new TableColumn<User, String>("phoneNumber");
-//        TableColumn<User, String> email = new TableColumn<User, String>("email");
-//
-//
-//        //opvul metadata
-//        familyName.setCellFactory(new PropertyValueFactory("name"));
-//
-//        firstName.setCellFactory(new PropertyValueFactory("firstName"));
-//        dateOfBirth.setCellFactory(new PropertyValueFactory("dateOfBirth"));
-//        phoneNumber.setCellFactory(new PropertyValueFactory("phoneNumber"));
-//        email.setCellFactory(new PropertyValueFactory("email"));
-//
-//        //opvullen
-//        ObservableList userList = FXCollections.observableArrayList(dc.getAllUsers());
-//        table.setItems(userList);
-//
-//        //toevoegen kolommen
-//        table.getColumns().addAll(familyName, firstName, dateOfBirth, phoneNumber, email);
-//
-//
-//        System.out.println(userList.toString());
-//
-//        //toevoegen aan scherm
-//        this.getChildren().add(table);
-//
-//
+        System.out.println("ik ben hier");
+        this.getChildren().add(oru);
+
 
 
 

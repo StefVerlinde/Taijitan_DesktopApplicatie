@@ -52,8 +52,6 @@ public class _OverviewPresentsController extends AnchorPane {
     private void buildGui(){
       lstSessions.setItems(FXCollections.observableArrayList(dc.getAllSessions()));
 
-
-
         lstSessions.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
         {
             if(newValue != null)

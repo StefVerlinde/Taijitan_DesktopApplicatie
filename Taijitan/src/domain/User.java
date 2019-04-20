@@ -5,15 +5,14 @@
  */
 package domain;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
-import repository.UserDao;
+import javafx.beans.property.StringProperty;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
 
 /**
  * @author tijsm
@@ -23,7 +22,7 @@ import javax.persistence.*;
 @NamedQueries({
 //        @NamedQuery(name = "User.findByName", query = "SELECT u FROM user u WHERE u.name = :userName")
 })
-public class User implements Serializable {
+public class User extends RecursiveTreeObject<User> implements Serializable {
 
     //region DBProperties
     private static final long serialVersionUID = 1L;
@@ -120,12 +119,17 @@ public class User implements Serializable {
     private Collection<Session> sessionCollection1;
     //endregion
 
-
-//    private final SimpleStringProperty familyNameProperty = new SimpleStringProperty();
-//    private final SimpleStringProperty firstNameProperty = new SimpleStringProperty();
-//    private final SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
-//    private final SimpleStringProperty telephoneProperty = new SimpleStringProperty();
-//    private final SimpleStringProperty emailProperty = new SimpleStringProperty();
+    //properties voor table
+    @Transient
+    private  SimpleStringProperty familyNameProperty = new SimpleStringProperty();
+    @Transient
+    private  SimpleStringProperty firstNameProperty = new SimpleStringProperty();
+    @Transient
+    private  SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
+    @Transient
+    private  SimpleStringProperty telephoneProperty = new SimpleStringProperty();
+    @Transient
+    private  SimpleStringProperty emailProperty = new SimpleStringProperty();
 
     public User() {
     }
@@ -142,6 +146,9 @@ public class User implements Serializable {
         this.gender = gender;
         this.nationality = nationality;
         this.discriminator = discriminator;
+
+        initSmpleStringProperties();
+
     }
 
     public Integer getUserId() {
@@ -379,21 +386,51 @@ public class User implements Serializable {
         return firstName + " " + name;
     }
 
-//    public SimpleStringProperty  familyNameProperty(){
-//        return this.familyNameProperty;
-//    }
-//    public SimpleStringProperty  firstNameProperty(){
-//        return this.firstNameProperty;
-//    }
-//    public SimpleStringProperty  dateOfBirthProperty(){
-//        return this.dateOfBirthProperty;
-//    }
-//    public SimpleStringProperty  telephoneProperty(){
-//        return this.telephoneProperty;
-//    }
-//    public SimpleStringProperty  emailProperty(){
-//        return this.emailProperty;
-//    }
+    //properties zijn nodig voor een tabel
+    public SimpleStringProperty familyNameProperty() {
+        this.familyNameProperty = new SimpleStringProperty(name);
+        System.out.print("famnaam: ");
+        System.out.println(firstNameProperty.toString());
+        return this.familyNameProperty;
+
+    }
+
+    public SimpleStringProperty firstNameProperty() {
+        this.firstNameProperty = new SimpleStringProperty(firstName);
+        System.out.print("firstname:");
+        System.out.println(firstNameProperty.toString());
+        return this.firstNameProperty;
+    }
+
+    public SimpleStringProperty dateOfBirthProperty() {
+        this.dateOfBirthProperty = new SimpleStringProperty(dateOfBirth.toString());
+        System.out.print("date:");
+        System.out.println(dateOfBirthProperty.toString());
+        return this.dateOfBirthProperty;
+    }
+
+    public SimpleStringProperty telephoneProperty() {
+        this.telephoneProperty = new SimpleStringProperty(phoneNumber);
+        System.out.print("telephone:");
+        System.out.println(telephoneProperty.toString());
+        return this.telephoneProperty;
+    }
+
+    public SimpleStringProperty emailProperty() {
+        this.emailProperty = new SimpleStringProperty(email);
+        System.out.print("mail:");
+        System.out.println(emailProperty.toString());
+        return this.emailProperty;
+    }
+
+    private void initSmpleStringProperties(){
+
+
+
+
+
+
+    }
 
 
 

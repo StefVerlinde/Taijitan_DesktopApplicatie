@@ -2,10 +2,7 @@ package domain;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import repository.SessionDao;
-import repository.SessionDaoJpa;
-import repository.UserDao;
-import repository.UserDaoJpa;
+import repository.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,10 +31,6 @@ public class Domaincontroller {
 
     public List<User> getAllUsers(){
         List<User> users = userDao.findAll();
-        for (User u:users)
-        {
-            System.out.println(u.toString());
-        }
         return users;
     }
     public ObservableList<User> GetAllUsersFX()
@@ -47,11 +40,6 @@ public class Domaincontroller {
 
     public List<Session> getAllSessions(){
         List<Session> sessions = sessionDao.findAll();
-
-        for(Session s : sessions){
-            System.out.printf(s.toString());
-        }
-
         return sessions;
     }
 
@@ -67,13 +55,17 @@ public class Domaincontroller {
     }
     public void updateUser(User user)
     {
+        GenericDaoJpa.startTransaction();
         userDao.update(user);
+        GenericDaoJpa.commitTransaction();
         System.out.println("update success");
     }
 
     public void deleteUser(User user)
     {
+        GenericDaoJpa.startTransaction();
         userDao.delete(user);
+        GenericDaoJpa.commitTransaction();
         System.out.println("delete success");
     }
 }

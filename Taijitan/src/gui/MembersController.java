@@ -139,6 +139,32 @@ public class MembersController extends BorderPane
             }
         });
     }
+
+    private void emptyFields(){
+        txtFirstName.clear();
+        txtLastName.clear();
+        txtBirthPlace.clear();
+        txtPersonalNationalNumber.clear();
+        txtStreet.clear();
+        txtPostalCode.clear();
+        txtHouseNumber.clear();
+        txtCityName.clear();
+        txtEmail.clear();
+        txtLandLineNumber.clear();
+        txtPhoneNumber.clear();
+        txtMailParent.clear();
+
+        cmbGender.getItems().setAll(Gender.values());
+        cmbGender.getSelectionModel().clearSelection();
+        cmbNationality.getItems().setAll(Country.values());
+        cmbNationality.getSelectionModel().clearSelection();
+        cmbCountry.getItems().setAll(Country.values());
+        cmbCountry.getSelectionModel().clearSelection();
+
+        dpBirthDate.getEditor().clear();
+        lblDateRegistered.setText("");
+    }
+
     private void setUser(User user) {
         if(user != null)
             this.user = user;
@@ -149,6 +175,11 @@ public class MembersController extends BorderPane
         if(user != null){
             AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
             dc.deleteUser(user);
+            lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+            this.emptyFields();
+            this.btnEdit.setDisable(true);
+            this.btnDelete.setDisable(true);
+            this.btnAdd.setDisable(true);
         }
     }
     @FXML

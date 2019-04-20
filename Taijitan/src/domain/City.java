@@ -5,17 +5,19 @@
  */
 package domain;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.*;
 
 /**
+ *
  * @author tijsm
  */
 @Entity
 @Table(name = "city")
 @NamedQueries({
-        @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")})
+        @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c"),
+        @NamedQuery(name = "City.findByPostal", query = "SELECT c FROM City c WHERE c.postalcode = :postal")})
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,5 +84,5 @@ public class City implements Serializable {
     public String toString() {
         return "domain.City[ postalcode=" + postalcode + " ]";
     }
-
+    
 }

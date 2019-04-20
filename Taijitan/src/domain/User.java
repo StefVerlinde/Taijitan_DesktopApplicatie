@@ -27,6 +27,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     //region DBProperties
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "UserId")
     private Integer userId;

@@ -1,7 +1,16 @@
+
 package gui;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 import com.jfoenix.controls.*;
 import domain.*;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +24,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-
 public class MembersController extends BorderPane {
+    private boolean isAdd;
     private Domaincontroller dc;
     private User user;
     @FXML
@@ -64,6 +73,7 @@ public class MembersController extends BorderPane {
 
 
     public MembersController(Domaincontroller dc) {
+        isAdd = false;
         this.dc = dc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members.fxml"));
         loader.setRoot(this);
@@ -81,32 +91,16 @@ public class MembersController extends BorderPane {
 
     private void buildGui() {
         lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+        btnAdd.setDisable(false);
 
 
         lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) ->
         {
             if (newValue != null) {
                 setUser((User) newValue);
+                toEditUser();
 
-                txtFirstName.setDisable(false);
-                txtLastName.setDisable(false);
-                txtBirthPlace.setDisable(false);
-                txtPersonalNationalNumber.setDisable(false);
-                txtStreet.setDisable(false);
-                txtPostalCode.setDisable(false);
-                txtHouseNumber.setDisable(false);
-                txtCityName.setDisable(false);
-                txtEmail.setDisable(false);
-                txtLandLineNumber.setDisable(false);
-                txtPhoneNumber.setDisable(false);
-                txtMailParent.setDisable(false);
-                cmbGender.setDisable(false);
-                cmbNationality.setDisable(false);
-                cmbCountry.setDisable(false);
-                dpBirthDate.setDisable(false);
-                btnEdit.setDisable(false);
-                btnAdd.setDisable(false);
-                btnDelete.setDisable(false);
+                enableFields();
 
                 txtFirstName.setText(user.getFirstName());
                 txtLastName.setText(user.getName());
@@ -159,49 +153,184 @@ public class MembersController extends BorderPane {
         lblDateRegistered.setText("");
     }
 
+    private void enableFields() {
+        txtFirstName.setDisable(false);
+        txtLastName.setDisable(false);
+        txtBirthPlace.setDisable(false);
+        txtPersonalNationalNumber.setDisable(false);
+        txtStreet.setDisable(false);
+        txtPostalCode.setDisable(false);
+        txtHouseNumber.setDisable(false);
+        txtCityName.setDisable(false);
+        txtEmail.setDisable(false);
+        txtLandLineNumber.setDisable(false);
+        txtPhoneNumber.setDisable(false);
+        txtMailParent.setDisable(false);
+        cmbGender.setDisable(false);
+        cmbNationality.setDisable(false);
+        cmbCountry.setDisable(false);
+        dpBirthDate.setDisable(false);
+        btnEdit.setDisable(false);
+        btnAdd.setDisable(false);
+        btnDelete.setDisable(false);
+    }
+
+    private void disableFields() {
+        txtFirstName.setDisable(true);
+        txtLastName.setDisable(true);
+        txtBirthPlace.setDisable(true);
+        txtPersonalNationalNumber.setDisable(true);
+        txtStreet.setDisable(true);
+        txtPostalCode.setDisable(true);
+        txtHouseNumber.setDisable(true);
+        txtCityName.setDisable(true);
+        txtEmail.setDisable(true);
+        txtLandLineNumber.setDisable(true);
+        txtPhoneNumber.setDisable(true);
+        txtMailParent.setDisable(true);
+        cmbGender.setDisable(true);
+        cmbNationality.setDisable(true);
+        cmbCountry.setDisable(true);
+        dpBirthDate.setDisable(true);
+        btnEdit.setDisable(true);
+        btnAdd.setDisable(true);
+        btnDelete.setDisable(true);
+    }
+
     private void setUser(User user) {
         if (user != null)
             this.user = user;
     }
 
+    private void toEditUser() {
+        btnEdit.setText("Pas gegevens aan");
+        btnDelete.setText("Verwijder lid");
+        btnAdd.setVisible(true);
+        isAdd = false;
+        btnDelete.setDisable(true);
+        btnEdit.disableProperty().unbind();
+    }
+
     @FXML
     private void delete() {
-        if (user != null) {
-            AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
-            dc.deleteUser(user);
-            lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
-            this.emptyFields();
-            this.btnEdit.setDisable(true);
-            this.btnDelete.setDisable(true);
-            this.btnAdd.setDisable(true);
+        if (!isAdd) {
+            if (user != null) {
+                AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
+                dc.deleteUser(user);
+                lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+                this.emptyFields();
+                this.disableFields();
+                this.btnEdit.setDisable(true);
+                this.btnDelete.setDisable(true);
+                this.btnAdd.setDisable(false);
+            }
         }
+        {
+            toEditUser();
+            disableFields();
+            this.btnAdd.setDisable(false);
+        }
+
     }
 
     @FXML
     private void edit() {
-        if (user != null) {
+        if (!isAdd) {
+            if (user != null) {
+                user.setFirstName(txtFirstName.getText());
+                user.setName(txtLastName.getText());
+                user.setBirthPlace(txtBirthPlace.getText());
+                user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
+                user.setStreet(txtStreet.getText());
+                if (!user.getCityPostalcode().getPostalcode().equals(txtPostalCode.getText())) {
+                    City newCity = new City(txtPostalCode.getText());
+                    newCity.setName(txtCityName.getText());
+                    user.setCityPostalcode(newCity);
+                }
+                user.setHouseNumber(txtHouseNumber.getText());
+                user.setEmail(txtEmail.getText());
+                user.setLandlineNumber(txtLandLineNumber.getText());
+                user.setMailParent(txtMailParent.getText());
+                user.setPhoneNumber(txtPhoneNumber.getText());
+                user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
+                user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
+                user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
+                user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
+
+                dc.updateUser(user);
+                lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+            }
+        } else {
             user.setFirstName(txtFirstName.getText());
             user.setName(txtLastName.getText());
             user.setBirthPlace(txtBirthPlace.getText());
             user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
             user.setStreet(txtStreet.getText());
-            if (!user.getCityPostalcode().getPostalcode().equals(txtPostalCode.getText())) {
+            if (dc.getAllCities().stream().filter(c -> c.getPostalcode().equals(txtPostalCode.getText())).count() == 0) {
                 City newCity = new City(txtPostalCode.getText());
                 newCity.setName(txtCityName.getText());
                 user.setCityPostalcode(newCity);
+                dc.addCity(newCity);
+            } else {
+                user.setCityPostalcode(dc.getCityByPostal(txtPostalCode.getText()));
             }
             user.setHouseNumber(txtHouseNumber.getText());
             user.setEmail(txtEmail.getText());
-            user.setLandlineNumber(txtLandLineNumber.getText());
-            user.setMailParent(txtMailParent.getText());
+            if(txtLandLineNumber.equals("")){
+                user.setLandlineNumber("Niet gekend");
+            } else {
+                user.setLandlineNumber(txtLandLineNumber.getText());
+            }
+            if(txtMailParent.equals("")){
+                user.setMailParent("");
+            } else {
+                user.setMailParent(txtMailParent.getText());
+            }
             user.setPhoneNumber(txtPhoneNumber.getText());
             user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
             user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
             user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
             user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
-
-            dc.updateUser(user);
+            user.setDateRegistred(new Date());
+            user.setDiscriminator("Member");
+            user.setFormulaId(new Formula(2));
+            user.setRank(7);
+            dc.addUser(user);
+            lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+            toEditUser();
+            emptyFields();
         }
+
+    }
+
+
+    @FXML
+    private void addUser() {
+        setUser(new User());
+        lstMembers.getSelectionModel().clearSelection();
+        isAdd = true;
+        btnAdd.setVisible(false);
+        btnEdit.setText("Voeg lid toe");
+        btnDelete.setText("Annuleer");
+        btnDelete.setDisable(false);
+        enableFields();
+        btnEdit.disableProperty().bind(
+                Bindings.isEmpty(txtFirstName.textProperty())
+                        .and(Bindings.isEmpty(txtLastName.textProperty()))
+                        .and(Bindings.isEmpty(txtBirthPlace.textProperty()))
+                        .and(Bindings.isEmpty(txtPersonalNationalNumber.textProperty()))
+                        .and(Bindings.isEmpty(txtStreet.textProperty()))
+                        .and(Bindings.isEmpty(txtPostalCode.textProperty()))
+                        .and(Bindings.isEmpty(txtHouseNumber.textProperty()))
+                        .and(Bindings.isEmpty(txtCityName.textProperty()))
+                        .and(Bindings.isEmpty(txtEmail.textProperty()))
+                        .and(Bindings.isEmpty(txtLandLineNumber.textProperty()))
+                        .and(Bindings.isEmpty(cmbGender.idProperty()))
+                        .and(Bindings.isEmpty(cmbCountry.idProperty()))
+                        .and(Bindings.isEmpty(cmbNationality.idProperty()))
+                        .and(Bindings.isEmpty(dpBirthDate.promptTextProperty()))
+        );
+        emptyFields();
     }
 
     private String formatDate(Date date) {

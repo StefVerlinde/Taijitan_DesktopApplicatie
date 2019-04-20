@@ -1,385 +1,337 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-         prefHeight="700.0" prefWidth="1141.0" type="BorderPane" xmlns="http://javafx.com/javafx/10.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <top>
-        <Label alignment="CENTER" contentDisplay="CENTER" text="Leden" textFill="#336566" BorderPane.alignment="CENTER">
-            <font>
-                <Font name="System Bold" size="48.0"/>
-            </font>
-        </Label>
-    </top>
-    <padding>
-        <Insets bottom="30.0" left="10.0" right="30.0" top="40.0"/>
-    </padding>
-    <left>
-        <JFXListView fx:id="lstMembers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                     minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="163.0"
-                     BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets bottom="10.0" left="20.0" right="10.0" top="10.0"/>
-            </BorderPane.margin>
-            <effect>
-                <Glow/>
-            </effect>
-        </JFXListView>
-    </left>
-    <center>
-        <GridPane style="-fx-text-fill: #336566;" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <children>
-                <JFXTextField fx:id="txtFirstName" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
-                    </GridPane.margin>
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtLastName" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
-                    </GridPane.margin>
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Voornaam*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" text="Familienaam*" GridPane.columnIndex="2" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Geboortedatum*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Datum van aanmelding"
-                       GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2"
-                       GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Nationaliteit*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Geboorteplaats*" GridPane.columnIndex="2"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <JFXTextField fx:id="txtBirthPlace" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
-                    </GridPane.margin>
-                </JFXTextField>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Geslacht*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Rijksregisternummer*"
-                       GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4"
-                       GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <JFXTextField fx:id="txtPersonalNationalNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets top="3.0"/>
-                    </GridPane.margin>
-                </JFXTextField>
-                <Label alignment="CENTER" text="Woonplaats:" textFill="#336566" underline="true"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="20.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets/>
-                    </GridPane.margin>
-                </Label>
-                <JFXTextField fx:id="txtStreet" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtPostalCode" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <Label alignment="CENTER" text="Contact:" textFill="#336566" underline="true"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="11" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="20.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets/>
-                    </GridPane.margin>
-                </Label>
-                <JFXTextField fx:id="txtEmail" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="12">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtLandLineNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="13">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtHouseNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtCityName" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="8">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtPhoneNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="12">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="txtMailParent" alignment="TOP_LEFT" disable="true" focusColor="#336566"
-                              style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="13">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </JFXTextField>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Straatnaam*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="7" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Postcode*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="8" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Land*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="9" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Huisnummer*" GridPane.columnIndex="2"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Stadnaam*" GridPane.columnIndex="2"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="E-mailadres*" GridPane.halignment="RIGHT"
-                       GridPane.rowIndex="12" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Vast telefoonnummer"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="13" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Telefoonnummer*" GridPane.columnIndex="2"
-                       GridPane.halignment="RIGHT" GridPane.rowIndex="12" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="E-mail van een ouder"
-                       GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="13"
-                       GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </Label>
-                <Label alignment="CENTER" text="Persoonlijk:" textFill="#336566" underline="true"
-                       GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="20.0"/>
-                    </font>
-                </Label>
-                <JFXComboBox fx:id="cmbGender" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="303.0"
-                             style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                <JFXComboBox fx:id="cmbNationality" disable="true" focusColor="#336566" prefHeight="30.0"
-                             prefWidth="282.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1"
-                             GridPane.rowIndex="3"/>
-                <JFXComboBox fx:id="cmbCountry" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0"
-                             style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-                <JFXDatePicker fx:id="dpBirthDate" defaultColor="#336566" disable="true" prefHeight="28.0"
-                               prefWidth="514.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1"
-                               GridPane.rowIndex="2"/>
-                <Label fx:id="lblDateRegistered" prefHeight="93.0" prefWidth="190.0" textAlignment="CENTER"
-                       textFill="#336566" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                </Label>
-                <JFXButton fx:id="btnEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true"
-                           onMouseClicked="#edit" prefHeight="34.0" prefWidth="183.0"
-                           style="-fx-background-color: #336566;" text="Pas gegevens aan" textAlignment="CENTER"
-                           textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1"
-                           GridPane.rowIndex="15">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </JFXButton>
-                <JFXButton fx:id="btnDelete" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER"
-                           disable="true" onMouseClicked="#delete" prefHeight="34.0" prefWidth="183.0"
-                           style="-fx-background-color: #336566;" text="Verwijder lid" textAlignment="CENTER"
-                           textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2"
-                           GridPane.rowIndex="15">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </JFXButton>
-                <JFXButton fx:id="btnAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true"
-                           prefHeight="33.0" prefWidth="15.0" style="-fx-background-color: #336566;" text="+"
-                           textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.rowIndex="15">
-                    <font>
-                        <Font name="System Bold" size="13.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </GridPane.margin>
-                </JFXButton>
-            </children>
-            <BorderPane.margin>
-                <Insets bottom="2.0" left="2.0" right="2.0"/>
-            </BorderPane.margin>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </padding>
-        </GridPane>
-    </center>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1141.0" type="BorderPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Leden" textFill="#336566" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+   </top>
+   <padding>
+      <Insets bottom="30.0" left="10.0" right="30.0" top="40.0" />
+   </padding>
+   <left>
+      <JFXListView fx:id="lstMembers" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="163.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <effect>
+            <Glow />
+         </effect>
+      </JFXListView>
+   </left>
+   <center>
+      <GridPane style="-fx-text-fill: #336566;" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXTextField fx:id="txtFirstName" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtLastName" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXDatePicker fx:id="dpBirthDate" defaultColor="#336566" disable="true" prefHeight="28.0" prefWidth="514.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXComboBox fx:id="cmbNationality" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="282.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="txtBirthPlace" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXComboBox fx:id="cmbGender" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="303.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <JFXTextField fx:id="txtPersonalNationalNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="3.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="txtStreet" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtHouseNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="7">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtPostalCode" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtCityName" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox fx:id="cmbCountry" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <JFXTextField fx:id="txtEmail" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtPhoneNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="12">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtLandLineNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtMailParent" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="13">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXTextField>
+            <Label alignment="CENTER" text="Woonplaats:" textFill="#336566" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Voornaam*" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" text="Familienaam*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Geboortedatum*" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Datum van aanmelding" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Nationaliteit*" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Geboorteplaats*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Geslacht*" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Rijksregisternummer*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="Contact:" textFill="#336566" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="11" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Straatnaam*" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Postcode*" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Land*" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Huisnummer*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Stadnaam*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="E-mailadres*" GridPane.halignment="RIGHT" GridPane.rowIndex="12" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Vast telefoonnummer" GridPane.halignment="RIGHT" GridPane.rowIndex="13" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Telefoonnummer*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="12" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="E-mail van een ouder" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="13" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" text="Persoonlijk:" textFill="#336566" underline="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDateRegistered" prefHeight="93.0" prefWidth="190.0" textAlignment="CENTER" textFill="#336566" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" onMouseClicked="#edit" prefHeight="34.0" prefWidth="183.0" style="-fx-background-color: #336566;" text="Pas gegevens aan" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="15">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="btnDelete" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" onMouseClicked="#delete" prefHeight="34.0" prefWidth="183.0" style="-fx-background-color: #336566;" text="Verwijder lid" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="btnAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" onMouseClicked="#addUser" style="-fx-background-color: #336566;" text="Voeg lid toe" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+   </center>
 </fx:root>

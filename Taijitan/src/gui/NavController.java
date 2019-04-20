@@ -6,6 +6,7 @@
 package gui;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,8 @@ import java.io.IOException;
  *
  * @author Jarne
  */
-public class NavController extends VBox {
+public class NavController extends VBox
+{
     @FXML
     private JFXButton btnMembers;
     @FXML
@@ -32,24 +34,28 @@ public class NavController extends VBox {
     private JFXButton btnOverviews;
     @FXML
     private JFXButton btnLeaderBoard;
-
+    
     private FrameController controller;
-
-    public NavController(FrameController frame) {
+    
+    public NavController(FrameController frame)
+    {
         controller = frame;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Nav.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
-        try {
+        try
+        {
             loader.load();
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             System.err.println(ex.getMessage());
         }
-    }
+    }  
 
     @FXML
-    private void loadMembers(ActionEvent event) {
+    private void loadMembers(ActionEvent event)
+    {
 
         controller.changeContent("members");
     }
@@ -58,33 +64,33 @@ public class NavController extends VBox {
     private void loadPresents(ActionEvent event) {
         controller.changeContent("presents");
     }
-
     @FXML
-    private void loadActivities(ActionEvent event) {
+    private void loadActivities(ActionEvent event)
+    {
     }
 
     @FXML
-    private void loadCourseMaterial(ActionEvent event) {
+    private void loadCourseMaterial(ActionEvent event)
+    {
     }
 
     @FXML
-    private void loadOverviews(ActionEvent event) {
+    private void loadOverviews(ActionEvent event)
+    {
         controller.changeContent("overviews");
     }
 
     @FXML
-    private void loadLeaderBoard(ActionEvent event) {
+    private void loadLeaderBoard(ActionEvent event)
+    {
 
     }
 
 
+
     @FXML
-    private void loadWelcome(MouseEvent event) {
+    private void loadWelcome(MouseEvent event)
+    {
         controller.changeContent("welcome");
-    }
-
-    @FXML
-    private void exit() {
-        System.exit(0);
     }
 }

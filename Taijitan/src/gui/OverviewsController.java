@@ -46,8 +46,6 @@ public class OverviewsController extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        buildGui();
     }
 
 
@@ -78,13 +76,13 @@ public class OverviewsController extends VBox {
     void showRegistrations(ActionEvent event) {
         _OverViewRegisteredUsersController oru = new _OverViewRegisteredUsersController(this.dc);
 
-        System.out.println("ik ben hier");
         this.getChildren().add(oru);
 
 
     }
 
     private void buildGui() {
+        this.getChildren().addAll(btnActivities, btnshowRegistrations, btnPresents, btnCourseMaterial, btnActivities);
 
     }
 }

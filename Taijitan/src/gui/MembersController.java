@@ -2,6 +2,7 @@
 package gui;
 
 //region Imports
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.Normalizer;
@@ -143,6 +144,11 @@ public class MembersController extends BorderPane {
         });
     }
 
+    private void updateUsers() {
+        users = dc.getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
+        lstMembers.setItems(FXCollections.observableArrayList(users));
+    }
+
     private void emptyFields() {
         txtFirstName.clear();
         txtLastName.clear();
@@ -238,7 +244,7 @@ public class MembersController extends BorderPane {
             if (user != null) {
                 if(AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?")){
                     dc.deleteUser(user);
-                    lstMembers.setItems(FXCollections.observableArrayList(users));
+                    updateUsers();
                     emptyFields();
                     disableFields();
                     this.btnEdit.setDisable(true);
@@ -246,10 +252,9 @@ public class MembersController extends BorderPane {
                     this.btnAdd.setDisable(false);
                 }
             }
-        }
-        else
-        {
+        } else {
             toEditUser();
+            emptyFields();
             disableFields();
             this.btnAdd.setDisable(false);
         }
@@ -259,41 +264,51 @@ public class MembersController extends BorderPane {
     @FXML
     private void edit() {
         boolean canSubmit = true;
-        if (!isAdd)
-        {
-            if (user != null)
-            {
+        if (!isAdd) {
+            if (user != null) {
                 //region Edit data from existing user
                 //Personal data
-                try
-                {
+                try {
                     lblPersonal.setText("");
                     user.setFirstName(txtFirstName.getText());
                     user.setName(txtLastName.getText());
                     user.setBirthPlace(txtBirthPlace.getText());
                     user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
                     user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
-                    user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
-                    user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
-                    user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
-                }
-                catch(IllegalArgumentException e)
-                {
+                    if (cmbNationality.getSelectionModel().isEmpty()) {
+                        throw new IllegalArgumentException("Nationaliteit mag niet leeg zijn");
+                    } else {
+                        user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
+                    }
+                    if (cmbGender.getSelectionModel().isEmpty()) {
+                        throw new IllegalArgumentException("Geslacht mag niet leeg zijn");
+                    } else {
+                        user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
+                    }
+                    if (cmbFormula.getSelectionModel().isEmpty()) {
+                        throw new IllegalArgumentException("Formule mag niet leeg zijn");
+                    } else {
+                        user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                    }
+                } catch (IllegalArgumentException e) {
                     canSubmit = false;
                     lblPersonal.setText(e.getMessage());
                 }
 
 
                 //Address
-                try
-                {
+                try {
                     lblAddress.setText("");
                     user.setStreet(txtStreet.getText());
                     user.setHouseNumber(txtHouseNumber.getText());
-                    user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
+                    if (cmbCountry.getSelectionModel().isEmpty()) {
+                        throw new IllegalArgumentException("Land mag niet leeg zijn");
+                    } else {
+                        user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
+                    }
                     if (!user.getCityPostalcode().getPostalcode().equals(txtPostalCode.getText())) {
                         if (dc.getAllCities().stream().filter(c -> c.getPostalcode().equals(txtPostalCode.getText())).count() == 0) {
-                            City newCity = new City(txtPostalCode.getText(),txtCityName.getText());
+                            City newCity = new City(txtPostalCode.getText(), txtCityName.getText());
                             user.setCityPostalcode(newCity);
                             dc.addCity(newCity);
                         } else {
@@ -301,91 +316,92 @@ public class MembersController extends BorderPane {
                         }
                     }
 
-                }
-                catch(IllegalArgumentException e)
-                {
+                } catch (IllegalArgumentException e) {
                     canSubmit = false;
                     lblAddress.setText(e.getMessage());
                 }
 
 
                 //contact
-                try
-                {
+                try {
                     lblContact.setText("");
                     user.setEmail(txtEmail.getText());
                     user.setLandlineNumber(txtLandLineNumber.getText());
                     user.setMailParent(txtMailParent.getText());
                     user.setPhoneNumber(txtPhoneNumber.getText());
-                }
-                catch(IllegalArgumentException e)
-                {
+                } catch (IllegalArgumentException e) {
                     canSubmit = false;
                     lblContact.setText(e.getMessage());
                 }
                 //endregion
 
                 //submit
-                if(canSubmit) {
+                if (canSubmit) {
                     dc.updateUser(user);
-                    lstMembers.setItems(FXCollections.observableArrayList(users));
+                    updateUsers();
                 }
             }
-        }
-        else {
+        } else {
 
             //region Add user
             //Personal data
-            try
-            {
+            try {
                 lblPersonal.setText("");
                 user.setFirstName(txtFirstName.getText());
                 user.setName(txtLastName.getText());
                 user.setBirthPlace(txtBirthPlace.getText());
                 user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
                 user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
-                user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
-                user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
-                user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
-            }
-            catch(IllegalArgumentException e)
-            {
+                if (cmbNationality.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Nationaliteit mag niet leeg zijn");
+                } else {
+                    user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
+                }
+                if (cmbGender.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Geslacht mag niet leeg zijn");
+                } else {
+                    user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
+                }
+                if (cmbFormula.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Formule mag niet leeg zijn");
+                } else {
+                    user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                }
+            } catch (IllegalArgumentException e) {
                 canSubmit = false;
                 lblPersonal.setText(e.getMessage());
             }
 
             //Address
-            try
-            {
+            try {
                 lblAddress.setText("");
                 user.setStreet(txtStreet.getText());
                 user.setHouseNumber(txtHouseNumber.getText());
-                user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
+                if (cmbCountry.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Land mag niet leeg zijn");
+                } else {
+                    user.setCountry(cmbCountry.getSelectionModel().getSelectedIndex());
+                }
                 if (dc.getAllCities().stream().filter(c -> c.getPostalcode().equals(txtPostalCode.getText())).count() == 0) {
-                    City newCity = new City(txtPostalCode.getText(),txtCityName.getText());
+                    City newCity = new City(txtPostalCode.getText(), txtCityName.getText());
                     user.setCityPostalcode(newCity);
                     dc.addCity(newCity);
                 } else {
                     user.setCityPostalcode(dc.getCityByPostal(txtPostalCode.getText()));
                 }
-            }
-            catch(IllegalArgumentException e)
-            {
+            } catch (IllegalArgumentException e) {
                 canSubmit = false;
                 lblAddress.setText(e.getMessage());
             }
 
             //contact
-            try
-            {
+            try {
                 lblContact.setText("");
                 user.setEmail(txtEmail.getText());
                 user.setLandlineNumber(txtLandLineNumber.getText());
                 user.setMailParent(txtMailParent.getText());
                 user.setPhoneNumber(txtPhoneNumber.getText());
-            }
-            catch(IllegalArgumentException e)
-            {
+            } catch (IllegalArgumentException e) {
                 canSubmit = false;
                 lblContact.setText(e.getMessage());
             }
@@ -397,14 +413,15 @@ public class MembersController extends BorderPane {
             //endregion
 
             //submit
-            if(canSubmit) {
+            if (canSubmit) {
                 dc.addUser(user);
-                lstMembers.setItems(FXCollections.observableArrayList(users));
+                updateUsers();
                 toEditUser();
                 emptyFields();
             }
         }
     }
+
     @FXML
     private void addUser() {
         setUser(new User());

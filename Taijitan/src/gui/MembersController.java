@@ -236,14 +236,15 @@ public class MembersController extends BorderPane {
     private void delete() {
         if (!isAdd) {
             if (user != null) {
-                AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
-                dc.deleteUser(user);
-                lstMembers.setItems(FXCollections.observableArrayList(users));
-                emptyFields();
-                disableFields();
-                this.btnEdit.setDisable(true);
-                this.btnDelete.setDisable(true);
-                this.btnAdd.setDisable(false);
+                if(AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?")){
+                    dc.deleteUser(user);
+                    lstMembers.setItems(FXCollections.observableArrayList(users));
+                    emptyFields();
+                    disableFields();
+                    this.btnEdit.setDisable(true);
+                    this.btnDelete.setDisable(true);
+                    this.btnAdd.setDisable(false);
+                }
             }
         }
         else

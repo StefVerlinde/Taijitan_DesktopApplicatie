@@ -98,6 +98,7 @@
                   <Insets top="3.0" />
                </GridPane.margin>
             </JFXTextField>
+            <JFXComboBox fx:id="cmbFormula" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <JFXTextField fx:id="txtStreet" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -336,6 +337,11 @@
                </font>
             </Label>
             <Label fx:id="lblContact" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="286.0" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="11" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="156.0" layoutY="338.0" text="Formule*" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

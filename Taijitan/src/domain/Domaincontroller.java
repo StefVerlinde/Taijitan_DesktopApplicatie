@@ -14,12 +14,14 @@ public class Domaincontroller {
     private UserDao userDao;
     private SessionDao sessionDao;
     private CityDao cityDao;
+    private GenericDao formulaDao;
 
     public Domaincontroller(){
 
         setUserDao(new UserDaoJpa());
         setSessionDao(new SessionDaoJpa());
         setCityDao(new CityDaoJpa());
+        setFormulaDao(new GenericDaoJpa(Formula.class));
     }
 
     public void setUserDao(UserDaoJpa udj){
@@ -34,6 +36,10 @@ public class Domaincontroller {
 
     public void setCityDao(CityDaoJpa cdj) {
         this.cityDao = cdj;
+    }
+
+    public void setFormulaDao(GenericDaoJpa<Formula> fdj) {
+        this.formulaDao = fdj;
     }
 
     public List<User> getAllUsers() {
@@ -97,6 +103,11 @@ public class Domaincontroller {
         City city = cityDao.getByPostal(postal);
         System.out.println(city.toString());
         return city;
+    }
+
+    public List<Formula> getAllFormulas()
+    {
+        return this.formulaDao.findAll();
     }
 
 }

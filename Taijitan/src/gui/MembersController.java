@@ -4,10 +4,13 @@ package gui;
 //region Imports
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.jfoenix.controls.*;
 import domain.*;
@@ -25,6 +28,7 @@ public class MembersController extends BorderPane {
     private boolean isAdd;
     private Domaincontroller dc;
     private User user;
+    private List<User> users;
     @FXML
     private JFXListView lstMembers;
     @FXML
@@ -73,6 +77,9 @@ public class MembersController extends BorderPane {
     private Label lblAddress;
     @FXML
     private Label lblContact;
+    @FXML
+    private JFXComboBox cmbFormula;
+
     //endregion
 
     public MembersController(Domaincontroller dc) {
@@ -81,6 +88,7 @@ public class MembersController extends BorderPane {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members.fxml"));
         loader.setRoot(this);
         loader.setController(this);
+        users = dc.getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
 
         try {
             loader.load();
@@ -93,7 +101,7 @@ public class MembersController extends BorderPane {
     }
 
     private void buildGui() {
-        lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+        lstMembers.setItems(FXCollections.observableArrayList(users));
         btnAdd.setDisable(false);
 
         lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) ->
@@ -126,6 +134,8 @@ public class MembersController extends BorderPane {
                 cmbNationality.getSelectionModel().select(user.getNationality());
                 cmbCountry.getItems().setAll(Country.values());
                 cmbCountry.getSelectionModel().select(user.getCountry());
+                cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).toArray());
+                cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
 
                 dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
                 lblDateRegistered.setText(formatDate(user.getDateRegistred()));
@@ -153,6 +163,8 @@ public class MembersController extends BorderPane {
         cmbNationality.getSelectionModel().clearSelection();
         cmbCountry.getItems().setAll(Country.values());
         cmbCountry.getSelectionModel().clearSelection();
+        cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).toArray());
+        cmbFormula.getSelectionModel().clearSelection();
 
         dpBirthDate.getEditor().clear();
         lblDateRegistered.setText("");
@@ -181,6 +193,7 @@ public class MembersController extends BorderPane {
         btnEdit.setDisable(false);
         btnAdd.setDisable(false);
         btnDelete.setDisable(false);
+        cmbFormula.setDisable(false);
     }
 
     private void disableFields() {
@@ -203,6 +216,7 @@ public class MembersController extends BorderPane {
         btnEdit.setDisable(true);
         btnAdd.setDisable(true);
         btnDelete.setDisable(true);
+        cmbFormula.setDisable(true);
     }
 
     private void setUser(User user) {
@@ -216,7 +230,6 @@ public class MembersController extends BorderPane {
         btnAdd.setVisible(true);
         isAdd = false;
         btnDelete.setDisable(true);
-        btnEdit.disableProperty().unbind();
     }
 
     @FXML
@@ -225,7 +238,7 @@ public class MembersController extends BorderPane {
             if (user != null) {
                 AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?");
                 dc.deleteUser(user);
-                lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+                lstMembers.setItems(FXCollections.observableArrayList(users));
                 emptyFields();
                 disableFields();
                 this.btnEdit.setDisable(true);
@@ -261,6 +274,7 @@ public class MembersController extends BorderPane {
                     user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
                     user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
                     user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
+                    user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
                 }
                 catch(IllegalArgumentException e)
                 {
@@ -313,7 +327,7 @@ public class MembersController extends BorderPane {
                 //submit
                 if(canSubmit) {
                     dc.updateUser(user);
-                    lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+                    lstMembers.setItems(FXCollections.observableArrayList(users));
                 }
             }
         }
@@ -331,6 +345,7 @@ public class MembersController extends BorderPane {
                 user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
                 user.setNationality(cmbNationality.getSelectionModel().getSelectedIndex());
                 user.setGender(cmbGender.getSelectionModel().getSelectedIndex());
+                user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
             }
             catch(IllegalArgumentException e)
             {
@@ -377,14 +392,13 @@ public class MembersController extends BorderPane {
             //extra required properties
             user.setDateRegistred(new Date());
             user.setDiscriminator("Member");
-            user.setFormulaId(new Formula(2));
-            user.setRank(7);
+            user.setRank(1);
             //endregion
 
             //submit
             if(canSubmit) {
                 dc.addUser(user);
-                lstMembers.setItems(FXCollections.observableArrayList(dc.getAllUsers()));
+                lstMembers.setItems(FXCollections.observableArrayList(users));
                 toEditUser();
                 emptyFields();
             }
@@ -400,22 +414,6 @@ public class MembersController extends BorderPane {
         btnDelete.setText("Annuleer");
         btnDelete.setDisable(false);
         enableFields();
-        btnEdit.disableProperty().bind(
-                Bindings.isEmpty(txtFirstName.textProperty())
-                        .and(Bindings.isEmpty(txtLastName.textProperty()))
-                        .and(Bindings.isEmpty(txtBirthPlace.textProperty()))
-                        .and(Bindings.isEmpty(txtPersonalNationalNumber.textProperty()))
-                        .and(Bindings.isEmpty(txtStreet.textProperty()))
-                        .and(Bindings.isEmpty(txtPostalCode.textProperty()))
-                        .and(Bindings.isEmpty(txtHouseNumber.textProperty()))
-                        .and(Bindings.isEmpty(txtCityName.textProperty()))
-                        .and(Bindings.isEmpty(txtEmail.textProperty()))
-                        .and(Bindings.isEmpty(txtLandLineNumber.textProperty()))
-                        .and(Bindings.isEmpty(cmbGender.idProperty()))
-                        .and(Bindings.isEmpty(cmbCountry.idProperty()))
-                        .and(Bindings.isEmpty(cmbNationality.idProperty()))
-                        .and(Bindings.isEmpty(dpBirthDate.promptTextProperty()))
-        );
         emptyFields();
     }
 

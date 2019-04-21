@@ -13,10 +13,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.regex.Pattern;
 
-/**
- * @author tijsm
- */
 @Entity
 @Table(name = "users")
 @NamedQueries({
@@ -120,7 +118,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     private Collection<Session> sessionCollection1;
     //endregion
 
-    //properties voor table
+    //properties for table
     @Transient
     private SimpleStringProperty familyNameProperty = new SimpleStringProperty();
     @Transient
@@ -165,6 +163,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setName(String name) {
+        if(name.trim().isEmpty() || name.length() >= 100)
+            throw new IllegalArgumentException("Familienaam is verplicht (max 100 karakters)");
         this.name = name;
     }
 
@@ -173,6 +173,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setFirstName(String firstName) {
+        if(firstName.trim().isEmpty() || firstName.length() >= 100)
+            throw new IllegalArgumentException("Voornaam is verplicht (max 100 karakters)");
         this.firstName = firstName;
     }
 
@@ -181,6 +183,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
+        if(dateOfBirth.after(new Date()))
+            throw new IllegalArgumentException("Geboortedatum moet in het verleden liggen");
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -189,6 +193,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setStreet(String street) {
+        if(street.trim().isEmpty())
+            throw new IllegalArgumentException("Straat is verplicht");
         this.street = street;
     }
 
@@ -205,6 +211,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setHouseNumber(String houseNumber) {
+        if(houseNumber.trim().isEmpty())
+            throw new IllegalArgumentException("Huisnummer is verplicht");
         this.houseNumber = houseNumber;
     }
 
@@ -213,6 +221,11 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        if(phoneNumber.trim().isEmpty())
+            throw new IllegalArgumentException("Telefoonnummer is verplicht");
+        else if(phoneNumber.length() < 10 || phoneNumber.length() > 20 ||
+                (!phoneNumber.startsWith("+") && !phoneNumber.startsWith("04")))
+            throw new IllegalArgumentException("Geen geldig telefoonnummer");
         this.phoneNumber = phoneNumber;
     }
 
@@ -221,6 +234,10 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setEmail(String email) {
+        if(email.trim().isEmpty())
+            throw new IllegalArgumentException("E-mailadres is verplicht");
+        else if(!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]+",email))
+            throw new IllegalArgumentException("Geen geldig E-mailadres");
         this.email = email;
     }
 
@@ -253,6 +270,9 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setPersonalNationalNumber(String personalNationalNumber) {
+        if(personalNationalNumber.trim().isEmpty() ||
+                !Pattern.matches("[0-9]{2}[.][0-9]{2}[.][0-9]{2}[-][0-9]{3}[.][0-9]{2}",personalNationalNumber))
+            throw  new IllegalArgumentException("Ongeldig rijksregisternummer");
         this.personalNationalNumber = personalNationalNumber;
     }
 
@@ -261,6 +281,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setBirthPlace(String birthPlace) {
+        if(birthPlace.trim().isEmpty() || birthPlace.length() > 100)
+            throw new IllegalArgumentException("Geboorteplaats is verplicht (max 100 karakters");
         this.birthPlace = birthPlace;
     }
 
@@ -269,6 +291,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setLandlineNumber(String landlineNumber) {
+        if(!landlineNumber.trim().isEmpty() && (landlineNumber.length() < 10 || landlineNumber.length() > 20))
+            throw new IllegalArgumentException("Geen geldig nummer");
         this.landlineNumber = landlineNumber;
     }
 
@@ -277,6 +301,9 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setMailParent(String mailParent) {
+        if(!mailParent.trim().isEmpty() &&
+                !Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]+",mailParent))
+            throw new IllegalArgumentException("Geen geldig E-mailadres van ouder");
         this.mailParent = mailParent;
     }
 
@@ -324,7 +351,9 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         return cityPostalcode;
     }
 
-    public void setCityPostalcode(City cityPostalcode) {
+    public void setCityPostalcode(City city) {
+        if(city == null)
+            throw new IllegalArgumentException("Geen geldige stad");
         this.cityPostalcode = cityPostalcode;
     }
 

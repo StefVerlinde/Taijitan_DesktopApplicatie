@@ -7,6 +7,7 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import javax.persistence.*;
 
 /**
@@ -33,15 +34,17 @@ public class City implements Serializable {
     public City() {
     }
 
-    public City(String postalcode) {
-        this.postalcode = postalcode;
+    public City(String postalcode,String name) {
+        setPostalcode(postalcode);
+        setName(name);
     }
-
     public String getPostalcode() {
         return postalcode;
     }
 
     public void setPostalcode(String postalcode) {
+        if(postalcode.trim().isEmpty())
+            throw new IllegalArgumentException("Geen geldige postcode");
         this.postalcode = postalcode;
     }
 
@@ -50,6 +53,8 @@ public class City implements Serializable {
     }
 
     public void setName(String name) {
+        if(name.trim().isEmpty() || name.length() >= 100)
+            throw new IllegalArgumentException("Stadsnaam is verplicht (max 100 karakters)");
         this.name = name;
     }
 

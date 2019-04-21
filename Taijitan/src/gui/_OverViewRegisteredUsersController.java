@@ -20,7 +20,13 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Year;
+import java.util.Date;
 import java.util.function.Predicate;
 
 public class _OverViewRegisteredUsersController extends AnchorPane {
@@ -145,17 +151,40 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 
     private  void printRegistredUsers(){
         try {
+
+
+
             PDDocument document = new PDDocument();
             PDPage pageOne = new PDPage();
                 PDPageContentStream contentStream = new PDPageContentStream(document, pageOne);
+                contentStream.beginText();
+                contentStream.setFont( PDType1Font.COURIER, 20 );
+                contentStream.setLeading(14.5f);
+                contentStream.newLineAtOffset(25, 750);
+                String text;
+                text = "Alle geregistreerde leden";
+                contentStream.showText(text);
+                contentStream.endText();
+
+                contentStream.beginText();
+                contentStream.setFont( PDType1Font.COURIER, 12 );
+                contentStream.setLeading(14.5f);
+                contentStream.newLineAtOffset(25, 700);
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
+                text = formatter.format(date);
+                contentStream.showText(text);
+                contentStream.endText();
+
+
                    int counter = 0;
-                    for(User u : dc.getAllUsers()){
+                   for(User u : dc.getAllUsers()){
                         counter+=1;
                         contentStream.beginText();
                         contentStream.setFont( PDType1Font.COURIER, 9 );
                         contentStream.setLeading(14.5f);
-                        contentStream.newLineAtOffset(25, 750-(counter*10));
-                        String text;
+                        contentStream.newLineAtOffset(25, 600-(counter*10));
+
                         text = String.format("%-12s %s %-12s %s %-12s %s %-34s %s %-25s",  u.getFirstName(),"|", u.getName(),"|", u.dateFormatter(u.getDateOfBirth()),"|", u.getEmail(),"|", u.getPhoneNumber());
                         contentStream.showText(text);
                         contentStream.endText();
@@ -163,12 +192,32 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
                     System.out.println("content added");
                     contentStream.close();
             document.addPage(pageOne);
-            document.save("D:/my_doc.pdf");
+            String path = askPath();
+            document.save(path);
+//            document.save("D:/my_doc.pdf");
             document.close();
         } catch (IOException e) {
             System.out.println("locatie niet gevonden");
             e.printStackTrace();
         }
+    }
+
+    private String askPath(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String path = f.getAbsolutePath();
+
+        LocalDate now = LocalDate.now();
+        int Year = now.getYear();
+        int Month = now.getMonthValue();
+        int day = now.getDayOfMonth();
+
+        String fileName = String.format("%s%s%d%d%d%s", path, "/OverzichtGeregistreerdeLeden", Year, Month, day, ".pdf");
+        System.out.println(fileName);
+
+        return fileName;
     }
 
 }

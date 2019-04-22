@@ -120,7 +120,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 
 
     private void buildColumns() {
-        clmUserFirstName.setPrefWidth(200);
+        clmUserFirstName.setPrefWidth(100);
         clmUserFirstName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -128,7 +128,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserFamilyName.setPrefWidth(200);
+        clmUserFamilyName.setPrefWidth(100);
         clmUserFamilyName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -136,7 +136,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserDateOfBirth.setPrefWidth(200);
+        clmUserDateOfBirth.setPrefWidth(100);
         clmUserDateOfBirth.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {

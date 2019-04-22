@@ -33,6 +33,10 @@ public class OverviewsController extends VBox {
     @FXML
     private TableView<User> table = new TableView();
 
+    private _OverviewPresentsController pc;
+    private _OverViewRegisteredUsersController oru;
+
+
     public OverviewsController(Domaincontroller dc) {
         this.dc = dc;
 
@@ -40,6 +44,8 @@ public class OverviewsController extends VBox {
         loader.setRoot(this);
         loader.setController(this);
 
+        pc = new _OverviewPresentsController(this.dc);
+        oru = new _OverViewRegisteredUsersController(this.dc);
 
         try {
             loader.load();
@@ -48,25 +54,34 @@ public class OverviewsController extends VBox {
         }
     }
 
-
-    @FXML
-    void showActivities(ActionEvent event) {
+    public void clearNodes(){
+        this.getChildren().remove(pc);
+        this.getChildren().remove(oru);
 
     }
 
     @FXML
+    void showActivities(ActionEvent event) {
+        clearNodes();
+    }
+
+    @FXML
     void showChampionship(ActionEvent event) {
+        clearNodes();
+
 
     }
 
     @FXML
     void showCourseMaterial(ActionEvent event) {
+        clearNodes();
+
 
     }
 
     @FXML
     void showPresents(ActionEvent event) {
-        _OverviewPresentsController pc = new _OverviewPresentsController(this.dc);
+        clearNodes();
 
         this.getChildren().add(pc);
 
@@ -74,11 +89,9 @@ public class OverviewsController extends VBox {
 
     @FXML
     void showRegistrations(ActionEvent event) {
-        _OverViewRegisteredUsersController oru = new _OverViewRegisteredUsersController(this.dc);
+        clearNodes();
 
         this.getChildren().add(oru);
-
-
     }
 
     private void buildGui() {

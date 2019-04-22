@@ -135,7 +135,7 @@ public class MembersController extends BorderPane {
                 cmbNationality.getSelectionModel().select(user.getNationality());
                 cmbCountry.getItems().setAll(Country.values());
                 cmbCountry.getSelectionModel().select(user.getCountry());
-                cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).toArray());
+                cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
                 cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
 
                 dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));

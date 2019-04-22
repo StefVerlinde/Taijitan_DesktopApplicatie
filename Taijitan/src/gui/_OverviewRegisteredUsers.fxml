@@ -4,11 +4,17 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="1400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root minHeight="-Infinity" minWidth="-Infinity" prefHeight="758.0" prefWidth="774.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXTreeTableView fx:id="tblRegistredUsers" layoutX="117.0" layoutY="123.0" prefHeight="552.0" prefWidth="1165.0" stylesheets="@style.css" />
+      <BorderPane layoutX="117.0" layoutY="135.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="56.0">
+         <center>
+            <JFXTreeTableView fx:id="tblRegistredUsers" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="536.0" stylesheets="@style.css" />
+         </center>
+      </BorderPane>
       <JFXTextField fx:id="txtSearch" layoutX="117.0" layoutY="65.0" prefHeight="27.0" prefWidth="454.0" promptText="Zoeken (op naam, voornaam of telefoonnummer)" />
       <JFXButton fx:id="btnPrintPdf" alignment="CENTER" buttonType="RAISED" layoutX="117.0" layoutY="708.0" onAction="#printOverviewPdf" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="PDF" textFill="WHITE">
          <font>

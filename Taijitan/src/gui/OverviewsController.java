@@ -15,6 +15,7 @@ import java.io.IOException;
 public class OverviewsController extends VBox {
 
     private Domaincontroller dc;
+    private FrameController fc;
     @FXML
     private JFXButton btnActivities;
 
@@ -37,15 +38,15 @@ public class OverviewsController extends VBox {
     private _OverViewRegisteredUsersController oru;
 
 
-    public OverviewsController(Domaincontroller dc) {
+    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru) {
         this.dc = dc;
+        this.fc = fc;
+        this.pc = pc;
+        this.oru = oru;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("overviews.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-
-        pc = new _OverviewPresentsController(this.dc);
-        oru = new _OverViewRegisteredUsersController(this.dc);
 
         try {
             loader.load();

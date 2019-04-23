@@ -144,6 +144,11 @@ public class MembersController extends BorderPane {
         });
     }
 
+    public void pickUserInList(User user){
+        lstMembers.getSelectionModel().select(user);
+        setUser(user);
+    }
+
     private void updateUsers() {
         users = dc.getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
         lstMembers.setItems(FXCollections.observableArrayList(users));

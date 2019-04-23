@@ -57,15 +57,9 @@ public class Domaincontroller {
         return sessions;
     }
 
-    public List<String> getNamesMembersFromSession(Session session){
+    public List<User> getUsersFromSession(Session session){
         List<User> users = new ArrayList<>(session.getUserCollection());
-
-        List<String> userNames = new ArrayList<>();
-        for(User u : users){
-            userNames.add(String.format("%s %s", u.getFirstName(), u.getName()));
-        }
-
-        return userNames;
+        return users;
     }
     public void updateUser(User user)
     {

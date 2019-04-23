@@ -6,6 +6,7 @@
 package gui;
 
 import domain.Domaincontroller;
+import domain.User;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
@@ -15,13 +16,16 @@ public class FrameController extends HBox {
     private NavController nav;
     private WelcomeController welcome;
     private MembersController members;
-    private _OverviewPresentsController presents;
     private OverviewsController overviews;
     private Object current;
     Rectangle2D bounds;
+    private _OverviewPresentsController pc;
+    private _OverViewRegisteredUsersController oru;
 
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
+        this.pc = new _OverviewPresentsController(dc, this);
+        this.oru = new _OverViewRegisteredUsersController(dc);
         setupStart();
     }
 
@@ -54,7 +58,7 @@ public class FrameController extends HBox {
     }
 
     private void setupOverviews() {
-        overviews = new OverviewsController(dc);
+        overviews = new OverviewsController(dc, this, pc, oru);
         current = overviews;
 
 
@@ -76,9 +80,20 @@ public class FrameController extends HBox {
                 setupOverviews();
                 break;
         }
-
-
     }
 
+    public void changeToMembersWithSelectedUser(User user){
+        clearNodes();
+        members = new MembersController(dc);
+        current = members;
+        members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
+        members.pickUserInList(user);
+        getChildren().add(members);
+    }
 
+    public void clearNodes(){
+        this.getChildren().remove(pc);
+        this.getChildren().remove(oru);
+        this.getChildren().remove(overviews);
+    }
 }

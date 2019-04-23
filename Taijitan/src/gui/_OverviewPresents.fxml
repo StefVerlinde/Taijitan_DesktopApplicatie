@@ -27,7 +27,7 @@
         <Label fx:id="lblTeacher" layoutX="666.0" layoutY="120.0" text="Lesgever:" />
         <Label fx:id="lblDate" layoutX="666.0" layoutY="141.0" text="Datum:" />
         <Label layoutX="666.0" layoutY="174.0" text="Aanwezigen:" />
-        <JFXListView fx:id="lstPressents" layoutX="666.0" layoutY="192.0" prefHeight="387.0" prefWidth="503.0" />
+        <JFXListView fx:id="lstPressents" layoutX="666.0" layoutY="192.0" onMouseClicked="#selectMemberFromList" prefHeight="387.0" prefWidth="503.0" />
     </children>
    <padding>
       <Insets left="50.0" />

@@ -3,10 +3,12 @@ package gui;
 import com.jfoenix.controls.JFXListView;
 import domain.Domaincontroller;
 import domain.Session;
+import domain.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -24,14 +26,16 @@ public class _OverviewPresentsController extends AnchorPane {
     private Label lblDate;
 
     @FXML
-    private JFXListView<String> lstPressents;
+    private JFXListView lstPressents;
 
 
     private Domaincontroller dc;
+    private FrameController fc;
 
 
-    public _OverviewPresentsController(Domaincontroller dc) {
+    public _OverviewPresentsController(Domaincontroller dc, FrameController fc) {
         this.dc = dc;
+        this.fc = fc;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewPresents.fxml"));
         loader.setRoot(this);
@@ -64,12 +68,17 @@ public class _OverviewPresentsController extends AnchorPane {
                 lblTeacher.setText(String.format("Trainer: %s %s", sellectedSession.getTeacherUserId().getFirstName(), sellectedSession.getTeacherUserId().getName()));
                 lblTeacher = new Label(sellectedSession.getTeacherUserId().getFirstName());
 
-                lstPressents.setItems(FXCollections.observableArrayList(dc.getNamesMembersFromSession(sellectedSession)));
-
-
+                lstPressents.setItems(FXCollections.observableArrayList(dc.getUsersFromSession(sellectedSession)));
             }
         });
-
-
+    }
+    @FXML
+    private void selectMemberFromList(MouseEvent event)
+    {
+        if(event.getClickCount() == 2){
+            User selectedUser = (User) lstPressents.getSelectionModel().getSelectedItem();
+            System.out.println(selectedUser);
+            fc.changeToMembersWithSelectedUser(selectedUser);
+        }
     }
 }

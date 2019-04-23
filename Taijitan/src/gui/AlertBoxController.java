@@ -21,4 +21,12 @@ public class AlertBoxController {
             return false;
         }
     }
+
+    public static void BasicAlert(String title, String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
 }

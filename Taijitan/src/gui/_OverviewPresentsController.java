@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public class _OverviewPresentsController extends AnchorPane {
@@ -77,8 +78,14 @@ public class _OverviewPresentsController extends AnchorPane {
     {
         if(event.getClickCount() == 2){
             User selectedUser = (User) lstPressents.getSelectionModel().getSelectedItem();
-            System.out.println(selectedUser);
-            fc.changeToMembersWithSelectedUser(selectedUser);
+            List<User> users = dc.getAllUsers();
+            if(users.contains(selectedUser)){
+                System.out.println(selectedUser);
+                fc.changeToMembersWithSelectedUser(selectedUser);
+            }
+            else {
+                AlertBoxController.BasicAlert("Error", selectedUser.getFirstName() + selectedUser.getName() + " is geen bestaand lid meer.");
+            }
         }
     }
 }

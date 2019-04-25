@@ -17,7 +17,7 @@ public class AlertBoxController {
             System.out.println("Okay");
             return true;
         } else {
-            System.out.println("Cancel");
+            System.out.println("Annuleer");
             return false;
         }
     }

@@ -9,99 +9,55 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-public class Domaincontroller {
-
-    private UserDao userDao;
-    private SessionDao sessionDao;
-    private CityDao cityDao;
-    private GenericDao formulaDao;
+public class Domaincontroller
+{
+    private Taijitan taijitan;
 
     public Domaincontroller(){
-
-        setUserDao(new UserDaoJpa());
-        setSessionDao(new SessionDaoJpa());
-        setCityDao(new CityDaoJpa());
-        setFormulaDao(new GenericDaoJpa(Formula.class));
+        setTaijitan(new Taijitan());
     }
-
-    public void setUserDao(UserDaoJpa udj){
-
-        this.userDao = udj;
+    public Taijitan getTaijitan() {
+        return taijitan;
     }
-
-    public void setSessionDao(SessionDaoJpa sd) {
-
-        this.sessionDao = sd;
+    public void setTaijitan(Taijitan taijitan) {
+        this.taijitan = taijitan;
     }
-
-    public void setCityDao(CityDaoJpa cdj) {
-        this.cityDao = cdj;
-    }
-
-    public void setFormulaDao(GenericDaoJpa<Formula> fdj) {
-        this.formulaDao = fdj;
-    }
-
     public List<User> getAllUsers() {
-        List<User> users = userDao.findAll();
-        users.sort(Comparator.comparing(u -> u.getName()));
-        return users;
+        return taijitan.getAllUsers();
     }
     public ObservableList<User> getAllUsersFX()
     {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllUsers()));
+        return taijitan.getAllUsersFX();
     }
-
     public List<Session> getAllSessions(){
-        List<Session> sessions = sessionDao.findAll();
-        return sessions;
+        return taijitan.getAllSessions();
     }
-
     public List<User> getUsersFromSession(Session session){
-        List<User> users = new ArrayList<>(session.getUserCollection());
-        return users;
+        return taijitan.getUsersFromSession(session);
     }
     public void updateUser(User user)
     {
-        GenericDaoJpa.startTransaction();
-        userDao.update(user);
-        GenericDaoJpa.commitTransaction();
-        System.out.println("update success");
+        taijitan.updateUser(user);
     }
-
     public void deleteUser(User user) {
-        GenericDaoJpa.startTransaction();
-        userDao.delete(user);
-        GenericDaoJpa.commitTransaction();
+        taijitan.deleteUser(user);
     }
-
     public void addUser(User user) {
-        GenericDaoJpa.startTransaction();
-        userDao.insert(user);
-        GenericDaoJpa.commitTransaction();
+        taijitan.addUser(user);
     }
-
     public List<City> getAllCities()
     {
-        return cityDao.findAll();
+       return taijitan.getAllCities();
     }
-
     public void addCity(City city){
-        GenericDaoJpa.startTransaction();
-        cityDao.insert(city);
-        GenericDaoJpa.commitTransaction();
+        taijitan.addCity(city);
     }
-
     public City getCityByPostal(String postal)
     {
-        City city = cityDao.getByPostal(postal);
-        System.out.println(city.toString());
-        return city;
+        return taijitan.getCityByPostal(postal);
     }
-
     public List<Formula> getAllFormulas()
     {
-        return this.formulaDao.findAll();
+        return taijitan.getAllFormulas();
     }
-
 }

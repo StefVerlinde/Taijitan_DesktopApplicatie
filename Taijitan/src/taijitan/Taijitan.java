@@ -16,10 +16,6 @@ import util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
-/**
- * @author Jarne
- */
 public class Taijitan extends Application {
     private EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
     private EntityManager em = emf.createEntityManager();
@@ -27,7 +23,6 @@ public class Taijitan extends Application {
 
     @Override
     public void start(Stage stage) {
-        dc.getAllUsers();
         Scene scene = new Scene(new FrameController(dc));
         stage.setScene(scene);
         stage.getIcons().add(new Image("/assets/img/logo.png"));

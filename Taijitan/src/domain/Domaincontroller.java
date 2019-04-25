@@ -47,7 +47,7 @@ public class Domaincontroller {
         users.sort(Comparator.comparing(u -> u.getName()));
         return users;
     }
-    public ObservableList<User> GetAllUsersFX()
+    public ObservableList<User> getAllUsersFX()
     {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllUsers()));
     }

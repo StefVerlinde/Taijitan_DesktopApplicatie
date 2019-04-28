@@ -11,10 +11,10 @@ public class UserDaoJpa extends GenericDaoJpa<User> implements UserDao {
     }
 
     @Override
-    public User getUserByName(String name) throws EntityNotFoundException {
+    public User getUserByName(String name,String first) throws EntityNotFoundException {
         try {
-            return em.createNamedQuery("User.findByName", User.class)
-                    .setParameter("userName", name)
+            return em.createNamedQuery("User.findByFullName", User.class)
+                    .setParameter("userName", name).setParameter("first",first)
                     .getSingleResult();
         } catch (NoResultException ex) {
             throw new EntityNotFoundException();

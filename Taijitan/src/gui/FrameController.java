@@ -21,12 +21,15 @@ public class FrameController extends HBox {
     Rectangle2D bounds;
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
+    private ListPanelController listpanel;
 
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
         this.pc = new _OverviewPresentsController(dc, this);
         this.oru = new _OverViewRegisteredUsersController(dc);
+        this.listpanel = new ListPanelController(dc);
         setupStart();
+
     }
 
     private void setupStart() {
@@ -50,11 +53,14 @@ public class FrameController extends HBox {
     }
 
     private void setupMember() {
+        this.dc.setCurrentUser(null);
         members = new MembersController(dc);
+        this.dc.addPropertyChangeListenerCurrentUser(members);
         current = members;
-        members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
+        members.setMinWidth(bounds.getWidth() - nav.getPrefWidth()-listpanel.getPrefWidth());
+        listpanel.fillWithMembers();
 
-        getChildren().add(members);
+        getChildren().addAll(listpanel,members);
     }
 
     private void setupOverviews() {
@@ -68,6 +74,7 @@ public class FrameController extends HBox {
 
     public void changeContent(String string) {
         getChildren().remove(current);
+        getChildren().remove(listpanel);
 
         switch (string.toLowerCase()) {
             case "members":
@@ -87,7 +94,6 @@ public class FrameController extends HBox {
         members = new MembersController(dc);
         current = members;
         members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
-        members.pickUserInList(user);
         getChildren().add(members);
     }
 

@@ -7,6 +7,7 @@ import repository.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Taijitan {
     private UserDao userDao;
@@ -14,12 +15,14 @@ public class Taijitan {
     private CityDao cityDao;
     private GenericDao formulaDao;
 
+
     //constructor
     public Taijitan() {
         setCityDao(new CityDaoJpa());
         setSessionDao(new SessionDaoJpa());
         setUserDao(new UserDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
+
     }
 
     //getters - setters
@@ -53,9 +56,11 @@ public class Taijitan {
         users.sort(Comparator.comparing(u -> u.getName()));
         return users;
     }
-    public ObservableList<User> getAllUsersFX()
+    public ObservableList<User> getAllMembersFX()
     {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllUsers()));
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(
+                getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member"))
+                        .collect(Collectors.toList())));
     }
     public List<Session> getAllSessions(){
         List<Session> sessions = sessionDao.findAll();
@@ -77,6 +82,10 @@ public class Taijitan {
         userDao.startTransaction();
         userDao.delete(user);
         userDao.commitTransaction();
+    }
+    public User getUserByFullName(String firstname,String lastname)
+    {
+        return userDao.getUserByName(lastname,firstname);
     }
 
     public void addUser(User user) {

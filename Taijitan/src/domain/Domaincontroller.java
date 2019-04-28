@@ -1,33 +1,31 @@
 package domain;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import repository.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 public class Domaincontroller
 {
-    private Taijitan taijitan;
+    private final Taijitan taijitan;
+    private User currentUser;
+    private final PropertyChangeSupport subjectUsers;
 
     public Domaincontroller(){
-        setTaijitan(new Taijitan());
+        this.taijitan = new Taijitan();
+        this.subjectUsers = new PropertyChangeSupport(this);
     }
     public Taijitan getTaijitan() {
         return taijitan;
     }
-    public void setTaijitan(Taijitan taijitan) {
-        this.taijitan = taijitan;
-    }
     public List<User> getAllUsers() {
         return taijitan.getAllUsers();
     }
-    public ObservableList<User> getAllUsersFX()
+    public ObservableList<User> getAllMembersFX()
     {
-        return taijitan.getAllUsersFX();
+        return taijitan.getAllMembersFX();
     }
     public List<Session> getAllSessions(){
         return taijitan.getAllSessions();
@@ -35,12 +33,13 @@ public class Domaincontroller
     public List<User> getUsersFromSession(Session session){
         return taijitan.getUsersFromSession(session);
     }
-    public void updateUser(User user)
+    public void updateUser()
     {
-        taijitan.updateUser(user);
+        taijitan.updateUser(currentUser);
     }
-    public void deleteUser(User user) {
-        taijitan.deleteUser(user);
+    public void deleteUser() {
+        taijitan.deleteUser(currentUser);
+        setCurrentUser(null);
     }
     public void addUser(User user) {
         taijitan.addUser(user);
@@ -59,5 +58,16 @@ public class Domaincontroller
     public List<Formula> getAllFormulas()
     {
         return taijitan.getAllFormulas();
+    }
+    public User getCurrentUser() {
+        return currentUser;
+    }
+    public void setCurrentUser(User newUser) {
+        subjectUsers.firePropertyChange("currentUser",this.currentUser,newUser);
+        this.currentUser = newUser;
+    }
+    public void addPropertyChangeListenerCurrentUser(PropertyChangeListener pcl) {
+        subjectUsers.addPropertyChangeListener(pcl);
+        pcl.propertyChange(new PropertyChangeEvent(pcl, "currentUser", null, this.currentUser));
     }
 }

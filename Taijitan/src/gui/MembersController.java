@@ -2,20 +2,18 @@
 package gui;
 
 //region Imports
-
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.jfoenix.controls.*;
 import domain.*;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,15 +21,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 //endregion
 
-public class MembersController extends BorderPane {
+public class MembersController extends BorderPane implements PropertyChangeListener {
 
     //region Properties
     private boolean isAdd;
     private Domaincontroller dc;
-    private User user;
-    private List<User> users;
-    @FXML
-    private JFXListView lstMembers;
     @FXML
     private JFXTextField txtFirstName;
     @FXML
@@ -89,7 +83,6 @@ public class MembersController extends BorderPane {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        users = dc.getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
 
         try {
             loader.load();
@@ -97,63 +90,10 @@ public class MembersController extends BorderPane {
             System.err.println(ex.getMessage());
         }
 
-
-        buildGui();
-    }
-
-    private void buildGui() {
-        lstMembers.setItems(FXCollections.observableArrayList(users));
         btnAdd.setDisable(false);
-
-        lstMembers.getSelectionModel().selectedItemProperty().addListener((ObservableValue, oldValue, newValue) ->
-        {
-            if (newValue != null) {
-                lblAddress.setText("");
-                lblPersonal.setText("");
-                lblContact.setText("");
-                setUser((User) newValue);
-                toEditUser();
-
-                enableFields();
-
-                txtFirstName.setText(user.getFirstName());
-                txtLastName.setText(user.getName());
-                txtBirthPlace.setText(user.getBirthPlace());
-                txtPersonalNationalNumber.setText(user.getPersonalNationalNumber());
-                txtStreet.setText(user.getStreet());
-                txtPostalCode.setText(user.getCityPostalcode().getPostalcode());
-                txtHouseNumber.setText(user.getHouseNumber());
-                txtCityName.setText(user.getCityPostalcode().getName());
-                txtEmail.setText(user.getEmail());
-                txtLandLineNumber.setText(user.getLandlineNumber());
-                txtPhoneNumber.setText(user.getPhoneNumber());
-                txtMailParent.setText(user.getMailParent());
-
-                cmbGender.getItems().setAll(Gender.values());
-                cmbGender.getSelectionModel().select(user.getGender());
-                cmbNationality.getItems().setAll(Country.values());
-                cmbNationality.getSelectionModel().select(user.getNationality());
-                cmbCountry.getItems().setAll(Country.values());
-                cmbCountry.getSelectionModel().select(user.getCountry());
-                cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
-                cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
-
-                dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
-                lblDateRegistered.setText(formatDate(user.getDateRegistred()));
-            }
-        });
+        emptyFields();
+        disableFields();
     }
-
-    public void pickUserInList(User user){
-        lstMembers.getSelectionModel().select(user);
-        setUser(user);
-    }
-
-    private void updateUsers() {
-        users = dc.getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
-        lstMembers.setItems(FXCollections.observableArrayList(users));
-    }
-
     private void emptyFields() {
         txtFirstName.clear();
         txtLastName.clear();
@@ -229,12 +169,6 @@ public class MembersController extends BorderPane {
         btnDelete.setDisable(true);
         cmbFormula.setDisable(true);
     }
-
-    private void setUser(User user) {
-        if (user != null)
-            this.user = user;
-    }
-
     private void toEditUser() {
         btnEdit.setText("Pas gegevens aan");
         btnDelete.setText("Verwijder lid");
@@ -246,10 +180,9 @@ public class MembersController extends BorderPane {
     @FXML
     private void delete() {
         if (!isAdd) {
-            if (user != null) {
-                if(AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + user.getName() + " " + user.getFirstName() + " verwijderen?")){
-                    dc.deleteUser(user);
-                    updateUsers();
+            if (dc.getCurrentUser() != null) {
+                if(AlertBoxController.ConfirmationAlert("Delete", "Wil je user " + dc.getCurrentUser().getName() + " " + dc.getCurrentUser().getFirstName() + " verwijderen?")){
+                    dc.deleteUser();
                     emptyFields();
                     disableFields();
                     this.btnEdit.setDisable(true);
@@ -270,11 +203,13 @@ public class MembersController extends BorderPane {
     private void edit() {
         boolean canSubmit = true;
         if (!isAdd) {
-            if (user != null) {
+            if (dc.getCurrentUser() != null) {
                 //region Edit data from existing user
+                User user = dc.getCurrentUser();
                 //Personal data
                 try {
                     lblPersonal.setText("");
+
                     user.setFirstName(txtFirstName.getText());
                     user.setName(txtLastName.getText());
                     user.setBirthPlace(txtBirthPlace.getText());
@@ -342,13 +277,14 @@ public class MembersController extends BorderPane {
 
                 //submit
                 if (canSubmit) {
-                    dc.updateUser(user);
-                    updateUsers();
+                    dc.setCurrentUser(user);
+                    dc.updateUser();
                 }
             }
         } else {
 
             //region Add user
+            User user = new User();
             //Personal data
             try {
                 lblPersonal.setText("");
@@ -420,7 +356,6 @@ public class MembersController extends BorderPane {
             //submit
             if (canSubmit) {
                 dc.addUser(user);
-                updateUsers();
                 toEditUser();
                 emptyFields();
             }
@@ -429,8 +364,6 @@ public class MembersController extends BorderPane {
 
     @FXML
     private void addUser() {
-        setUser(new User());
-        lstMembers.getSelectionModel().clearSelection();
         isAdd = true;
         btnAdd.setVisible(false);
         btnEdit.setText("Voeg lid toe");
@@ -454,5 +387,42 @@ public class MembersController extends BorderPane {
 
     private Date convertToDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getNewValue() != null)
+        {
+            User user = (User)evt.getNewValue();
+            lblAddress.setText("");
+            lblPersonal.setText("");
+            lblContact.setText("");
+            toEditUser();
+            enableFields();
+            txtFirstName.setText(user.getFirstName());
+            txtLastName.setText(user.getName());
+            txtBirthPlace.setText(user.getBirthPlace());
+            txtPersonalNationalNumber.setText(user.getPersonalNationalNumber());
+            txtStreet.setText(user.getStreet());
+            txtPostalCode.setText(user.getCityPostalcode().getPostalcode());
+            txtHouseNumber.setText(user.getHouseNumber());
+            txtCityName.setText(user.getCityPostalcode().getName());
+            txtEmail.setText(user.getEmail());
+            txtLandLineNumber.setText(user.getLandlineNumber());
+            txtPhoneNumber.setText(user.getPhoneNumber());
+            txtMailParent.setText(user.getMailParent());
+
+            cmbGender.getItems().setAll(Gender.values());
+            cmbGender.getSelectionModel().select(user.getGender());
+            cmbNationality.getItems().setAll(Country.values());
+            cmbNationality.getSelectionModel().select(user.getNationality());
+            cmbCountry.getItems().setAll(Country.values());
+            cmbCountry.getSelectionModel().select(user.getCountry());
+            cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
+            cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+
+            dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
+            lblDateRegistered.setText(formatDate(user.getDateRegistred()));
+        }
     }
 }

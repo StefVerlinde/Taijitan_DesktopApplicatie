@@ -14,26 +14,23 @@ import java.io.IOException;
 
 public class OverviewsController extends VBox {
 
-    private Domaincontroller dc;
-    private FrameController fc;
+
     @FXML
     private JFXButton btnActivities;
-
     @FXML
     private JFXButton btnshowRegistrations;
-
     @FXML
     private JFXButton btnPresents;
-
     @FXML
     private JFXButton btnCourseMaterial;
-
     @FXML
     private JFXButton btnChampionship;
-
     @FXML
     private TableView<User> table = new TableView();
 
+
+    private Domaincontroller dc;
+    private FrameController fc;
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
 

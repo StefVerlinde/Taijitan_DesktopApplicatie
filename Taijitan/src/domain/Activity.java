@@ -35,7 +35,6 @@ import javax.persistence.TemporalType;
         @NamedQuery(name = "Activity.findByType", query = "SELECT a FROM Activity a WHERE a.type = :type"),
         @NamedQuery(name = "Activity.findByStartDate", query = "SELECT a FROM Activity a WHERE a.startDate = :startDate"),
         @NamedQuery(name = "Activity.findByEndDate", query = "SELECT a FROM Activity a WHERE a.endDate = :endDate"),
-        @NamedQuery(name = "Activity.findByMaxAmountParticipant", query = "SELECT a FROM Activity a WHERE a.maxAmountParticipant = :maxAmountParticipant"),
         @NamedQuery(name = "Activity.findByIsFull", query = "SELECT a FROM Activity a WHERE a.isFull = :isFull")})
 public class Activity implements Serializable {
 
@@ -57,9 +56,7 @@ public class Activity implements Serializable {
     @Column(name = "EndDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    @Basic(optional = false)
-    @Column(name = "maxAmountParticipant")
-    private int maxAmountParticipant;
+
     @Basic(optional = false)
     @Column(name = "IsFull")
     private boolean isFull;
@@ -78,12 +75,12 @@ public class Activity implements Serializable {
         this.activityId = activityId;
     }
 
-    public Activity(Integer activityId, int type, Date startDate, Date endDate, int maxAmountParticipant, boolean isFull) {
+    public Activity(Integer activityId, int type, Date startDate, Date endDate, boolean isFull) {
         this.activityId = activityId;
         this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.maxAmountParticipant = maxAmountParticipant;
+        this.endDate = endDate;
         this.isFull = isFull;
     }
 
@@ -125,14 +122,6 @@ public class Activity implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public int getMaxAmountParticipant() {
-        return maxAmountParticipant;
-    }
-
-    public void setMaxAmountParticipant(int maxAmountParticipant) {
-        this.maxAmountParticipant = maxAmountParticipant;
     }
 
     public boolean getIsFull() {

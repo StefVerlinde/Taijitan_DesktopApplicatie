@@ -1,5 +1,6 @@
 package domain;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -13,9 +14,15 @@ public class Domaincontroller
     private User currentUser;
     private final PropertyChangeSupport subjectUsers;
 
+    private ObservableList<User> lijstMembers;
+    private ObservableList<User> lijstConfirmed;
+
     public Domaincontroller(){
         this.taijitan = new Taijitan();
         this.subjectUsers = new PropertyChangeSupport(this);
+
+        lijstMembers = FXCollections.observableArrayList(getAllUsers());
+        lijstConfirmed = FXCollections.observableArrayList();
     }
     public Taijitan getTaijitan() {
         return taijitan;
@@ -70,4 +77,18 @@ public class Domaincontroller
         subjectUsers.addPropertyChangeListener(pcl);
         pcl.propertyChange(new PropertyChangeEvent(pcl, "currentUser", null, this.currentUser));
     }
+
+    public void addConfirmed(User u){
+        this.lijstConfirmed.add(u);
+        this.lijstMembers.remove(u);
+    }
+    public void removeConfirmed(User u){
+        this.lijstMembers.add(u);
+        this.lijstConfirmed.remove(u);
+    }
+
+    public ObservableList<User> getLijstMembers(){
+        return this.lijstMembers;
+    }
+    public ObservableList<User> getLijstConfirmed(){return this.lijstConfirmed;}
 }

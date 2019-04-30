@@ -26,6 +26,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     //region Properties
     private boolean isAdd;
     private Domaincontroller dc;
+    private FrameController fc;
     @FXML
     private JFXTextField txtFirstName;
     @FXML
@@ -77,9 +78,10 @@ public class MembersController extends BorderPane implements PropertyChangeListe
 
     //endregion
 
-    public MembersController(Domaincontroller dc) {
+    public MembersController(Domaincontroller dc, FrameController fc) {
         isAdd = false;
         this.dc = dc;
+        this.fc = fc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -94,6 +96,10 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         emptyFields();
         disableFields();
     }
+    public boolean getIsAdd(){
+        return isAdd;
+    }
+
     private void emptyFields() {
         txtFirstName.clear();
         txtLastName.clear();
@@ -165,7 +171,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbCountry.setDisable(true);
         dpBirthDate.setDisable(true);
         btnEdit.setDisable(true);
-        btnAdd.setDisable(true);
+        //btnAdd.setDisable(true);
         btnDelete.setDisable(true);
         cmbFormula.setDisable(true);
     }
@@ -188,6 +194,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     this.btnEdit.setDisable(true);
                     this.btnDelete.setDisable(true);
                     this.btnAdd.setDisable(false);
+                    fc.updateListPanel();
                 }
             }
         } else {
@@ -279,6 +286,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 if (canSubmit) {
                     dc.setCurrentUser(user);
                     dc.updateUser();
+                    fc.updateListPanel();
                 }
             }
         } else {
@@ -358,6 +366,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 dc.addUser(user);
                 toEditUser();
                 emptyFields();
+                fc.updateListPanel();
             }
         }
     }
@@ -424,5 +433,37 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
             lblDateRegistered.setText(formatDate(user.getDateRegistred()));
         }
+    }
+
+    public void fillFieldsWithSelectedUser(User user){
+        lblAddress.setText("");
+        lblPersonal.setText("");
+        lblContact.setText("");
+        toEditUser();
+        enableFields();
+        txtFirstName.setText(user.getFirstName());
+        txtLastName.setText(user.getName());
+        txtBirthPlace.setText(user.getBirthPlace());
+        txtPersonalNationalNumber.setText(user.getPersonalNationalNumber());
+        txtStreet.setText(user.getStreet());
+        txtPostalCode.setText(user.getCityPostalcode().getPostalcode());
+        txtHouseNumber.setText(user.getHouseNumber());
+        txtCityName.setText(user.getCityPostalcode().getName());
+        txtEmail.setText(user.getEmail());
+        txtLandLineNumber.setText(user.getLandlineNumber());
+        txtPhoneNumber.setText(user.getPhoneNumber());
+        txtMailParent.setText(user.getMailParent());
+
+        cmbGender.getItems().setAll(Gender.values());
+        cmbGender.getSelectionModel().select(user.getGender());
+        cmbNationality.getItems().setAll(Country.values());
+        cmbNationality.getSelectionModel().select(user.getNationality());
+        cmbCountry.getItems().setAll(Country.values());
+        cmbCountry.getSelectionModel().select(user.getCountry());
+        cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
+        cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+
+        dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
+        lblDateRegistered.setText(formatDate(user.getDateRegistred()));
     }
 }

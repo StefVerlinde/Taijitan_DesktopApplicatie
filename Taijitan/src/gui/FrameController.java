@@ -27,7 +27,7 @@ public class FrameController extends HBox {
         this.dc = dc;
         this.pc = new _OverviewPresentsController(dc, this);
         this.oru = new _OverViewRegisteredUsersController(dc);
-        this.listpanel = new ListPanelController(dc);
+        this.listpanel = new ListPanelController(dc, this);
         setupStart();
 
     }
@@ -54,7 +54,7 @@ public class FrameController extends HBox {
 
     private void setupMember() {
         this.dc.setCurrentUser(null);
-        members = new MembersController(dc);
+        members = new MembersController(dc, this);
         this.dc.addPropertyChangeListenerCurrentUser(members);
         current = members;
         members.setMinWidth(bounds.getWidth() - nav.getPrefWidth()-listpanel.getPrefWidth());
@@ -91,9 +91,10 @@ public class FrameController extends HBox {
 
     public void changeToMembersWithSelectedUser(User user){
         clearNodes();
-        members = new MembersController(dc);
+        members = new MembersController(dc, this);
         current = members;
         members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
+        members.fillFieldsWithSelectedUser(user);
         getChildren().add(members);
     }
 
@@ -101,5 +102,13 @@ public class FrameController extends HBox {
         this.getChildren().remove(pc);
         this.getChildren().remove(oru);
         this.getChildren().remove(overviews);
+    }
+
+    public void updateListPanel(){
+        listpanel.fillWithMembers();
+    }
+
+    public boolean isAddingMember(){
+        return members.getIsAdd();
     }
 }

@@ -84,7 +84,7 @@ public class _OverviewPresentsController extends AnchorPane {
                 fc.changeToMembersWithSelectedUser(selectedUser);
             }
             else {
-                AlertBoxController.BasicAlert("Error", selectedUser.getFirstName() + selectedUser.getName() + " is geen bestaand lid meer.");
+                AlertBoxController.BasicAlert("Error", selectedUser.getFirstName() + " " + selectedUser.getName() + " is geen bestaand lid meer.");
             }
         }
     }

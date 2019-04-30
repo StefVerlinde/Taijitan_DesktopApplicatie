@@ -87,7 +87,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     private String discriminator;
 
     @Column(name = "Rank")
-    private Integer rank;
+    private int rank;
 
     @ManyToMany(mappedBy = "userCollection")
     private Collection<Session> sessionCollection;
@@ -123,6 +123,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     private SimpleStringProperty familyNameProperty = new SimpleStringProperty();
     @Transient
     private SimpleStringProperty firstNameProperty = new SimpleStringProperty();
+    @Transient
+    private  SimpleStringProperty KyuProperty = new SimpleStringProperty();
     @Transient
     private SimpleStringProperty dateOfBirthProperty = new SimpleStringProperty();
     @Transient
@@ -442,6 +444,11 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     public SimpleStringProperty dateOfBirthProperty() {
         this.dateOfBirthProperty = new SimpleStringProperty(dateFormatter(dateOfBirth));
         return this.dateOfBirthProperty;
+    }
+
+    public SimpleStringProperty KyuProperty(){
+        this.KyuProperty = new SimpleStringProperty(String.format("%d", rank));
+        return  this.KyuProperty;
     }
 
     public SimpleStringProperty telephoneProperty() {

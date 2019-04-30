@@ -60,6 +60,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 
     JFXTreeTableColumn<User, String> clmUserFirstName = new JFXTreeTableColumn<>("Voornaam");
     JFXTreeTableColumn<User, String> clmUserFamilyName = new JFXTreeTableColumn<>("Familienaam");
+    JFXTreeTableColumn<User, String> clmKyu = new JFXTreeTableColumn<>("Kyu");
     JFXTreeTableColumn<User, String> clmUserDateOfBirth = new JFXTreeTableColumn<>("Geboortedatum");
     JFXTreeTableColumn<User, String> clmUserTelephone = new JFXTreeTableColumn<>("Telefoonnummer");
     JFXTreeTableColumn<User, String> clmUserEmail = new JFXTreeTableColumn<>("Email adres");
@@ -92,7 +93,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
         System.out.println(users.size());
 
 //        tblRegistredUsers = new JFXTreeTableView<>();
-        tblRegistredUsers.getColumns().setAll(clmUserFamilyName, clmUserFirstName, clmUserDateOfBirth, clmUserEmail, clmUserTelephone);
+        tblRegistredUsers.getColumns().setAll(clmUserFamilyName, clmUserFirstName,clmKyu, clmUserDateOfBirth, clmUserEmail, clmUserTelephone);
         tblRegistredUsers.setRoot(root);
         tblRegistredUsers.setShowRoot(false);
 
@@ -136,7 +137,15 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmUserDateOfBirth.setPrefWidth(100);
+        clmKyu.setPrefWidth(25);
+        clmKyu.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                    return  param.getValue().getValue().KyuProperty();
+            }
+        });
+
+        clmUserDateOfBirth.setPrefWidth(50);
         clmUserDateOfBirth.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
@@ -164,9 +173,6 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 
     private  void printRegistredUsersPdf(){
         try {
-
-
-
             PDDocument document = new PDDocument();
             PDPage pageOne = new PDPage();
                 PDPageContentStream contentStream = new PDPageContentStream(document, pageOne);
@@ -265,7 +271,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
                 row.createCell(6).setCellValue(u.getCityPostalcode().getName());
                 row.createCell(7).setCellValue(u.getPhoneNumber());
                 row.createCell(8).setCellValue(u.getEmail());
-                //row.createCell(9).setCellValue(u.getRank().toString());
+                row.createCell(9).setCellValue(u.getRank().toString());
             }
 
             for (int i = 0; i < columns.length; i++) {

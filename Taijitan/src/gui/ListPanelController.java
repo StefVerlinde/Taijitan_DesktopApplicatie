@@ -42,6 +42,9 @@ public class ListPanelController extends VBox{
                     if(AlertBoxController.ConfirmationAlert("Alert", "Ben je zeker dat je dit scherm wilt verlaten? Alle ingegeven gegevens zullen verloren gaan.")){
                         this.dc.setCurrentUser(newValue);
                     }
+                    else {
+                        lstItems.refresh();
+                    }
                 }
                 else {
                     this.dc.setCurrentUser(newValue);

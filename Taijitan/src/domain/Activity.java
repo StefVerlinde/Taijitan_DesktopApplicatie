@@ -6,21 +6,12 @@
 package domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
@@ -40,9 +31,10 @@ public class Activity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ActivityId")
-    private Integer activityId;
+    private int activityId;
     @Column(name = "Name")
     private String name;
     @Basic(optional = false)
@@ -64,31 +56,32 @@ public class Activity implements Serializable {
             @JoinColumn(name = "ActivityId", referencedColumnName = "ActivityId")}, inverseJoinColumns = {
             @JoinColumn(name = "MemberId", referencedColumnName = "UserId")})
     @ManyToMany
-    private Collection<User> userCollection;
-    @OneToMany(mappedBy = "activityId")
-    private Collection<User> userCollection1;
+    private List<User> users;
+//    @OneToMany(mappedBy = "activityId")
+//    private Collection<User> userCollection1;
 
     public Activity() {
     }
 
-    public Activity(Integer activityId) {
+    public Activity(int activityId) {
         this.activityId = activityId;
     }
 
-    public Activity(Integer activityId, int type, Date startDate, Date endDate, boolean isFull) {
-        this.activityId = activityId;
+    public Activity(String name, int type, Date startDate, Date endDate, List<User> users) {
+        //this.activityId = activityId;
+        this.name = name;
         this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.endDate = endDate;
-        this.isFull = isFull;
+        this.users = users;
+
     }
 
-    public Integer getActivityId() {
+    public int getActivityId() {
         return activityId;
     }
 
-    public void setActivityId(Integer activityId) {
+    public void setActivityId(int activityId) {
         this.activityId = activityId;
     }
 
@@ -132,40 +125,40 @@ public class Activity implements Serializable {
         this.isFull = isFull;
     }
 
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
-    public Collection<User> getUserCollection1() {
-        return userCollection1;
+//    public Collection<User> getUserCollection1() {
+//        return userCollection1;
+//    }
+
+    public void setUserCollection1(List<User> users) {
+        this.users = users;
     }
 
-    public void setUserCollection1(Collection<User> userCollection1) {
-        this.userCollection1 = userCollection1;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return activityId == activity.activityId &&
+                type == activity.type &&
+                isFull == activity.isFull &&
+                Objects.equals(name, activity.name) &&
+                Objects.equals(startDate, activity.startDate) &&
+                Objects.equals(endDate, activity.endDate) &&
+                Objects.equals(users, activity.users) ;
+//                Objects.equals(userCollection1, activity.userCollection1);
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (activityId != null ? activityId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Activity)) {
-            return false;
-        }
-        Activity other = (Activity) object;
-        if ((this.activityId == null && other.activityId != null) || (this.activityId != null && !this.activityId.equals(other.activityId))) {
-            return false;
-        }
-        return true;
+        return Objects.hash(activityId, name, type, startDate, endDate, isFull, users);
     }
 
     @Override

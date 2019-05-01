@@ -51,6 +51,9 @@ public class Domaincontroller
     public void addUser(User user) {
         taijitan.addUser(user);
     }
+    public void addActivity(Activity act){
+        taijitan.addActivity(act);
+    }
     public List<City> getAllCities()
     {
        return taijitan.getAllCities();
@@ -83,6 +86,7 @@ public class Domaincontroller
         this.lijstMembers.remove(u);
     }
     public void removeConfirmed(User u){
+        System.out.println(lijstConfirmed.toString());
         this.lijstMembers.add(u);
         this.lijstConfirmed.remove(u);
     }

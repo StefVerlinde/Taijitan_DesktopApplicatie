@@ -13,6 +13,7 @@
         <class>domain.Session</class>
         <class>domain.TrainingDay</class>
         <class>domain.User</class>
+        <class>domain.Activity</class>
         <properties>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:sqlserver://taijitandbserver.database.windows.net:1433;database=Taijitan_db;user=taijitanadmin@taijitandbserver;password=P2P1819_G08;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"/>

@@ -14,6 +14,7 @@ public class Taijitan {
     private SessionDao sessionDao;
     private CityDao cityDao;
     private GenericDao formulaDao;
+    private  ActivityDao activityDao;
 
 
     //constructor
@@ -21,7 +22,9 @@ public class Taijitan {
         setCityDao(new CityDaoJpa());
         setSessionDao(new SessionDaoJpa());
         setUserDao(new UserDaoJpa());
+        setActivityDao(new ActivityDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
+
 
     }
 
@@ -43,6 +46,13 @@ public class Taijitan {
     }
     public void setCityDao(CityDao cityDao) {
         this.cityDao = cityDao;
+    }
+
+    public ActivityDao getActivityDao(){
+        return this.activityDao;
+    }
+    public void setActivityDao(ActivityDao act){
+        this.activityDao = act;
     }
     public GenericDao getFormulaDao() {
         return formulaDao;
@@ -92,6 +102,12 @@ public class Taijitan {
         userDao.startTransaction();
         userDao.insert(user);
         userDao.commitTransaction();
+    }
+
+    public void addActivity(Activity activity){
+        activityDao.startTransaction();
+        activityDao.insert(activity);
+        activityDao.commitTransaction();
     }
 
     public List<City> getAllCities()

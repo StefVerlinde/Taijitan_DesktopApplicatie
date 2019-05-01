@@ -1,5 +1,6 @@
 package gui;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import domain.Domaincontroller;
 import domain.User;
@@ -13,6 +14,9 @@ public class ListPanelController extends VBox{
     private FrameController fc;
     @FXML
     private JFXListView<User> lstItems;
+    @FXML
+    private JFXButton btnAdd;
+
 
     public ListPanelController(Domaincontroller dc, FrameController fc) {
         this.dc = dc;
@@ -45,4 +49,22 @@ public class ListPanelController extends VBox{
             }
         });
     }
+    public void setDisableAdd(boolean b){
+        this.btnAdd.setDisable(b);
+    }
+    public void setVisibleAdd(boolean b){
+        this.btnAdd.setVisible(b);
+    }
+
+    @FXML
+    private void addUser() {
+        fc.setIsAdd(true);
+        this.setVisibleAdd(false);
+        fc.setBtnEditText("Voeg lid toe");
+        fc.setBtnDeleteText("Annuleer");
+        fc.setDisableDelete(false);
+        fc.enableFieldsMember();
+        fc.emptyFieldsMember();
+    }
+
 }

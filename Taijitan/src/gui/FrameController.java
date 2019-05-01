@@ -114,4 +114,22 @@ public class FrameController extends HBox {
     public boolean isAddingMember(){
         return members.getIsAdd();
     }
+    public void setDisableAdd(boolean b){listpanel.setDisableAdd(b);}
+    public void setVisibleAdd(boolean b){listpanel.setVisibleAdd(b);}
+
+    public void setIsAdd(boolean b){members.setIsAdd(b);}
+    public void setBtnEditText(String s)
+    {
+        members.setBtnEditText(s);
+    }
+    public void setBtnDeleteText(String s)
+    {
+        members.setBtnDeleteText(s);
+    }
+    public void setDisableDelete(boolean b)
+    {
+        members.setDisableDelete(b);
+    }
+    public void enableFieldsMember() {members.enableFieldsMember();};
+    public void emptyFieldsMember() {members.emptyFieldsMember();}
 }

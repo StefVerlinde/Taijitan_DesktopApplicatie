@@ -66,8 +66,6 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     @FXML
     private JFXButton btnEdit;
     @FXML
-    private JFXButton btnAdd;
-    @FXML
     private Label lblPersonal;
     @FXML
     private Label lblAddress;
@@ -75,6 +73,8 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     private Label lblContact;
     @FXML
     private JFXComboBox cmbFormula;
+    @FXML
+    private JFXComboBox cmbRank;
 
     //endregion
 
@@ -92,7 +92,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             System.err.println(ex.getMessage());
         }
 
-        btnAdd.setDisable(false);
+        fc.setDisableAdd(false);
         emptyFields();
         disableFields();
     }
@@ -122,6 +122,8 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbCountry.getSelectionModel().clearSelection();
         cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).toArray());
         cmbFormula.getSelectionModel().clearSelection();
+        cmbRank.getItems().setAll(Rank.values());
+        cmbRank.getSelectionModel().clearSelection();
 
         dpBirthDate.getEditor().clear();
         lblDateRegistered.setText("");
@@ -148,9 +150,10 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbCountry.setDisable(false);
         dpBirthDate.setDisable(false);
         btnEdit.setDisable(false);
-        btnAdd.setDisable(false);
+        fc.setDisableAdd(false);
         btnDelete.setDisable(false);
         cmbFormula.setDisable(false);
+        cmbRank.setDisable(false);
     }
 
     private void disableFields() {
@@ -174,11 +177,12 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         //btnAdd.setDisable(true);
         btnDelete.setDisable(true);
         cmbFormula.setDisable(true);
+        cmbRank.setDisable(true);
     }
     private void toEditUser() {
         btnEdit.setText("Pas gegevens aan");
         btnDelete.setText("Verwijder lid");
-        btnAdd.setVisible(true);
+        fc.setVisibleAdd(true);
         isAdd = false;
         btnDelete.setDisable(true);
     }
@@ -193,7 +197,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     disableFields();
                     this.btnEdit.setDisable(true);
                     this.btnDelete.setDisable(true);
-                    this.btnAdd.setDisable(false);
+                    fc.setDisableAdd(false);
                     fc.updateListPanel();
                 }
             }
@@ -201,7 +205,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             toEditUser();
             emptyFields();
             disableFields();
-            this.btnAdd.setDisable(false);
+            fc.setDisableAdd(false);
         }
 
     }
@@ -236,6 +240,11 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                         throw new IllegalArgumentException("Formule mag niet leeg zijn");
                     } else {
                         user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                    }
+                    if (cmbRank.getSelectionModel().isEmpty()) {
+                        throw new IllegalArgumentException("Rank mag niet leeg zijn");
+                    } else {
+                        user.setRank(cmbRank.getSelectionModel().getSelectedIndex() + 1);
                     }
                 } catch (IllegalArgumentException e) {
                     canSubmit = false;
@@ -316,6 +325,11 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 } else {
                     user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
                 }
+                if (cmbRank.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Rank mag niet leeg zijn");
+                } else {
+                    user.setRank(cmbRank.getSelectionModel().getSelectedIndex() + 1);
+                }
             } catch (IllegalArgumentException e) {
                 canSubmit = false;
                 lblPersonal.setText(e.getMessage());
@@ -371,16 +385,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         }
     }
 
-    @FXML
-    private void addUser() {
-        isAdd = true;
-        btnAdd.setVisible(false);
-        btnEdit.setText("Voeg lid toe");
-        btnDelete.setText("Annuleer");
-        btnDelete.setDisable(false);
-        enableFields();
-        emptyFields();
-    }
+
 
     private String formatDate(Date date) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -429,6 +434,8 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             cmbCountry.getSelectionModel().select(user.getCountry());
             cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
             cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+            cmbRank.getItems().setAll(Rank.values());
+            cmbRank.getSelectionModel().select(user.getRank() - 1);
 
             dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
             lblDateRegistered.setText(formatDate(user.getDateRegistred()));
@@ -462,8 +469,35 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbCountry.getSelectionModel().select(user.getCountry());
         cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
         cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+        cmbRank.getItems().setAll(Rank.values());
+        cmbRank.getSelectionModel().select(user.getRank() - 1);
 
         dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
         lblDateRegistered.setText(formatDate(user.getDateRegistred()));
+    }
+
+    public void setIsAdd(boolean b)
+    {
+        this.isAdd = b;
+    }
+    public void setBtnEditText(String s)
+    {
+        this.btnEdit.setText(s);
+    }
+    public void setBtnDeleteText(String s)
+    {
+        this.btnDelete.setText(s);
+    }
+    public void setDisableDelete(boolean b)
+    {
+        this.btnDelete.setDisable(b);
+    }
+    public void enableFieldsMember()
+    {
+        this.enableFields();
+    }
+    public void emptyFieldsMember()
+    {
+        this.emptyFields();
     }
 }

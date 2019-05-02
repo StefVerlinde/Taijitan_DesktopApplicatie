@@ -65,7 +65,7 @@ public class Taijitan {
         return users;
     }
     public List<User> getAllMembers(){
-        return getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
+        return getAllUsers().stream().collect(Collectors.toList());
     }
     public List<Activity> getAllActivities(){
         return activityDao.findAll();

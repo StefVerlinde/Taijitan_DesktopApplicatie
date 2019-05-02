@@ -70,6 +70,8 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     private JFXComboBox cmbFormula;
     @FXML
     private JFXComboBox cmbRank;
+    @FXML
+    private JFXComboBox cmbDiscriminator;
 
     //endregion
 
@@ -116,9 +118,13 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbCountry.getItems().setAll(Country.values());
         cmbCountry.getSelectionModel().clearSelection();
         cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).toArray());
+        cmbFormula.getItems().add(0, "Leerkracht/Admin");
         cmbFormula.getSelectionModel().clearSelection();
         cmbRank.getItems().setAll(Rank.values());
+        cmbRank.getItems().add(0, "Leerkracht/Admin");
         cmbRank.getSelectionModel().clearSelection();
+        cmbDiscriminator.getItems().setAll("Member", "Teacher", "Admin");
+        cmbDiscriminator.getSelectionModel().clearSelection();
 
         dpBirthDate.getEditor().clear();
         lblDateRegistered.setText("");
@@ -149,6 +155,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         btnDelete.setDisable(false);
         cmbFormula.setDisable(false);
         cmbRank.setDisable(false);
+        cmbDiscriminator.setDisable(false);
     }
 
     private void disableFields() {
@@ -173,6 +180,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         btnDelete.setDisable(true);
         cmbFormula.setDisable(true);
         cmbRank.setDisable(true);
+        cmbDiscriminator.setDisable(true);
     }
     private void toEditUser() {
         btnEdit.setText("Pas gegevens aan");
@@ -234,12 +242,29 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     if (cmbFormula.getSelectionModel().isEmpty()) {
                         throw new IllegalArgumentException("Formule mag niet leeg zijn");
                     } else {
-                        user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                        if(cmbFormula.getSelectionModel().getSelectedIndex() == 0)
+                        {
+                            user.setFormulaId(null);
+                        } else
+                        {
+                            user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                        }
                     }
                     if (cmbRank.getSelectionModel().isEmpty()) {
                         throw new IllegalArgumentException("Rank mag niet leeg zijn");
                     } else {
-                        user.setRank(cmbRank.getSelectionModel().getSelectedIndex() + 1);
+                        if(cmbRank.getSelectionModel().getSelectedIndex() == 0)
+                        {
+                            user.setRank(0);
+                        } else
+                        {
+                            user.setRank(cmbRank.getSelectionModel().getSelectedIndex());
+                        }
+                    }
+                    if (cmbDiscriminator.getSelectionModel().isEmpty()) {
+                        throw new IllegalArgumentException("Soort mag niet leeg zijn");
+                    } else {
+                        user.setDiscriminator(String.format("%s", cmbDiscriminator.getSelectionModel().getSelectedItem()));
                     }
                 } catch (IllegalArgumentException e) {
                     canSubmit = false;
@@ -318,12 +343,29 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 if (cmbFormula.getSelectionModel().isEmpty()) {
                     throw new IllegalArgumentException("Formule mag niet leeg zijn");
                 } else {
-                    user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                    if(cmbFormula.getSelectionModel().getSelectedIndex() == 0)
+                    {
+                        user.setFormulaId(null);
+                    } else
+                    {
+                        user.setFormulaId(dc.getAllFormulas().stream().filter(f -> f.getName().equals(cmbFormula.getSelectionModel().getSelectedItem())).findFirst().get());
+                    }
                 }
                 if (cmbRank.getSelectionModel().isEmpty()) {
                     throw new IllegalArgumentException("Rank mag niet leeg zijn");
                 } else {
-                    user.setRank(cmbRank.getSelectionModel().getSelectedIndex() + 1);
+                    if(cmbRank.getSelectionModel().getSelectedIndex() == 0)
+                    {
+                        user.setRank(0);
+                    } else
+                    {
+                        user.setRank(cmbRank.getSelectionModel().getSelectedIndex());
+                    }
+                }
+                if (cmbDiscriminator.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Soort mag niet leeg zijn");
+                } else {
+                    user.setDiscriminator(String.format("%s", cmbDiscriminator.getSelectionModel().getSelectedItem()));
                 }
             } catch (IllegalArgumentException e) {
                 canSubmit = false;
@@ -366,8 +408,6 @@ public class MembersController extends BorderPane implements PropertyChangeListe
 
             //extra required properties
             user.setDateRegistred(new Date());
-            user.setDiscriminator("Member");
-            user.setRank(1);
             //endregion
 
             //submit
@@ -417,9 +457,20 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             cmbCountry.getItems().setAll(Country.values());
             cmbCountry.getSelectionModel().select(user.getCountry());
             cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
-            cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+            cmbFormula.getItems().add(0, "Leerkracht/Admin");
+            if(user.getFormulaId() == null)
+            {
+                cmbFormula.getSelectionModel().select(0);
+            } else {
+                cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+            }
+
             cmbRank.getItems().setAll(Rank.values());
-            cmbRank.getSelectionModel().select(user.getRank() - 1);
+            cmbRank.getItems().add(0, "Leerkracht/Admin");
+            int rang = user.getRank();
+            cmbRank.getSelectionModel().select(rang);
+            cmbDiscriminator.getItems().setAll("Member", "Teacher", "Admin");
+            cmbDiscriminator.getSelectionModel().select(user.getDiscriminator());
 
             dpBirthDate.setValue(Dates.convertToLocalDate(user.getDateOfBirth()));
             lblDateRegistered.setText(formatDate(user.getDateRegistred()));
@@ -452,12 +503,28 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbCountry.getItems().setAll(Country.values());
         cmbCountry.getSelectionModel().select(user.getCountry());
         cmbFormula.getItems().setAll(dc.getAllFormulas().stream().map(f -> f.getName()).filter(s -> !s.contains("D")).toArray());
-        cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+        cmbFormula.getItems().add(0, "Leerkracht/Admin");
+        if(user.getFormulaId() == null)
+        {
+            cmbFormula.getSelectionModel().select(0);
+        } else {
+            cmbFormula.getSelectionModel().select(user.getFormulaId().getName());
+        }
         cmbRank.getItems().setAll(Rank.values());
-        cmbRank.getSelectionModel().select(user.getRank() - 1);
+        cmbRank.getItems().add(0, "Leerkracht/Admin");
+        int rang = user.getRank();
+        cmbRank.getSelectionModel().select(rang);
+        cmbDiscriminator.getItems().setAll("Member", "Teacher", "Admin");
+        cmbDiscriminator.getSelectionModel().select(user.getDiscriminator());
 
         dpBirthDate.setValue(Dates.convertToLocalDate(user.getDateOfBirth()));
         lblDateRegistered.setText(formatDate(user.getDateRegistred()));
+        if (user.getDiscriminator().equals("Members"))
+        {
+            btnDelete.setDisable(false);
+        } else {
+            btnDelete.setDisable(true);
+        }
     }
 
     public void setIsAdd(boolean b)

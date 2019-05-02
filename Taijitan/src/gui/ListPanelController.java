@@ -2,18 +2,21 @@ package gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import domain.Activity;
+import domain.ActivityType;
 import domain.Domaincontroller;
 import domain.User;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 
-public class ListPanelController extends VBox  {
+public class ListPanelController <T> extends VBox  {
     private Domaincontroller dc;
     private FrameController fc;
     @FXML
-    private JFXListView<User> lstItems;
+    private JFXListView<T> lstItems;
     @FXML
     private JFXButton btnAdd;
 
@@ -33,38 +36,49 @@ public class ListPanelController extends VBox  {
     }
     public void fillWithMembers(){
         btnAdd.setText("Voeg lid toe");
-        lstItems.setItems(dc.getAllMembersFX());
+        lstItems.setItems((ObservableList<T>)dc.getAllMembersFX());
 
         lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
         {
             if(newValue != null)
             {
+                User usr = (User)newValue;
                 if(fc.isAddingMember()){
                     if(AlertBoxController.ConfirmationAlert("Alert", "Ben je zeker dat je dit scherm wilt verlaten? Alle ingegeven gegevens zullen verloren gaan.")){
-                        this.dc.setCurrentUser(newValue);
+                        this.dc.setCurrentUser(usr);
                     }
                     else {
                         lstItems.refresh();
                     }
                 }
                 else {
-                    this.dc.setCurrentUser(newValue);
+                    this.dc.setCurrentUser(usr);
                 }
             }
         });
     }
     public void fillWithActivities(){
         btnAdd.setText("Voeg activiteit toe");
-        lstItems.setItems(null);
-        /*lstItems.setItems(dc.getAllActivitiesFX());
+        lstItems.setItems((ObservableList<T>) dc.getAllActivitiesFX());
 
         lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
         {
             if(newValue != null)
             {
-                //TODO
+                Activity act = (Activity)newValue;
+                if(fc.isAddingActivity()){
+                    if(AlertBoxController.ConfirmationAlert("Alert", "Ben je zeker dat je dit scherm wilt verlaten? Alle ingegeven gegevens zullen verloren gaan.")){
+                        this.dc.setCurrentActivity(act);
+                    }
+                    else {
+                        lstItems.refresh();
+                    }
+                }
+                else {
+                    this.dc.setCurrentActivity(act);
+                }
             }
-        });*/
+        });
     }
 
     public void setDisableAdd(boolean b){

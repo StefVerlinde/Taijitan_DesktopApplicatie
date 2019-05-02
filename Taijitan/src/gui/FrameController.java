@@ -51,6 +51,7 @@ public class FrameController extends HBox {
     }
 
     private void setupMember() {
+        this.listpanel = new ListPanelController(dc, this);
         this.setVisibleAdd(true);
         this.dc.setCurrentUser(null);
         members = new MembersController(dc, this);
@@ -68,8 +69,10 @@ public class FrameController extends HBox {
     }
 
     public void setupActivities(){
+        this.listpanel = new ListPanelController(dc, this);
         this.setVisibleAdd(true);
         activities = new ActivitiesController(dc,this);
+        this.dc.addPropertyChangeListenerCurrentActivity(activities);
         current = activities;
         listpanel.fillWithActivities();
         getChildren().addAll(listpanel,activities);
@@ -110,8 +113,10 @@ public class FrameController extends HBox {
         this.getChildren().remove(overviews);
     }
 
-    public void updateListPanel(){
+    public void updateListPanelMembers(){
         listpanel.fillWithMembers();
+    }
+    public void updateListPanelActivities(){ listpanel.fillWithActivities();
     }
 
     public boolean isAddingMember(){
@@ -138,7 +143,7 @@ public class FrameController extends HBox {
 
 
     public void emptyfieldsActivities(){activities.emptyFields();}
-    public void enableFieldsActivities(){activities.enableField();}
+    public void enableFieldsActivities(){activities.enableFields();}
     public void setIsAddActivities(boolean b){activities.setIsAdd(b);}
     public void setBtnEditTextActivities(String s)
     {
@@ -151,5 +156,8 @@ public class FrameController extends HBox {
     public void setDisableDeleteActivities(boolean b)
     {
         activities.setDisableDelete(b);
+    }
+    public boolean isAddingActivity(){
+        return activities.getIsAdd();
     }
 }

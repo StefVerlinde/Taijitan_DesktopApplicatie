@@ -12,15 +12,17 @@ public class Domaincontroller
 {
     private final Taijitan taijitan;
     private User currentUser;
+    private Activity currentActivity;
     private final PropertyChangeSupport subjectUsers;
-
+    private final PropertyChangeSupport subjectActivities;
     private ObservableList<User> lijstMembers;
     private ObservableList<User> lijstConfirmed;
+
 
     public Domaincontroller(){
         this.taijitan = new Taijitan();
         this.subjectUsers = new PropertyChangeSupport(this);
-
+        this.subjectActivities = new PropertyChangeSupport(this);
         lijstMembers = FXCollections.observableArrayList(getAllUsers());
         lijstConfirmed = FXCollections.observableArrayList();
     }
@@ -48,6 +50,10 @@ public class Domaincontroller
     public void deleteUser() {
         taijitan.deleteUser(currentUser);
         setCurrentUser(null);
+    }
+    public void deleteActivity(){
+        taijitan.deleteActivity(this.currentActivity);
+        setCurrentActivity(null);
     }
     public void addUser(User user) {
         taijitan.addUser(user);
@@ -77,11 +83,21 @@ public class Domaincontroller
         subjectUsers.firePropertyChange("currentUser",this.currentUser,newUser);
         this.currentUser = newUser;
     }
+    public List<User> getAllMembers(){
+        return taijitan.getAllMembers();
+    }
     public void addPropertyChangeListenerCurrentUser(PropertyChangeListener pcl) {
         subjectUsers.addPropertyChangeListener(pcl);
         pcl.propertyChange(new PropertyChangeEvent(pcl, "currentUser", null, this.currentUser));
     }
-
+    public void setCurrentActivity(Activity act){
+        subjectActivities.firePropertyChange("currentActivity",this.currentActivity,act);
+        this.currentActivity = act;
+    }
+    public void addPropertyChangeListenerCurrentActivity(PropertyChangeListener pcl) {
+        subjectActivities.addPropertyChangeListener(pcl);
+        pcl.propertyChange(new PropertyChangeEvent(pcl,"currentActivity",null,this.currentActivity));
+    }
     public void addConfirmed(User u){
         this.lijstConfirmed.add(u);
         this.lijstMembers.remove(u);
@@ -91,10 +107,16 @@ public class Domaincontroller
         this.lijstMembers.add(u);
         this.lijstConfirmed.remove(u);
     }
-
-    public ObservableList<User> getLijstMembers(){
-        return this.lijstMembers;
+    public void setLijstMembers(List<User> lijstMembers) {
+        this.lijstMembers = FXCollections.observableArrayList(lijstMembers); }
+    public void setLijstConfirmed(List<User> lijstConfirmed) {
+        this.lijstConfirmed = FXCollections.observableArrayList(lijstConfirmed);
     }
-    public ObservableList<User> getLijstConfirmed(){return this.lijstConfirmed;}
+    public Activity getCurrentActivity() {
+        return currentActivity;
+    }
+    public ObservableList<User> getLijstMembers(){
+        return FXCollections.unmodifiableObservableList(this.lijstMembers);}
+    public ObservableList<User> getLijstConfirmed(){ return FXCollections.unmodifiableObservableList(this.lijstConfirmed);}
 
 }

@@ -1,10 +1,7 @@
 package gui;
 
 import com.jfoenix.controls.*;
-import domain.Activity;
-import domain.ActivityType;
-import domain.Domaincontroller;
-import domain.User;
+import domain.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -22,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ActivitiesController extends AnchorPane {
+public class ActivitiesController extends AnchorPane implements PropertyChangeListener {
     @FXML
     private JFXTextField txtName;
     @FXML
@@ -85,7 +84,9 @@ public class ActivitiesController extends AnchorPane {
     dtmStart.getEditor().clear();
     cboType.getSelectionModel().clearSelection();
     lstConfirmed.setItems(null);
-
+    dc.setLijstConfirmed(new ArrayList<>(){});
+    dc.setLijstMembers(dc.getAllMembers());
+    lstMembers.setItems(dc.getLijstMembers());
     }
     public void disableFields(){
         btnDelete.setDisable(true);
@@ -97,7 +98,7 @@ public class ActivitiesController extends AnchorPane {
         lstMembers.setDisable(true);
         cboType.setDisable(true);
     }
-    public void enableField()
+    public void enableFields()
     {
         btnDelete.setDisable(false);
         btnEdit.setDisable(false);
@@ -107,6 +108,7 @@ public class ActivitiesController extends AnchorPane {
         lstConfirmed.setDisable(false);
         lstMembers.setDisable(false);
         cboType.setDisable(false);
+
     }
 
     @FXML
@@ -133,6 +135,9 @@ public class ActivitiesController extends AnchorPane {
 
     @FXML
     private void edit() {
+
+        //TODO edit user
+
         int tp;
         if(cboType.getSelectionModel().getSelectedItem() == ActivityType.excursie.toString()){
             tp = 0;
@@ -142,30 +147,36 @@ public class ActivitiesController extends AnchorPane {
         }
 
         List<User> users = new ArrayList<>(dc.getLijstConfirmed());
-        Activity act = new Activity(txtName.getText(), tp, convertToDateViaSqlDate(dtmStart.getValue()), convertToDateViaSqlDate(dtmEnd.getValue()), users);
-        System.out.println(act.getEndDate());
-        System.out.println(act.getStartDate());
-        System.out.println(act.getName());
-        System.out.println(act.getUsers().toString());
+        Activity act = new Activity(txtName.getText(),tp,Dates.convertToDate(dtmStart.getValue()),
+                Dates.convertToDate(dtmEnd.getValue()), users);
 
 
         dc.addActivity(act);
+        toEditUser();
+        emptyFields();
+        fc.updateListPanelActivities();
     }
 
     @FXML
     private void delete(){
         if (!isAdd) {
-            //TODO
+            if (dc.getCurrentActivity() != null) {
+                if(AlertBoxController.ConfirmationAlert("Delete", "Wil je activiteit " + dc.getCurrentActivity().getName() + " verwijderen?")){
+                    dc.deleteActivity();
+                    emptyFields();
+                    disableFields();
+                    this.btnEdit.setDisable(true);
+                    this.btnDelete.setDisable(true);
+                    fc.setDisableAdd(false);
+                    fc.updateListPanelActivities();
+                }
+            }
         } else {
             toEditUser();
             emptyFields();
             disableFields();
             fc.setDisableAdd(false);
         }
-    }
-
-    private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
-        return java.sql.Date.valueOf(dateToConvert);
     }
 
     public void setIsAdd(boolean b)
@@ -184,7 +195,28 @@ public class ActivitiesController extends AnchorPane {
     {
         this.btnDelete.setDisable(b);
     }
+    public boolean getIsAdd() {
+        return isAdd;
+    }
 
-
-
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getNewValue() != null)
+        {
+            Activity act = (Activity)evt.getNewValue();
+            txtName.setText(act.getName());
+            dtmStart.setValue(Dates.convertToLocalDate(act.getStartDate()));
+            dtmEnd.setValue(Dates.convertToLocalDate(act.getEndDate()));
+            cboType.getSelectionModel().select(act.getType());
+            dc.setLijstConfirmed(act.getUsers());
+            dc.setLijstMembers(dc.getAllMembers().stream().filter(u -> !containsUser(act.getUsers(),u)).collect(Collectors.toList()));
+            lstConfirmed.setItems(dc.getLijstConfirmed());
+            lstMembers.setItems(dc.getLijstMembers());
+            toEditUser();
+            enableFields();
+        }
+    }
+    private boolean containsUser(List<User> users,User user){
+        return users.contains(user);
+    }
 }

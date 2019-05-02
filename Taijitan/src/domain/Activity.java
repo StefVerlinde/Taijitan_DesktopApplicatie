@@ -5,6 +5,9 @@
  */
 package domain;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -133,10 +136,6 @@ public class Activity implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
-//    public Collection<User> getUserCollection1() {
-//        return userCollection1;
-//    }
 
     public void setUserCollection1(List<User> users) {
         this.users = users;

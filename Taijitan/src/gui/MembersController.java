@@ -7,14 +7,9 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 import com.jfoenix.controls.*;
 import domain.*;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -198,7 +193,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     this.btnEdit.setDisable(true);
                     this.btnDelete.setDisable(true);
                     fc.setDisableAdd(false);
-                    fc.updateListPanel();
+                    fc.updateListPanelMembers();
                 }
             }
         } else {
@@ -225,7 +220,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     user.setName(txtLastName.getText());
                     user.setBirthPlace(txtBirthPlace.getText());
                     user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
-                    user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
+                    user.setDateOfBirth(Dates.convertToDate(dpBirthDate.getValue()));
                     if (cmbNationality.getSelectionModel().isEmpty()) {
                         throw new IllegalArgumentException("Nationaliteit mag niet leeg zijn");
                     } else {
@@ -295,7 +290,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 if (canSubmit) {
                     dc.setCurrentUser(user);
                     dc.updateUser();
-                    fc.updateListPanel();
+                    fc.updateListPanelMembers();
                 }
             }
         } else {
@@ -309,7 +304,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 user.setName(txtLastName.getText());
                 user.setBirthPlace(txtBirthPlace.getText());
                 user.setPersonalNationalNumber(txtPersonalNationalNumber.getText());
-                user.setDateOfBirth(convertToDate(dpBirthDate.getValue()));
+                user.setDateOfBirth(Dates.convertToDate(dpBirthDate.getValue()));
                 if (cmbNationality.getSelectionModel().isEmpty()) {
                     throw new IllegalArgumentException("Nationaliteit mag niet leeg zijn");
                 } else {
@@ -380,7 +375,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 dc.addUser(user);
                 toEditUser();
                 emptyFields();
-                fc.updateListPanel();
+                fc.updateListPanelMembers();
             }
         }
     }
@@ -392,17 +387,6 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         String output = formatter.format(date);
         return output;
     }
-
-    private LocalDate convertToLocalDate(Date date) {
-        return date.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
-
-    private Date convertToDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getNewValue() != null)
@@ -437,7 +421,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             cmbRank.getItems().setAll(Rank.values());
             cmbRank.getSelectionModel().select(user.getRank() - 1);
 
-            dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
+            dpBirthDate.setValue(Dates.convertToLocalDate(user.getDateOfBirth()));
             lblDateRegistered.setText(formatDate(user.getDateRegistred()));
         }
     }
@@ -472,7 +456,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         cmbRank.getItems().setAll(Rank.values());
         cmbRank.getSelectionModel().select(user.getRank() - 1);
 
-        dpBirthDate.setValue(convertToLocalDate(user.getDateOfBirth()));
+        dpBirthDate.setValue(Dates.convertToLocalDate(user.getDateOfBirth()));
         lblDateRegistered.setText(formatDate(user.getDateRegistred()));
     }
 

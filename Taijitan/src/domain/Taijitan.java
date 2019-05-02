@@ -24,8 +24,6 @@ public class Taijitan {
         setUserDao(new UserDaoJpa());
         setActivityDao(new ActivityDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
-
-
     }
 
     //getters - setters
@@ -66,14 +64,15 @@ public class Taijitan {
         users.sort(Comparator.comparing(u -> u.getName()));
         return users;
     }
+    public List<User> getAllMembers(){
+        return getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member")).collect(Collectors.toList());
+    }
     public List<Activity> getAllActivities(){
         return activityDao.findAll();
     }
     public ObservableList<User> getAllMembersFX()
     {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(
-                getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member"))
-                        .collect(Collectors.toList())));
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllMembers()));
     }
     public ObservableList<Activity> getAllActivitiesFX(){
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllActivities())));
@@ -99,6 +98,11 @@ public class Taijitan {
         userDao.startTransaction();
         userDao.delete(user);
         userDao.commitTransaction();
+    }
+    public void deleteActivity(Activity act){
+        activityDao.startTransaction();
+        activityDao.delete(act);
+        activityDao.commitTransaction();
     }
     public User getUserByFullName(String firstname,String lastname)
     {

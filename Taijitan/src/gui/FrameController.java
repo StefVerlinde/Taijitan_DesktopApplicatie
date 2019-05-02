@@ -27,7 +27,7 @@ public class FrameController extends HBox {
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
         this.pc = new _OverviewPresentsController(dc, this);
-        this.oru = new _OverViewRegisteredUsersController(dc);
+        this.oru = new _OverViewRegisteredUsersController(dc,this);
         this.listpanel = new ListPanelController(dc, this);
         setupStart();
 
@@ -51,6 +51,7 @@ public class FrameController extends HBox {
     }
 
     private void setupMember() {
+        this.setVisibleAdd(true);
         this.dc.setCurrentUser(null);
         members = new MembersController(dc, this);
         this.dc.addPropertyChangeListenerCurrentUser(members);
@@ -67,9 +68,11 @@ public class FrameController extends HBox {
     }
 
     public void setupActivities(){
-        activities = new ActivitiesController(dc);
+        this.setVisibleAdd(true);
+        activities = new ActivitiesController(dc,this);
         current = activities;
-        getChildren().add(activities);
+        listpanel.fillWithActivities();
+        getChildren().addAll(listpanel,activities);
     }
 
     public void changeContent(String string) {
@@ -117,19 +120,36 @@ public class FrameController extends HBox {
     public void setDisableAdd(boolean b){listpanel.setDisableAdd(b);}
     public void setVisibleAdd(boolean b){listpanel.setVisibleAdd(b);}
 
-    public void setIsAdd(boolean b){members.setIsAdd(b);}
-    public void setBtnEditText(String s)
+    public void setIsAddMembers(boolean b){members.setIsAdd(b);}
+    public void setBtnEditTextMembers(String s)
     {
         members.setBtnEditText(s);
     }
-    public void setBtnDeleteText(String s)
+    public void setBtnDeleteTextMembers(String s)
     {
         members.setBtnDeleteText(s);
     }
-    public void setDisableDelete(boolean b)
+    public void setDisableDeleteMembers(boolean b)
     {
         members.setDisableDelete(b);
     }
     public void enableFieldsMember() {members.enableFieldsMember();};
     public void emptyFieldsMember() {members.emptyFieldsMember();}
+
+
+    public void emptyfieldsActivities(){activities.emptyFields();}
+    public void enableFieldsActivities(){activities.enableField();}
+    public void setIsAddActivities(boolean b){activities.setIsAdd(b);}
+    public void setBtnEditTextActivities(String s)
+    {
+        activities.setBtnEditText(s);
+    }
+    public void setBtnDeleteTextActivities(String s)
+    {
+        activities.setBtnDeleteText(s);
+    }
+    public void setDisableDeleteActivities(boolean b)
+    {
+        activities.setDisableDelete(b);
+    }
 }

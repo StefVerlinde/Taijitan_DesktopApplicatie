@@ -13,7 +13,7 @@
    <children>
       <BorderPane layoutX="117.0" layoutY="135.0" prefHeight="518.0" prefWidth="1120.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="166.0">
          <left>
-            <JFXTreeTableView fx:id="tblRegistredUsers" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="1088.0" stylesheets="@style.css" BorderPane.alignment="CENTER">
+            <JFXTreeTableView fx:id="tblRegistredUsers" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#selectUserInList" prefHeight="518.0" prefWidth="1088.0" stylesheets="@style.css" BorderPane.alignment="CENTER">
                <columnResizePolicy>
                   <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy></JFXTreeTableView>

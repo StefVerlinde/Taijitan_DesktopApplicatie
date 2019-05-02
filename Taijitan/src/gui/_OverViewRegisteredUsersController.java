@@ -3,6 +3,7 @@ package gui;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import domain.Domaincontroller;
+import domain.Rank;
 import domain.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -31,6 +33,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class _OverViewRegisteredUsersController extends AnchorPane {
@@ -66,9 +69,11 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
     JFXTreeTableColumn<User, String> clmUserEmail = new JFXTreeTableColumn<>("Email adres");
 
     private Domaincontroller dc;
+    private FrameController fc;
 
-    public _OverViewRegisteredUsersController(Domaincontroller dc) {
+    public _OverViewRegisteredUsersController(Domaincontroller dc,FrameController fc) {
         this.dc = dc;
+        this.fc = fc;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewRegisteredUsers.fxml"));
         loader.setRoot(this);
@@ -271,7 +276,9 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
                 row.createCell(6).setCellValue(u.getCityPostalcode().getName());
                 row.createCell(7).setCellValue(u.getPhoneNumber());
                 row.createCell(8).setCellValue(u.getEmail());
-                row.createCell(9).setCellValue(u.getRank().toString());
+                if(Rank.getById(u.getRank()) != null)
+                    row.createCell(9).setCellValue(String.format("%s",Rank.getById(u.getRank())));
+                else row.createCell(9).setCellValue("Niet van toepassing");
             }
 
             for (int i = 0; i < columns.length; i++) {
@@ -314,6 +321,21 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
         System.out.println(fileName);
 
         return fileName;
+    }
+    @FXML
+    private void selectUserInList(MouseEvent event) {
+        if(event.getClickCount() == 2)
+        {
+            TreeItem<User> selectedUser = tblRegistredUsers.getSelectionModel().getSelectedItem();
+            List<User> users = dc.getAllUsers();
+            if(users.contains(selectedUser.getValue())){
+                System.out.println(selectedUser);
+                fc.changeToMembersWithSelectedUser(selectedUser.getValue());
+            }
+            else {
+                AlertBoxController.BasicAlert("Error", selectedUser.getValue().getFirstName() + " " + selectedUser.getValue().getName() + " is geen bestaand lid meer.");
+            }
+        }
     }
 }
 

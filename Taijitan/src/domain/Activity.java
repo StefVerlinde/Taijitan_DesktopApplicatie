@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.management.monitor.StringMonitor;
 import javax.persistence.*;
 
 /**
@@ -163,7 +164,7 @@ public class Activity implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Activity[ activityId=" + activityId + " ]";
+        return String.format("%s",this.name);
     }
 
 }

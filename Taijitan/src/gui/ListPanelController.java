@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 
-public class ListPanelController extends VBox{
+public class ListPanelController extends VBox  {
     private Domaincontroller dc;
     private FrameController fc;
     @FXML
@@ -32,6 +32,7 @@ public class ListPanelController extends VBox{
         }
     }
     public void fillWithMembers(){
+        btnAdd.setText("Voeg lid toe");
         lstItems.setItems(dc.getAllMembersFX());
 
         lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
@@ -52,6 +53,20 @@ public class ListPanelController extends VBox{
             }
         });
     }
+    public void fillWithActivities(){
+        btnAdd.setText("Voeg activiteit toe");
+        lstItems.setItems(null);
+        /*lstItems.setItems(dc.getAllActivitiesFX());
+
+        lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
+        {
+            if(newValue != null)
+            {
+                //TODO
+            }
+        });*/
+    }
+
     public void setDisableAdd(boolean b){
         this.btnAdd.setDisable(b);
     }
@@ -60,14 +75,27 @@ public class ListPanelController extends VBox{
     }
 
     @FXML
-    private void addUser() {
-        fc.setIsAdd(true);
-        this.setVisibleAdd(false);
-        fc.setBtnEditText("Voeg lid toe");
-        fc.setBtnDeleteText("Annuleer");
-        fc.setDisableDelete(false);
-        fc.enableFieldsMember();
-        fc.emptyFieldsMember();
+    private void add() {
+
+        if(btnAdd.getText().equals("Voeg lid toe"))
+        {
+            fc.setIsAddMembers(true);
+            this.setVisibleAdd(false);
+            fc.setBtnEditTextMembers("Voeg lid loe");
+            fc.setBtnDeleteTextMembers("Annuleer");
+            fc.setDisableDeleteMembers(false);
+            fc.enableFieldsMember();
+            fc.emptyFieldsMember();
+        }
+        else if(btnAdd.getText().equals("Voeg activiteit toe")){
+            fc.setIsAddActivities(true);
+            this.setVisibleAdd(false);
+            fc.setBtnEditTextActivities("Voeg activiteit toe");
+            fc.setBtnDeleteTextActivities("Annuleer");
+            fc.setDisableDeleteActivities(false);
+            fc.enableFieldsActivities();
+            fc.emptyfieldsActivities();
+        }
     }
 
 }

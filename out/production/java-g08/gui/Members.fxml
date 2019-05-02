@@ -87,6 +87,7 @@
                </GridPane.margin>
             </JFXTextField>
             <JFXComboBox fx:id="cmbFormula" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <JFXComboBox fx:id="cmbRank" disable="true" focusColor="#336566" layoutX="412.0" layoutY="192.0" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
             <JFXTextField fx:id="txtStreet" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -306,14 +307,6 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </JFXButton>
-            <JFXButton fx:id="btnAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" onMouseClicked="#addUser" style="-fx-background-color: #336566;" text="Voeg lid toe" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="4" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </GridPane.margin>
-            </JFXButton>
             <Label fx:id="lblPersonal" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="290.0" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -336,6 +329,11 @@
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="350.0" layoutY="198.0" text="Rang*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </Label>
          </children>
          <BorderPane.margin>

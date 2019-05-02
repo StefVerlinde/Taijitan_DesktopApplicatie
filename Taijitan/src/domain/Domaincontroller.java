@@ -34,6 +34,7 @@ public class Domaincontroller
     {
         return taijitan.getAllMembersFX();
     }
+    public ObservableList<Activity> getAllActivitiesFX(){return taijitan.getAllActivitiesFX();}
     public List<Session> getAllSessions(){
         return taijitan.getAllSessions();
     }
@@ -95,4 +96,5 @@ public class Domaincontroller
         return this.lijstMembers;
     }
     public ObservableList<User> getLijstConfirmed(){return this.lijstConfirmed;}
+
 }

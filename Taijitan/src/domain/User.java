@@ -447,7 +447,10 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public SimpleStringProperty KyuProperty(){
-        this.KyuProperty = new SimpleStringProperty(String.format("%d", rank));
+        if(Rank.getById(rank) != null)
+            this.KyuProperty = new SimpleStringProperty(String.format("%s",Rank.getById(rank)));
+        else this.KyuProperty = new SimpleStringProperty("Niet van toepassing");
+
         return  this.KyuProperty;
     }
 

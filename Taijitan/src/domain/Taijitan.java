@@ -14,7 +14,7 @@ public class Taijitan {
     private SessionDao sessionDao;
     private CityDao cityDao;
     private GenericDao formulaDao;
-    private  ActivityDao activityDao;
+    private ActivityDao activityDao;
 
 
     //constructor
@@ -66,12 +66,19 @@ public class Taijitan {
         users.sort(Comparator.comparing(u -> u.getName()));
         return users;
     }
+    public List<Activity> getAllActivities(){
+        return activityDao.findAll();
+    }
     public ObservableList<User> getAllMembersFX()
     {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(
                 getAllUsers().stream().filter(u -> u.getDiscriminator().equals("Member"))
                         .collect(Collectors.toList())));
     }
+    public ObservableList<Activity> getAllActivitiesFX(){
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllActivities())));
+    }
+
     public List<Session> getAllSessions(){
         List<Session> sessions = sessionDao.findAll();
         return sessions;

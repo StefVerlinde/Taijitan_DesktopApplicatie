@@ -121,6 +121,7 @@ public class FrameController extends HBox {
         this.getChildren().remove(pc);
         this.getChildren().remove(oru);
         this.getChildren().remove(overviews);
+        this.getChildren().remove(scorebord);
     }
 
     public void updateListPanelMembers(){

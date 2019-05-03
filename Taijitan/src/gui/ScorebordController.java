@@ -85,7 +85,7 @@ public class ScorebordController extends AnchorPane {
     private void buildGui(){
         buildColumns();
         ObservableList<User> users = FXCollections.observableArrayList(dc.getAllUsers());
-
+        Collections.sort(users, Comparator.comparing(User::getScore).reversed());
         //opvullen tabel
         final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
         System.out.println(users.size());
@@ -93,9 +93,6 @@ public class ScorebordController extends AnchorPane {
         tblScorebord.getColumns().setAll(clmUserFamilyName, clmUserFirstName,clmScore);
         tblScorebord.setRoot(root);
         tblScorebord.setShowRoot(false);
-        clmScore.setSortType(TreeTableColumn.SortType.DESCENDING);
-        tblScorebord.getSortOrder().add(clmScore);
-        tblScorebord.sort();
 
         searchFields();
     }

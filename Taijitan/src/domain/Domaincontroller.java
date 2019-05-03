@@ -98,6 +98,7 @@ public class Domaincontroller
         subjectActivities.addPropertyChangeListener(pcl);
         pcl.propertyChange(new PropertyChangeEvent(pcl,"currentActivity",null,this.currentActivity));
     }
+
     public void addConfirmed(User u){
         this.lijstConfirmed.add(u);
         this.lijstMembers.remove(u);

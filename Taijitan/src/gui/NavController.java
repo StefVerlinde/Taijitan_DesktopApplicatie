@@ -33,7 +33,7 @@ public class NavController extends VBox
     @FXML
     private JFXButton btnOverviews;
     @FXML
-    private JFXButton btnLeaderBoard;
+    private JFXButton btnScorebord;
     
     private FrameController controller;
     
@@ -83,10 +83,7 @@ public class NavController extends VBox
     }
 
     @FXML
-    private void loadLeaderBoard(ActionEvent event)
-    {
-
-    }
+    private void loadScorebord(ActionEvent event) {controller.changeContent("scorebord");}
 
 
 

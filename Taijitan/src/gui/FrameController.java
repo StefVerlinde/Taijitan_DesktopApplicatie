@@ -18,6 +18,7 @@ public class FrameController extends HBox {
     private MembersController members;
     private OverviewsController overviews;
     private ActivitiesController activities;
+    private ScorebordController scorebord;
     private Object current;
     Rectangle2D bounds;
     private _OverviewPresentsController pc;
@@ -78,6 +79,12 @@ public class FrameController extends HBox {
         getChildren().addAll(listpanel,activities);
     }
 
+    public void setupScorebord(){
+        this.scorebord = new ScorebordController(dc, this);
+        current = scorebord;
+        getChildren().add(scorebord);
+    }
+
     public void changeContent(String string) {
         getChildren().remove(current);
         getChildren().remove(listpanel);
@@ -94,6 +101,9 @@ public class FrameController extends HBox {
                 break;
             case "activities":
                 setupActivities();
+                break;
+            case "scorebord":
+                setupScorebord();
                 break;
         }
     }

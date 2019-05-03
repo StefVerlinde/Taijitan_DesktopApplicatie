@@ -6,6 +6,7 @@
 package domain;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import javax.persistence.*;
@@ -89,6 +90,9 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     @Column(name = "Rank")
     private int rank;
 
+    @Column(name = "Score")
+    private int score;
+
     @ManyToMany(mappedBy = "userCollection")
     private Collection<Session> sessionCollection;
 
@@ -121,6 +125,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     //properties for table
     @Transient
     private SimpleStringProperty familyNameProperty = new SimpleStringProperty();
+    @Transient
+    private SimpleStringProperty scoreProperty = new SimpleStringProperty();
     @Transient
     private SimpleStringProperty firstNameProperty = new SimpleStringProperty();
     @Transient
@@ -325,6 +331,10 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.rank = rank;
     }
 
+    public int getScore(){return score;}
+
+    public void setScore(int score){this.score = score;}
+
     public Collection<Session> getSessionCollection() {
         return sessionCollection;
     }
@@ -423,6 +433,11 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.familyNameProperty = new SimpleStringProperty(name);
         return this.familyNameProperty;
 
+    }
+
+    public SimpleStringProperty scoreProperty(){
+        this.scoreProperty = new SimpleStringProperty(String.format("%s", score));
+        return this.scoreProperty;
     }
 
     public String dateFormatter(Date date) {

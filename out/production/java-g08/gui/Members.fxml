@@ -88,27 +88,27 @@
             </JFXTextField>
             <JFXComboBox fx:id="cmbFormula" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <JFXComboBox fx:id="cmbRank" disable="true" focusColor="#336566" layoutX="412.0" layoutY="192.0" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <JFXTextField fx:id="txtStreet" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <JFXTextField fx:id="txtStreet" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtHouseNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="7">
+            <JFXTextField fx:id="txtHouseNumber" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="8">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtPostalCode" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <JFXTextField fx:id="txtPostalCode" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtCityName" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="8">
+            <JFXTextField fx:id="txtCityName" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="3" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXTextField>
-            <JFXComboBox fx:id="cmbCountry" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <JFXComboBox fx:id="cmbCountry" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <JFXTextField fx:id="txtEmail" alignment="TOP_LEFT" disable="true" focusColor="#336566" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="12">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -129,7 +129,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXTextField>
-            <Label alignment="CENTER" text="Woonplaats:" textFill="#336566" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Label alignment="CENTER" text="Woonplaats:" textFill="#336566" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -209,7 +209,7 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Straatnaam*" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Straatnaam*" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -217,7 +217,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Postcode*" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Postcode*" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -225,7 +225,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Land*" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Land*" GridPane.halignment="RIGHT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -233,7 +233,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Huisnummer*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Huisnummer*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -241,7 +241,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Stadnaam*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Stadnaam*" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -335,6 +335,12 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Soort gebruiker*" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="cmbDiscriminator" disable="true" focusColor="#336566" prefHeight="30.0" prefWidth="326.0" style="-fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
          <BorderPane.margin>
             <Insets bottom="2.0" left="2.0" right="2.0" />

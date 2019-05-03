@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="872.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="1234.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="56.0" layoutY="31.0" prefHeight="711.0" prefWidth="783.0" spacing="30.0">
+      <VBox alignment="TOP_CENTER" layoutX="56.0" layoutY="31.0" prefHeight="711.0" prefWidth="1125.0" spacing="30.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="71.0" prefWidth="867.0" text="Scorebord" textAlignment="CENTER" textFill="#336566">
                <font>
@@ -19,7 +19,7 @@
                </font>
             </Label>
             <JFXTextField fx:id="txtSearch" focusColor="#336566" prefHeight="27.0" prefWidth="298.0" promptText="Zoeken (op naam, voornaam of score)" />
-            <JFXTreeTableView>
+            <JFXTreeTableView fx:id="tblScorebord" onMouseClicked="#selectUserInList" stylesheets="@style.css">
                <columnResizePolicy>
                   <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>

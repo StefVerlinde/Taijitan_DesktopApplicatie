@@ -440,6 +440,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         return this.scoreProperty;
     }
 
+
     public String dateFormatter(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);

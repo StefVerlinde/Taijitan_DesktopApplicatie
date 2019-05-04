@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1221.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXListView fx:id="lstActivities" layoutX="72.0" layoutY="120.0" onMouseClicked="#selectActivityFromList" prefHeight="460.0" prefWidth="503.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="14.0" text="Activiteiten" textAlignment="CENTER" textFill="#336566">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="255.0" layoutY="75.0" prefHeight="38.0" prefWidth="136.0" text="Activiteiten" textAlignment="CENTER" textFill="#336566">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="878.0" layoutY="75.0" prefHeight="38.0" prefWidth="80.0" text="Details" textAlignment="CENTER" textFill="#336566">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblName" layoutX="665.0" layoutY="120.0" text="Naam:" />
+      <Label fx:id="lblStart" layoutX="667.0" layoutY="151.0" text="Start:" />
+      <Label layoutX="668.0" layoutY="222.0" text="Deelnemers" />
+      <JFXListView fx:id="lstPressents" layoutX="666.0" layoutY="240.0" onMouseClicked="#selectUserFromList" prefHeight="340.0" prefWidth="503.0" />
+      <Label fx:id="lblEnd" layoutX="845.0" layoutY="151.0" text="Einde:" />
+      <Label fx:id="lblType" layoutX="667.0" layoutY="181.0" text="Type:" />
+      <JFXButton fx:id="btnPrintPdf" alignment="CENTER" buttonType="RAISED" layoutX="323.0" layoutY="645.0" onAction="#printOverviewPdf" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="PDF" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnPrintExcell" alignment="CENTER" buttonType="RAISED" layoutX="646.0" layoutY="645.0" onAction="#printOverviewExcell" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="EXCEL" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets left="50.0" />
+   </padding>
+</fx:root>

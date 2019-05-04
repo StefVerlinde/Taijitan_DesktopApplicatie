@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import domain.Domaincontroller;
 import domain.Rank;
 import domain.User;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -61,6 +62,8 @@ public class ScorebordController extends AnchorPane {
     JFXTreeTableColumn<User, String> clmUserFirstName = new JFXTreeTableColumn<>("Voornaam");
     JFXTreeTableColumn<User, String> clmUserFamilyName = new JFXTreeTableColumn<>("Familienaam");
     JFXTreeTableColumn<User, String> clmScore = new JFXTreeTableColumn<>("Score");
+    JFXTreeTableColumn<User, String> clmRanking = new JFXTreeTableColumn<>("Ranking");
+
 
     private Domaincontroller dc;
     private FrameController fc;
@@ -90,7 +93,7 @@ public class ScorebordController extends AnchorPane {
         final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
         System.out.println(users.size());
 
-        tblScorebord.getColumns().setAll(clmUserFamilyName, clmUserFirstName,clmScore);
+        tblScorebord.getColumns().setAll( clmRanking, clmUserFamilyName, clmUserFirstName,clmScore);
         tblScorebord.setRoot(root);
         tblScorebord.setShowRoot(false);
 
@@ -137,6 +140,20 @@ public class ScorebordController extends AnchorPane {
                 return param.getValue().getValue().scoreProperty();
             }
         });
+
+        clmRanking.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            int ranknumber = 1;
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+
+                List<User> gesorteerdeUsers = dc.getSortedUsers();
+//                Collections.sort(gesorteerdeUsers, Comparator.comparing(User::getScore).reversed());
+
+                User u = param.getValue().getValue();
+                int rank = gesorteerdeUsers.indexOf(u)+1;
+                return new SimpleStringProperty(String.format("%d", rank));
+            }
+        });
     }
 
     private  void printRegistredUsersPdf(){
@@ -174,14 +191,18 @@ public class ScorebordController extends AnchorPane {
                 contentStream.setLeading(14.5f);
                 contentStream.newLineAtOffset(25, 600-(counter*10));
 
-                text = String.format("%-20s %-20s %-20s %-20s %-20s",  u.getFirstName(),"|", u.getName(),"|", u.getScore());
+                List<User> users = dc.getSortedUsers();
+                int rank = users.indexOf(u) + 1;
+
+                text = String.format("%-5s %-15s %-15s %-15s %-15s %-15s %-15s", String.format("%d", rank), "|",   u.getFirstName(),"|", u.getName(),"|", u.getScore());
                 contentStream.showText(text);
                 contentStream.endText();
             }
             System.out.println("content added");
             contentStream.close();
             document.addPage(pageOne);
-            String path = askPath(".pdf");
+//            String path = askPath(".pdf");
+            String path = AskPath.execute("Scorebord", "pdf");
             document.save(path);
 //            document.save("D:/my_doc.pdf");
             document.close();
@@ -193,7 +214,7 @@ public class ScorebordController extends AnchorPane {
 
     private void printRegistredUsersExcell() {
         try {
-            String[] columns = {"Voornaam", "Familienaam", "Score"};
+            String[] columns = {"Ranking", "Voornaam", "Familienaam", "Score"};
             //https://www.callicoder.com/java-write-excel-file-apache-poi/
             Workbook workbook = new XSSFWorkbook();
 
@@ -228,15 +249,21 @@ public class ScorebordController extends AnchorPane {
                 rownum++;
                 Row row = sheet.createRow(rownum);
 
-                row.createCell(0).setCellValue(u.getFirstName());
-                row.createCell(1).setCellValue(u.getName());
-                row.createCell(2).setCellValue(u.getScore());
+                List<User> users = dc.getSortedUsers();
+                int rank = users.indexOf(u) + 1;
+
+
+                row.createCell(0).setCellValue(rank);
+                row.createCell(1).setCellValue(u.getFirstName());
+                row.createCell(2).setCellValue(u.getName());
+                row.createCell(3).setCellValue(u.getScore());
             }
 
             for (int i = 0; i < columns.length; i++) {
                 sheet.autoSizeColumn(i);
             }
-            FileOutputStream fileOut = new FileOutputStream(askPath(".xlsx"));
+//            FileOutputStream fileOut = new FileOutputStream(askPath(".xlsx"));
+            FileOutputStream fileOut = new FileOutputStream(AskPath.execute("Scorebord", "xlsx"));
             workbook.write(fileOut);
             fileOut.close();
 
@@ -253,23 +280,7 @@ public class ScorebordController extends AnchorPane {
         }
     }
 
-    private String askPath(String extension){
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String path = f.getAbsolutePath();
 
-        LocalDate now = LocalDate.now();
-        int Year = now.getYear();
-        int Month = now.getMonthValue();
-        int day = now.getDayOfMonth();
-
-        String fileName = String.format("%s%s%d%d%d%s", path, "/Scorebord", Year, Month, day, extension);
-        System.out.println(fileName);
-
-        return fileName;
-    }
 
     @FXML
     private void selectUserInList(MouseEvent event) {
@@ -286,4 +297,7 @@ public class ScorebordController extends AnchorPane {
             }
         }
     }
+
+
+
 }

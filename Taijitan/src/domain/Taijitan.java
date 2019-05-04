@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import repository.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,8 @@ public class Taijitan {
     private CityDao cityDao;
     private GenericDao formulaDao;
     private ActivityDao activityDao;
+    private List<User> sortedUsers;
+
 
 
     //constructor
@@ -24,6 +27,9 @@ public class Taijitan {
         setUserDao(new UserDaoJpa());
         setActivityDao(new ActivityDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
+
+        sortedUsers = getAllUsers();
+        Collections.sort(sortedUsers, Comparator.comparing(User::getScore).reversed());
     }
 
     //getters - setters
@@ -86,6 +92,11 @@ public class Taijitan {
         List<User> users = new ArrayList<>(session.getUserCollection());
         return users;
     }
+
+    public List<User> getSortedUsers() {
+        return sortedUsers;
+    }
+
     public void updateUser(User user)
     {
         userDao.startTransaction();

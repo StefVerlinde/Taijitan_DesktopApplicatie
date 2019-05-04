@@ -41,6 +41,8 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
     private boolean isAdd;
     private Domaincontroller dc;
     private FrameController fc;
+    private final ObservableList<String> types = FXCollections.observableArrayList(ActivityType.stage.toString(), ActivityType.excursie.toString());
+
 
     public ActivitiesController(Domaincontroller dc,FrameController fc){
         this.dc = dc;
@@ -219,4 +221,46 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
     private boolean containsUser(List<User> users,User user){
         return users.contains(user);
     }
+
+    public void fillFieldWithSelectedActivity(Activity selectedActivity) {
+        enableAll();
+        txtName.setText(selectedActivity.getName());
+        dtmStart.setValue(convertToLocalDate(selectedActivity.getStartDate()));
+        dtmEnd.setValue(convertToLocalDate(selectedActivity.getEndDate()));
+        cboType.setItems(types);
+        if(selectedActivity.getType() == 0){
+            cboType.getSelectionModel().selectFirst();
+        }
+        else{
+            cboType.getSelectionModel().select(1);
+        }
+
+        lstConfirmed.setItems(FXCollections.observableArrayList(selectedActivity.getUsers()));
+
+        List<User> notConfirmedUsers = dc.getAllUsers();
+        for (User u : selectedActivity.getUsers()){
+            notConfirmedUsers.remove(u);
+        }
+
+        lstMembers.setItems(FXCollections.observableArrayList(notConfirmedUsers));
+    }
+
+    private LocalDate convertToLocalDate(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
+    private void enableAll(){
+        txtName.setDisable(false);
+        dtmEnd.setDisable(false);
+        dtmStart.setDisable(false);
+        lstMembers.setDisable(false);
+        lstConfirmed.setDisable(false);
+        cboType.setDisable(false);
+        btnEdit.setDisable(false);
+        btnDelete.setDisable(false);
+    }
+
+
 }

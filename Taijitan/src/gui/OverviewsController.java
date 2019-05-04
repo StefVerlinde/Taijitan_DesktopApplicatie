@@ -33,13 +33,15 @@ public class OverviewsController extends VBox {
     private FrameController fc;
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
+    private  _OverviewActivitiesController oa;
 
 
-    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru) {
+    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru, _OverviewActivitiesController oa) {
         this.dc = dc;
         this.fc = fc;
         this.pc = pc;
         this.oru = oru;
+        this.oa = oa;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("overviews.fxml"));
         loader.setRoot(this);
@@ -55,12 +57,15 @@ public class OverviewsController extends VBox {
     public void clearNodes(){
         this.getChildren().remove(pc);
         this.getChildren().remove(oru);
+        this.getChildren().remove(oa);
 
     }
 
     @FXML
     void showActivities(ActionEvent event) {
         clearNodes();
+
+        this.getChildren().add(oa);
     }
 
     @FXML

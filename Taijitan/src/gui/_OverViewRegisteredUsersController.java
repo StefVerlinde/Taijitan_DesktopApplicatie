@@ -216,7 +216,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
                     System.out.println("content added");
                     contentStream.close();
             document.addPage(pageOne);
-            String path = askPath(".pdf");
+            String path = AskPath.execute("overzichtLeden", "pdf");
             document.save(path);
 //            document.save("D:/my_doc.pdf");
             document.close();
@@ -284,7 +284,8 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             for (int i = 0; i < columns.length; i++) {
                 sheet.autoSizeColumn(i);
             }
-            FileOutputStream fileOut = new FileOutputStream(askPath(".xlsx"));
+//            FileOutputStream fileOut = new FileOutputStream(askPath(".xlsx"));
+            FileOutputStream fileOut = new FileOutputStream(AskPath.execute("overzichtLeden", "xlsx"));
             workbook.write(fileOut);
             fileOut.close();
 
@@ -299,29 +300,8 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             System.out.println("IO Exception");
             e.printStackTrace();
         }
-
-
-
-
     }
 
-    private String askPath(String extension){
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String path = f.getAbsolutePath();
-
-        LocalDate now = LocalDate.now();
-        int Year = now.getYear();
-        int Month = now.getMonthValue();
-        int day = now.getDayOfMonth();
-
-        String fileName = String.format("%s%s%d%d%d%s", path, "/OverzichtGeregistreerdeLeden", Year, Month, day, extension);
-        System.out.println(fileName);
-
-        return fileName;
-    }
     @FXML
     private void selectUserInList(MouseEvent event) {
         if(event.getClickCount() == 2)

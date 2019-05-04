@@ -40,6 +40,7 @@ public class Domaincontroller
     public List<Session> getAllSessions(){
         return taijitan.getAllSessions();
     }
+    public List<Activity> getAllActivities(){return taijitan.getAllActivities();}
     public List<User> getUsersFromSession(Session session){
         return taijitan.getUsersFromSession(session);
     }
@@ -51,9 +52,16 @@ public class Domaincontroller
         taijitan.deleteUser(currentUser);
         setCurrentUser(null);
     }
+    public List<User> getSortedUsers(){
+        return taijitan.getSortedUsers();
+    }
     public void deleteActivity(){
         taijitan.deleteActivity(this.currentActivity);
         setCurrentActivity(null);
+    }
+
+    public List<User> getUsersFromActivity(Activity act){
+        return act.getUsers();
     }
     public void addUser(User user) {
         taijitan.addUser(user);

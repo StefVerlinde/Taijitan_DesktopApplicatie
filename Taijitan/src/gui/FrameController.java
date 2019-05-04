@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domain.Activity;
 import domain.Domaincontroller;
 import domain.User;
 import javafx.geometry.Rectangle2D;
@@ -23,12 +24,14 @@ public class FrameController extends HBox {
     Rectangle2D bounds;
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
+    private _OverviewActivitiesController oa;
     private ListPanelController listpanel;
 
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
         this.pc = new _OverviewPresentsController(dc, this);
         this.oru = new _OverViewRegisteredUsersController(dc,this);
+        this.oa = new _OverviewActivitiesController(dc, this);
         this.listpanel = new ListPanelController(dc, this);
         setupStart();
 
@@ -64,7 +67,7 @@ public class FrameController extends HBox {
     }
 
     private void setupOverviews() {
-        overviews = new OverviewsController(dc, this, pc, oru);
+        overviews = new OverviewsController(dc, this, pc, oru, oa);
         current = overviews;
         getChildren().add(overviews);
     }
@@ -115,6 +118,15 @@ public class FrameController extends HBox {
         members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
         members.fillFieldsWithSelectedUser(user);
         getChildren().add(members);
+    }
+
+    public void changeToActivityWithSelectedUser(Activity selectedActivity) {
+        clearNodes();
+        activities = new ActivitiesController(dc, this);
+        current = activities;
+        activities.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
+        activities.fillFieldWithSelectedActivity(selectedActivity);
+        getChildren().add(activities);
     }
 
     public void clearNodes(){
@@ -171,4 +183,6 @@ public class FrameController extends HBox {
     public boolean isAddingActivity(){
         return activities.getIsAdd();
     }
+
+
 }

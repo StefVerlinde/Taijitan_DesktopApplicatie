@@ -69,6 +69,11 @@
                   <JFXDatePicker fx:id="dtmStart" defaultColor="#336566" prefHeight="29.0" prefWidth="718.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXDatePicker fx:id="dtmEnd" defaultColor="#336566" prefHeight="29.0" prefWidth="583.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXComboBox fx:id="cboType" focusColor="#336566" prefHeight="27.0" prefWidth="569.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lblError" prefHeight="41.0" prefWidth="566.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <GridPane prefHeight="366.0" prefWidth="783.0">

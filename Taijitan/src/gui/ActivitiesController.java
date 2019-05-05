@@ -4,20 +4,17 @@ import com.jfoenix.controls.*;
 import domain.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +35,9 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
     private JFXButton btnEdit;
     @FXML
     private JFXButton btnDelete;
+    @FXML
+    private Label lblError;
+
     private boolean isAdd;
     private Domaincontroller dc;
     private FrameController fc;
@@ -135,7 +135,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
 
     @FXML
     private void edit() {
-
+        boolean canSubmit = true;
         //TODO edit user
 
         int tp;
@@ -147,14 +147,23 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
         }
 
         List<User> users = new ArrayList<>(dc.getLijstConfirmed());
-        Activity act = new Activity(txtName.getText(),tp,Dates.convertToDate(dtmStart.getValue()),
-                Dates.convertToDate(dtmEnd.getValue()), users);
+        try{
+            Activity act = new Activity("test",tp,Dates.convertToDate(dtmStart.getValue()),
+                    Dates.convertToDate(dtmEnd.getValue()), users);
+            dc.addActivity(act);
+        }catch(IllegalArgumentException e)
+        {
+            canSubmit = false;
+            lblError.setText(e.getMessage());
+        }
 
 
-        dc.addActivity(act);
-        toEditUser();
-        emptyFields();
-        fc.updateListPanelActivities();
+
+        if(canSubmit) {
+            toEditUser();
+            emptyFields();
+            fc.updateListPanelActivities();
+        }
     }
 
     @FXML

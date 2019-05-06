@@ -4,20 +4,15 @@ import com.jfoenix.controls.*;
 import domain.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +33,9 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
     private JFXButton btnEdit;
     @FXML
     private JFXButton btnDelete;
+    @FXML
+    private Label lblError;
+
     private boolean isAdd;
     private Domaincontroller dc;
     private FrameController fc;
@@ -89,6 +87,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
     dc.setLijstConfirmed(new ArrayList<>(){});
     dc.setLijstMembers(dc.getAllMembers());
     lstMembers.setItems(dc.getLijstMembers());
+    lblError.setText("");
     }
     public void disableFields(){
         btnDelete.setDisable(true);
@@ -137,26 +136,77 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
 
     @FXML
     private void edit() {
+        boolean canSubmit = true;
+        if(!isAdd){
+            //edit activity
+            try{
+                Activity act = dc.getCurrentActivity();
+                act.setName(txtName.getText());
+                act.setUsers(dc.getLijstConfirmed());
+                act.setStartDate(Dates.convertToDate(dtmStart.getValue()));
+                act.setEndDate(Dates.convertToDate(dtmEnd.getValue()));
 
-        //TODO edit user
+                /*if(!Dates.sameDay(act.getStartDate(),Dates.convertToDate(dtmStart.getValue())))
+                {
+                    act.setStartDate(Dates.convertToDate(dtmStart.getValue()));
+                }
 
-        int tp;
-        if(cboType.getSelectionModel().getSelectedItem() == ActivityType.excursie.toString()){
-            tp = 0;
+                if(!Dates.sameDay(act.getEndDate(),Dates.convertToDate(dtmEnd.getValue())))
+                {
+                    act.setEndDate(Dates.convertToDate(dtmEnd.getValue()));
+                }*/
+
+                if (cboType.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Type mag niet leeg zijn");
+                } else {
+                    act.setType(cboType.getSelectionModel().getSelectedIndex());
+                }
+            }
+            catch(IllegalArgumentException e)
+            {
+                canSubmit = false;
+                lblError.setText(e.getMessage());
+            }
+
+            if(canSubmit) {
+                dc.updateActivity();
+                disableFields();
+                emptyFields();
+                fc.updateListPanelActivities();
+            }
         }
         else{
-            tp = 1;
+            //add activity
+            List<User> users = new ArrayList<>(dc.getLijstConfirmed());
+            Activity act = new Activity();
+            try{
+                act.setName(txtName.getText());
+                act.setUsers(users);
+                act.setStartDate(Dates.convertToDate(dtmStart.getValue()));
+                act.setEndDate(Dates.convertToDate(dtmEnd.getValue()));
+
+                if (cboType.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Type mag niet leeg zijn");
+                } else {
+                    act.setType(cboType.getSelectionModel().getSelectedIndex());
+                }
+
+
+            }catch(IllegalArgumentException e)
+            {
+                canSubmit = false;
+                lblError.setText(e.getMessage());
+            }
+
+            if(canSubmit) {
+                dc.addActivity(act);
+                toEditUser();
+                emptyFields();
+                fc.updateListPanelActivities();
+            }
         }
 
-        List<User> users = new ArrayList<>(dc.getLijstConfirmed());
-        Activity act = new Activity(txtName.getText(),tp,Dates.convertToDate(dtmStart.getValue()),
-                Dates.convertToDate(dtmEnd.getValue()), users);
 
-
-        dc.addActivity(act);
-        toEditUser();
-        emptyFields();
-        fc.updateListPanelActivities();
     }
 
     @FXML

@@ -102,7 +102,13 @@ public class Taijitan {
         userDao.startTransaction();
         userDao.update(user);
         userDao.commitTransaction();
-        System.out.println("update success");
+        System.out.println("update user success");
+    }
+    public void updateActivity(Activity act){
+        activityDao.startTransaction();
+        activityDao.update(act);
+        activityDao.commitTransaction();
+        System.out.println("update activity success");
     }
 
     public void deleteUser(User user) {

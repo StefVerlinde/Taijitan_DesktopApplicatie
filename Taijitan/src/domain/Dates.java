@@ -13,6 +13,9 @@ public class Dates {
     }
 
     public static Date convertToDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return localDate == null ? null : Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+    public static boolean sameDay(Date date1,Date date2){
+        return !date1.before(date2) && !date1.after(date2);
     }
 }

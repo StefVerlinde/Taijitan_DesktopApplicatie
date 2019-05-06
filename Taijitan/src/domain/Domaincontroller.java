@@ -48,6 +48,7 @@ public class Domaincontroller
     {
         taijitan.updateUser(currentUser);
     }
+    public void updateActivity(){taijitan.updateActivity(currentActivity);}
     public void deleteUser() {
         taijitan.deleteUser(currentUser);
         setCurrentUser(null);

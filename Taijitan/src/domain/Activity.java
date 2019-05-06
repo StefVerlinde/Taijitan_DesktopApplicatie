@@ -17,10 +17,6 @@ import java.util.Objects;
 import javax.management.monitor.StringMonitor;
 import javax.persistence.*;
 
-/**
- *
- * @author tijsm
- */
 @Entity
 @Table(name = "Activity")
 @NamedQueries({
@@ -73,12 +69,11 @@ public class Activity implements Serializable {
 
     public Activity(String name, int type, Date startDate, Date endDate, List<User> users) {
         //this.activityId = activityId;
-        this.name = name;
-        this.type = type;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.users = users;
-
+        setName(name);
+        setType(type);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        setUsers(users);
     }
 
     public int getActivityId() {
@@ -94,6 +89,8 @@ public class Activity implements Serializable {
     }
 
     public void setName(String name) {
+        if(name.trim().isEmpty())
+            throw new IllegalArgumentException("Naam is verplicht");
         this.name = name;
     }
 
@@ -110,6 +107,10 @@ public class Activity implements Serializable {
     }
 
     public void setStartDate(Date startDate) {
+        if(startDate == null)
+            throw new IllegalArgumentException("startdatum is verplicht!");
+        /*else if(startDate.before(new Date()))
+            throw new IllegalArgumentException("Een activiteit moet in de toekomst beginnen!");*/
         this.startDate = startDate;
     }
 
@@ -118,6 +119,12 @@ public class Activity implements Serializable {
     }
 
     public void setEndDate(Date endDate) {
+        if(endDate == null)
+            throw new IllegalArgumentException("einddatum is verplicht!");
+        /*else if(endDate.before(new Date()))
+            throw new IllegalArgumentException("Een activiteit moet in de toekomst eindigen!");*/
+        else if(endDate.before(startDate))
+            throw new IllegalArgumentException("Een activiteit kan niet voor de startdatum eindigen!");
         this.endDate = endDate;
     }
 

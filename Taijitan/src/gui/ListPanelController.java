@@ -3,7 +3,6 @@ package gui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import domain.Activity;
-import domain.ActivityType;
 import domain.Domaincontroller;
 import domain.User;
 import javafx.collections.ObservableList;

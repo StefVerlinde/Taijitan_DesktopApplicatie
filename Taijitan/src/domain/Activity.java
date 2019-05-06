@@ -71,8 +71,8 @@ public class Activity implements Serializable {
         //this.activityId = activityId;
         setName(name);
         setType(type);
-        setEndDate(endDate);
         setStartDate(startDate);
+        setEndDate(endDate);
         setUsers(users);
     }
 
@@ -89,7 +89,7 @@ public class Activity implements Serializable {
     }
 
     public void setName(String name) {
-        if(name == null || this.name.trim().isEmpty())
+        if(name.trim().isEmpty())
             throw new IllegalArgumentException("Naam is verplicht");
         this.name = name;
     }
@@ -109,8 +109,8 @@ public class Activity implements Serializable {
     public void setStartDate(Date startDate) {
         if(startDate == null)
             throw new IllegalArgumentException("startdatum is verplicht!");
-        else if(startDate.before(new Date()))
-            throw new IllegalArgumentException("Een activiteit moet in de toekomst beginnen!");
+        /*else if(startDate.before(new Date()))
+            throw new IllegalArgumentException("Een activiteit moet in de toekomst beginnen!");*/
         this.startDate = startDate;
     }
 
@@ -121,8 +121,8 @@ public class Activity implements Serializable {
     public void setEndDate(Date endDate) {
         if(endDate == null)
             throw new IllegalArgumentException("einddatum is verplicht!");
-        else if(endDate.before(new Date()))
-            throw new IllegalArgumentException("Een activiteit moet in de toekomst eindigen!");
+        /*else if(endDate.before(new Date()))
+            throw new IllegalArgumentException("Een activiteit moet in de toekomst eindigen!");*/
         else if(endDate.before(startDate))
             throw new IllegalArgumentException("Een activiteit kan niet voor de startdatum eindigen!");
         this.endDate = endDate;

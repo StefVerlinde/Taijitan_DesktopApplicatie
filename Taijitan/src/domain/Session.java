@@ -116,10 +116,6 @@ public class Session implements Serializable {
         return formulaCollection1;
     }
 
-    public void setFormulaCollection1(Collection<Formula> formulaCollection1) {
-        this.formulaCollection1 = formulaCollection1;
-    }
-
     public Collection<User> getUserCollection1() {
         return userCollection1;
     }

@@ -139,8 +139,7 @@ public class FrameController extends HBox {
     public void updateListPanelMembers(){
         listpanel.fillWithMembers();
     }
-    public void updateListPanelActivities(){ listpanel.fillWithActivities();
-    }
+    public void updateListPanelActivities(){ listpanel.fillWithActivities();}
 
     public boolean isAddingMember(){
         return members.getIsAdd();
@@ -180,9 +179,5 @@ public class FrameController extends HBox {
     {
         activities.setDisableDelete(b);
     }
-    public boolean isAddingActivity(){
-        return activities.getIsAdd();
-    }
-
-
+    public boolean isAddingActivity(){return activities.getIsAdd();}
 }

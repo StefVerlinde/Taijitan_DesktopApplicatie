@@ -156,12 +156,11 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     }
 
+    //region Getters and Setters
     public Integer getUserId() {
         return userId;
     }
 
-
-    //region Getters and Setters
     public void setUserId(Integer userId) {
         this.userId = userId;
     }

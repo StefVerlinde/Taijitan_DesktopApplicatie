@@ -42,14 +42,11 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </HBox.margin>
                 </JFXButton>
-                <JFXButton fx:id="btnChampionship" alignment="CENTER" buttonType="RAISED" onAction="#showChampionship" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #336566;" text="Cubkampioenschap" textFill="WHITE" HBox.hgrow="ALWAYS">
-                    <font>
-                        <Font name="Arial" size="18.0" />
-                    </font>
-                    <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </HBox.margin>
-                </JFXButton>
+            <JFXButton fx:id="btnChampionship" alignment="CENTER" buttonType="RAISED" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #336566;" text="Clubkampioenschap" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </JFXButton>
             </children>
          <VBox.margin>
             <Insets left="75.0" right="75.0" />

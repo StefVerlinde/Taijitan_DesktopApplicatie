@@ -54,42 +54,17 @@ public class NavController extends VBox
     }  
 
     @FXML
-    private void loadMembers(ActionEvent event)
-    {
-
-        controller.changeContent("members");
-    }
-
+    private void loadMembers(ActionEvent event){controller.changeContent("members");}
     @FXML
-    private void loadPresents(ActionEvent event) {
-        controller.changeContent("presents");
-    }
+    private void loadPresents(ActionEvent event) {controller.changeContent("presents");}
     @FXML
-    private void loadActivities(ActionEvent event)
-    {
-        controller.changeContent("activities");
-    }
-
+    private void loadActivities(ActionEvent event){controller.changeContent("activities");}
     @FXML
-    private void loadCourseMaterial(ActionEvent event)
-    {
-
-    }
-
+    private void loadCourseMaterial(ActionEvent event){}
     @FXML
-    private void loadOverviews(ActionEvent event)
-    {
-        controller.changeContent("overviews");
-    }
-
+    private void loadOverviews(ActionEvent event){controller.changeContent("overviews");}
     @FXML
     private void loadScorebord(ActionEvent event) {controller.changeContent("scorebord");}
-
-
-
     @FXML
-    private void loadWelcome(MouseEvent event)
-    {
-        controller.changeContent("welcome");
-    }
+    private void loadWelcome(MouseEvent event){controller.changeContent("welcome");}
 }

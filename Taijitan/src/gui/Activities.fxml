@@ -78,15 +78,16 @@
             </GridPane>
             <GridPane prefHeight="366.0" prefWidth="783.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="148.18180602522924" minHeight="10.0" prefHeight="26.872723993979236" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="450.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="148.18180602522924" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="148.18180602522924" minHeight="10.0" prefHeight="29.62131837055055" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="308.30102446400895" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXListView fx:id="lstMembers" onMouseClicked="#toConfirmed" prefHeight="358.0" prefWidth="279.0" GridPane.rowIndex="1">
+                  <JFXListView fx:id="lstMembers" onMouseClicked="#toConfirmed" prefHeight="358.0" prefWidth="279.0" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="50.0" right="50.0" top="20.0" />
                      </GridPane.margin>
@@ -96,16 +97,18 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <JFXListView fx:id="lstConfirmed" onMouseClicked="#toMember" prefHeight="24.0" prefWidth="324.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <JFXListView fx:id="lstConfirmed" onMouseClicked="#toMember" prefHeight="24.0" prefWidth="324.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="50.0" right="50.0" top="20.0" />
                      </GridPane.margin>
                   </JFXListView>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="39.0" prefWidth="392.0" text="Bevestigd" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="39.0" prefWidth="392.0" text="Bevestigd" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
+                  <JFXTextField fx:id="txtSearchMembers" alignment="CENTER" focusColor="#336566" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Zoek leden" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <JFXTextField fx:id="txtSearchComfirmedMembers" alignment="CENTER" focusColor="#336566" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Zoek bevestigde leden" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

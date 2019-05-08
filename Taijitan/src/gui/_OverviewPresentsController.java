@@ -34,24 +34,6 @@ public class _OverviewPresentsController extends AnchorPane {
     private FrameController fc;
 
 
-    public _OverviewPresentsController(Domaincontroller dc, FrameController fc) {
-        this.dc = dc;
-        this.fc = fc;
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewPresents.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        buildGui();
-    }
-
     private void buildGui() {
         lstSessions.setItems(FXCollections.observableArrayList(dc.getAllSessions()));
 
@@ -72,6 +54,28 @@ public class _OverviewPresentsController extends AnchorPane {
                 lstPressents.setItems(FXCollections.observableArrayList(dc.getUsersFromSession(sellectedSession)));
             }
         });
+
+
+    }
+
+    public _OverviewPresentsController(Domaincontroller dc, FrameController fc) {
+        this.dc = dc;
+        this.fc = fc;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewPresents.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        buildGui();
+
+
     }
     @FXML
     private void selectMemberFromList(MouseEvent event)

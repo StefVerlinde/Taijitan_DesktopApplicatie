@@ -288,8 +288,7 @@ public class UserTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void setOngeldigCityPostalcode_cityIsNull(){
-        City newCity = new City();
-        user.setCityPostalcode(newCity);
+        user.setCityPostalcode(null);
     }
 
     @Test(expected = IllegalArgumentException.class)

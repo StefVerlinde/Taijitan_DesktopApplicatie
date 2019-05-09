@@ -68,6 +68,8 @@ public class Comment implements Serializable {
     }
 
     public void setContent(String content) {
+        if(content == null ||content.trim().isEmpty())
+            throw new IllegalArgumentException("Ongeldige conent");
         this.content = content;
     }
 
@@ -76,6 +78,8 @@ public class Comment implements Serializable {
     }
 
     public void setDateCreated(Date dateCreated) {
+        if(dateCreated == null)
+            throw new IllegalArgumentException("Ongeldige datum");
         this.dateCreated = dateCreated;
     }
 

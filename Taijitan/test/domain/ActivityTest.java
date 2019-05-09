@@ -3,15 +3,7 @@ package domain;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
 import static org.junit.Assert.*;
-
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 
@@ -28,21 +20,20 @@ public class ActivityTest {
     public void testValidActivityId(){
         int id = 1;
         activity.setActivityId(id);
-        Assert.assertEquals(id, activity.getActivityId());
+        assertEquals(id, activity.getActivityId());
     }
 
     @Test
     public void testValidName(){
         String name = "testName";
         activity.setName(name);
-        Assert.assertEquals(name, activity.getName());
+        assertEquals(name, activity.getName());
     }
 
     @Test
     public void testValidType(){
-        int valOfType = ActivityType.excursie.ordinal();
-        activity.setType(ActivityType.excursie.ordinal());
-        Assert.assertEquals(1, valOfType);
+        activity.setType(1);
+        assertEquals(1, activity.getType());
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -28,7 +28,7 @@ public class CityTest {
     @Test (expected = IllegalArgumentException.class)
     public void setInvalidPostalCode_toSmall(){
         String code = "999";
-
+        this.city.setPostalcode(code);
     }
     @Test (expected = IllegalArgumentException.class)
     public void setInvalidPostalCode_toBig(){

@@ -43,7 +43,7 @@ public class City implements Serializable {
     }
 
     public void setPostalcode(String postalcode) {
-        if(postalcode.trim().isEmpty())
+        if(postalcode.trim().isEmpty() || postalcode.length() != 4)
             throw new IllegalArgumentException("Geen geldige postcode");
         this.postalcode = postalcode;
     }
@@ -53,7 +53,7 @@ public class City implements Serializable {
     }
 
     public void setName(String name) {
-        if(name.trim().isEmpty() || name.length() >= 100)
+        if(name == null || name.trim().isEmpty() || name.length() >= 100)
             throw new IllegalArgumentException("Stadsnaam is verplicht (max 100 karakters)");
         this.name = name;
     }

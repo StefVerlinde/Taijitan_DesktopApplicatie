@@ -53,19 +53,21 @@ public class TrainingDay implements Serializable {
         this.trainingDayId = trainingDayId;
     }
 
-    public TrainingDay(Integer trainingDayId, double startHour, double stopHour, double duration, int dayOfWeek) {
-        this.trainingDayId = trainingDayId;
-        this.startHour = startHour;
-        this.stopHour = stopHour;
-        this.duration = duration;
-        this.dayOfWeek = dayOfWeek;
+    public TrainingDay(Integer trainingDayId, double startHour, double stopHour,int dayOfWeek) {
+        setTrainingDayId(trainingDayId);
+        setStartHour(startHour);
+        setStopHour(stopHour);
+        setDuration(stopHour-startHour);
+        setDayOfWeek(dayOfWeek);
     }
 
-    public Integer getTrainingDayId() {
+    public int getTrainingDayId() {
         return trainingDayId;
     }
 
-    public void setTrainingDayId(Integer trainingDayId) {
+    public void setTrainingDayId(int trainingDayId) {
+        if(trainingDayId <0)
+            throw new IllegalArgumentException("Ongeldige id");
         this.trainingDayId = trainingDayId;
     }
 
@@ -74,6 +76,8 @@ public class TrainingDay implements Serializable {
     }
 
     public void setName(String name) {
+        if(name == null || name.trim().isEmpty())
+            throw new IllegalArgumentException("Ongeldige naam");
         this.name = name;
     }
 
@@ -82,6 +86,8 @@ public class TrainingDay implements Serializable {
     }
 
     public void setStartHour(double startHour) {
+        if(startHour < 0 || startHour > 24)
+            throw new IllegalArgumentException("Ongeldig tijdstip");
         this.startHour = startHour;
     }
 
@@ -90,6 +96,10 @@ public class TrainingDay implements Serializable {
     }
 
     public void setStopHour(double stopHour) {
+        if(stopHour < 0 || stopHour > 24)
+            throw new IllegalArgumentException("Ongeldig tijdstip");
+        if(startHour >= stopHour)
+            throw new IllegalArgumentException("stop uur kan niet voor start uur zijn");
         this.stopHour = stopHour;
     }
 
@@ -97,7 +107,9 @@ public class TrainingDay implements Serializable {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    private void setDuration(double duration) {
+        if(duration < 0)
+            throw new IllegalArgumentException("Een duur kan niet negatief zijn");
         this.duration = duration;
     }
 
@@ -106,6 +118,8 @@ public class TrainingDay implements Serializable {
     }
 
     public void setDayOfWeek(int dayOfWeek) {
+        if(dayOfWeek < 0)
+            throw  new IllegalArgumentException("Kan niet");
         this.dayOfWeek = dayOfWeek;
     }
 

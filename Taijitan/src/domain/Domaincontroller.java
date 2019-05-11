@@ -111,11 +111,14 @@ public class Domaincontroller
     public void addConfirmed(User u){
         this.lijstConfirmed.add(u);
         this.lijstMembers.remove(u);
+
     }
     public void removeConfirmed(User u){
         System.out.println(lijstConfirmed.toString());
         this.lijstMembers.add(u);
         this.lijstConfirmed.remove(u);
+
+
     }
     public void setLijstMembers(List<User> lijstMembers) {
         this.lijstMembers = FXCollections.observableArrayList(lijstMembers); }

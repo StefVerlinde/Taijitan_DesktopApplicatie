@@ -48,6 +48,11 @@ public class Activity implements Serializable {
     @Column(name = "EndDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+    @Column(name = "score")
+    private int score;
+    @Column(name = "MaxParticpants")
+    private int maxParticpants;
+
 
     @Basic(optional = false)
     @Column(name = "IsFull")
@@ -67,14 +72,33 @@ public class Activity implements Serializable {
         this.activityId = activityId;
     }
 
-    public Activity(String name, int type, Date startDate, Date endDate, List<User> users) {
+    public Activity(String name, int type, Date startDate, Date endDate, List<User> users, int score, int maxp) {
         //this.activityId = activityId;
         setName(name);
         setType(type);
         setStartDate(startDate);
         setEndDate(endDate);
         setUsers(users);
+        setScore(score);
+        setMaxParticpants(maxp);
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore(){
+        return this.score;
+    }
+
+    public void setMaxParticpants(int maxp) {
+        this.maxParticpants = maxp;
+    }
+
+    public int getMaxParticpants(){
+        return this.maxParticpants;
+    }
+
 
     public int getActivityId() {
         return activityId;

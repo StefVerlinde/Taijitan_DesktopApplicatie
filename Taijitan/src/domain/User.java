@@ -474,6 +474,16 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     public SimpleStringProperty discriminatorProperty(){
         this.discriminatorProperty = new SimpleStringProperty(discriminator);
 
+        if(discriminator.equals("Member"))
+            this.discriminatorProperty = new SimpleStringProperty("Lid");
+        else if(discriminator.equals("Admin"))
+            this.discriminatorProperty = new SimpleStringProperty("Administrator");
+        else if(discriminator.equals("Teacher"))
+            this.discriminatorProperty = new SimpleStringProperty("Trainer");
+        else{
+            this.discriminatorProperty = new SimpleStringProperty("Onbekend");
+        }
+
         return this.discriminatorProperty;
     }
 

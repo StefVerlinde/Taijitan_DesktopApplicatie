@@ -67,6 +67,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
     JFXTreeTableColumn<User, String> clmUserDateOfBirth = new JFXTreeTableColumn<>("Geboortedatum");
     JFXTreeTableColumn<User, String> clmUserTelephone = new JFXTreeTableColumn<>("Telefoonnummer");
     JFXTreeTableColumn<User, String> clmUserEmail = new JFXTreeTableColumn<>("Email adres");
+    JFXTreeTableColumn<User, String> clmDiscriminator = new JFXTreeTableColumn<>(("Rol"));
 
     private Domaincontroller dc;
     private FrameController fc;
@@ -98,7 +99,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
         System.out.println(users.size());
 
 //        tblRegistredUsers = new JFXTreeTableView<>();
-        tblRegistredUsers.getColumns().setAll(clmUserFamilyName, clmUserFirstName,clmKyu, clmUserDateOfBirth, clmUserEmail, clmUserTelephone);
+        tblRegistredUsers.getColumns().setAll(clmUserFamilyName, clmUserFirstName,clmKyu, clmDiscriminator, clmUserDateOfBirth, clmUserEmail, clmUserTelephone);
         tblRegistredUsers.setRoot(root);
         tblRegistredUsers.setShowRoot(false);
 
@@ -142,11 +143,19 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             }
         });
 
-        clmKyu.setPrefWidth(25);
+        clmKyu.setPrefWidth(10);
         clmKyu.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
                     return  param.getValue().getValue().KyuProperty();
+            }
+        });
+
+        clmDiscriminator.setPrefWidth(15);
+        clmDiscriminator.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return  param.getValue().getValue().discriminatorProperty();
             }
         });
 

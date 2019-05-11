@@ -137,6 +137,8 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     private SimpleStringProperty telephoneProperty = new SimpleStringProperty();
     @Transient
     private SimpleStringProperty emailProperty = new SimpleStringProperty();
+    @Transient
+    private SimpleStringProperty discriminatorProperty = new SimpleStringProperty();
 
     public User() {
     }
@@ -467,6 +469,12 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         else this.KyuProperty = new SimpleStringProperty("Niet van toepassing");
 
         return  this.KyuProperty;
+    }
+
+    public SimpleStringProperty discriminatorProperty(){
+        this.discriminatorProperty = new SimpleStringProperty(discriminator);
+
+        return this.discriminatorProperty;
     }
 
     public SimpleStringProperty telephoneProperty() {

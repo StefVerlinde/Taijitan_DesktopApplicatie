@@ -20,6 +20,7 @@ public class FrameController extends HBox {
     private OverviewsController overviews;
     private ActivitiesController activities;
     private ScorebordController scorebord;
+    private CourseMaterialController courseMaterial;
     private Object current;
     Rectangle2D bounds;
     private _OverviewPresentsController pc;
@@ -81,6 +82,15 @@ public class FrameController extends HBox {
         listpanel.fillWithActivities();
         getChildren().addAll(listpanel,activities);
     }
+    public void setupCourseMaterial(){
+        this.listpanel = new ListPanelController(dc,this);
+        this.setVisibleAdd(true);
+        courseMaterial = new CourseMaterialController(dc,this);
+        this.dc.addPropertyChangeListenerCurrentCourseMaterial(courseMaterial);
+        current = courseMaterial;
+        listpanel.fillWithCourseMaterial();
+        getChildren().addAll(listpanel,courseMaterial);
+    }
 
     public void setupScorebord(){
         this.scorebord = new ScorebordController(dc, this);
@@ -107,6 +117,9 @@ public class FrameController extends HBox {
                 break;
             case "scorebord":
                 setupScorebord();
+                break;
+            case "coursematerial":
+                setupCourseMaterial();
                 break;
         }
     }

@@ -60,7 +60,7 @@ public class NavController extends VBox
     @FXML
     private void loadActivities(ActionEvent event){controller.changeContent("activities");}
     @FXML
-    private void loadCourseMaterial(ActionEvent event){}
+    private void loadCourseMaterial(ActionEvent event){controller.changeContent("coursematerial");}
     @FXML
     private void loadOverviews(ActionEvent event){controller.changeContent("overviews");}
     @FXML

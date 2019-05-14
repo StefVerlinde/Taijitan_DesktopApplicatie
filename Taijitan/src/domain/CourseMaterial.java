@@ -126,7 +126,7 @@ public class CourseMaterial implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.CourseMaterial[ materialId=" + materialId + " ]";
+        return String.format("%s - %s",Rank.getById(getRank()),getTitle());
     }
 
 }

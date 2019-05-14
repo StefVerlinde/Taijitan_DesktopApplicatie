@@ -16,6 +16,7 @@ public class Taijitan {
     private CityDao cityDao;
     private GenericDao formulaDao;
     private ActivityDao activityDao;
+    private CourseMaterialDao courseMaterialDao;
     private List<User> sortedUsers;
 
 
@@ -27,10 +28,12 @@ public class Taijitan {
         setUserDao(new UserDaoJpa());
         setActivityDao(new ActivityDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
+        setCourseMaterialDao(new CourseMaterialDaoJpa());
 
         sortedUsers = getAllUsers();
         Collections.sort(sortedUsers, Comparator.comparing(User::getScore).reversed());
     }
+
 
     //getters - setters
     public UserDao getUserDao() {
@@ -50,6 +53,14 @@ public class Taijitan {
     }
     public void setCityDao(CityDao cityDao) {
         this.cityDao = cityDao;
+    }
+
+    public CourseMaterialDao getCourseMaterialDao() {
+        return courseMaterialDao;
+    }
+
+    public void setCourseMaterialDao(CourseMaterialDao courseMaterialDao) {
+        this.courseMaterialDao = courseMaterialDao;
     }
 
     public ActivityDao getActivityDao(){
@@ -83,7 +94,9 @@ public class Taijitan {
     public ObservableList<Activity> getAllActivitiesFX(){
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllActivities())));
     }
-
+    public List<CourseMaterial> getAllCourseMaterials(){
+       return courseMaterialDao.findAll();
+    }
     public List<Session> getAllSessions(){
         List<Session> sessions = sessionDao.findAll();
         return sessions;

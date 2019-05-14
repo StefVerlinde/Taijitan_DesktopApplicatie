@@ -3,35 +3,40 @@ package domain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Domaincontroller
 {
     private final Taijitan taijitan;
     private User currentUser;
     private Activity currentActivity;
+    private CourseMaterial currentCourseMaterial;
     private final PropertyChangeSupport subjectUsers;
     private final PropertyChangeSupport subjectActivities;
+    private final PropertyChangeSupport subjectCourseMaterial;
     private ObservableList<User> lijstMembers;
     private ObservableList<User> lijstConfirmed;
     private FilteredList<User> filteredMembersLijst;
     private FilteredList<User> getFilteredConfirmedLijst;
+    private ObservableList<CourseMaterial> lijstCourseMaterial;
+    private FilteredList<CourseMaterial> filteredCourseMaterialLijst;
+
+
 
     public Domaincontroller(){
         this.taijitan = new Taijitan();
         this.subjectUsers = new PropertyChangeSupport(this);
         this.subjectActivities = new PropertyChangeSupport(this);
+        this.subjectCourseMaterial = new PropertyChangeSupport(this);
         lijstMembers = FXCollections.observableArrayList(getAllUsers());
         filteredMembersLijst = new FilteredList<>(lijstMembers,p -> true);
         lijstConfirmed = FXCollections.observableArrayList();
         getFilteredConfirmedLijst = new FilteredList<>(lijstConfirmed,p -> true);
+        lijstCourseMaterial = FXCollections.observableArrayList(taijitan.getAllCourseMaterials());
+        filteredCourseMaterialLijst = new FilteredList<>(lijstCourseMaterial,p -> true);
     }
     public Taijitan getTaijitan() {
         return taijitan;
@@ -77,6 +82,11 @@ public class Domaincontroller
         getFilteredConfirmedLijst.setPredicate(user ->{
             return user.getFirstName().toLowerCase().contains(str.toLowerCase())
                     || user.getName().toLowerCase().contains(str.toLowerCase());
+        });
+    }
+    public void filterCourseMaterial(Rank rank){
+        filteredCourseMaterialLijst.setPredicate(course -> {
+            return course.getRank() == rank.getId();
         });
     }
 
@@ -126,7 +136,10 @@ public class Domaincontroller
         subjectActivities.addPropertyChangeListener(pcl);
         pcl.propertyChange(new PropertyChangeEvent(pcl,"currentActivity",null,this.currentActivity));
     }
-
+    public void addPropertyChangeListenerCurrentCourseMaterial(PropertyChangeListener pcl){
+        subjectCourseMaterial.addPropertyChangeListener(pcl);
+        pcl.propertyChange(new PropertyChangeEvent(pcl,"currentCourseMaterial",null,this.currentCourseMaterial));
+    }
     public void addConfirmed(User u){
         this.lijstConfirmed.add(u);
         this.lijstMembers.remove(u);
@@ -154,5 +167,16 @@ public class Domaincontroller
     public ObservableList<User> getLijstConfirmed(){
         return FXCollections.unmodifiableObservableList(this.getFilteredConfirmedLijst);
     }
+    public ObservableList<CourseMaterial> getLijstCourseMaterial(){
+        return FXCollections.unmodifiableObservableList(this.filteredCourseMaterialLijst);
+    }
 
+    public CourseMaterial getCurrentCourseMaterial() {
+        return currentCourseMaterial;
+    }
+
+    public void setCurrentCourseMaterial(CourseMaterial newC) {
+        subjectCourseMaterial.firePropertyChange("currentCourseMaterial",this.currentCourseMaterial,newC);
+        this.currentCourseMaterial = newC;
+    }
 }

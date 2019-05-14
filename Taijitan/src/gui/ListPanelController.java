@@ -1,14 +1,18 @@
 package gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
-import domain.Activity;
-import domain.Domaincontroller;
-import domain.User;
+import domain.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class ListPanelController <T> extends VBox  {
@@ -18,6 +22,8 @@ public class ListPanelController <T> extends VBox  {
     private JFXListView<T> lstItems;
     @FXML
     private JFXButton btnAdd;
+    @FXML
+    private JFXComboBox cboRank;
 
 
     public ListPanelController(Domaincontroller dc, FrameController fc) {
@@ -33,6 +39,8 @@ public class ListPanelController <T> extends VBox  {
             System.err.println(ex.getMessage());
         }
     }
+
+
     public void fillWithMembers(){
         btnAdd.setText("Voeg lid toe");
         lstItems.setItems((ObservableList<T>)dc.getAllMembersFX());
@@ -79,6 +87,29 @@ public class ListPanelController <T> extends VBox  {
             }
         });
     }
+    public void fillWithCourseMaterial(){
+        cboRank.setVisible(true);
+        btnAdd.setText("Voeg Lesmateriaal toe");
+        lstItems.setItems((ObservableList<T>)dc.getLijstCourseMaterial());
+
+        cboRank.getItems().setAll(Rank.values());
+
+        cboRank.valueProperty().addListener(new ChangeListener<Rank>() {
+            @Override public void changed(ObservableValue ov, Rank old, Rank newV) {
+                dc.filterCourseMaterial(newV);
+            }
+        });
+
+        lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
+        {
+            if(newValue != null)
+            {
+                CourseMaterial courseM = (CourseMaterial)newValue;
+                dc.setCurrentCourseMaterial(courseM);
+            }
+        });
+
+    }
 
     public void setDisableAdd(boolean b){
         this.btnAdd.setDisable(b);
@@ -86,7 +117,6 @@ public class ListPanelController <T> extends VBox  {
     public void setVisibleAdd(boolean b){
         this.btnAdd.setVisible(b);
     }
-
     @FXML
     private void add() {
 

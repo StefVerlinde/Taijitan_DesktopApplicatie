@@ -2,11 +2,15 @@ package domain;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Domaincontroller
 {
@@ -17,14 +21,17 @@ public class Domaincontroller
     private final PropertyChangeSupport subjectActivities;
     private ObservableList<User> lijstMembers;
     private ObservableList<User> lijstConfirmed;
-
+    private FilteredList<User> filteredMembersLijst;
+    private FilteredList<User> getFilteredConfirmedLijst;
 
     public Domaincontroller(){
         this.taijitan = new Taijitan();
         this.subjectUsers = new PropertyChangeSupport(this);
         this.subjectActivities = new PropertyChangeSupport(this);
         lijstMembers = FXCollections.observableArrayList(getAllUsers());
+        filteredMembersLijst = new FilteredList<>(lijstMembers,p -> true);
         lijstConfirmed = FXCollections.observableArrayList();
+        getFilteredConfirmedLijst = new FilteredList<>(lijstConfirmed,p -> true);
     }
     public Taijitan getTaijitan() {
         return taijitan;
@@ -59,6 +66,18 @@ public class Domaincontroller
     public void deleteActivity(){
         taijitan.deleteActivity(this.currentActivity);
         setCurrentActivity(null);
+    }
+    public void filter(String str){
+        filteredMembersLijst.setPredicate(user ->{
+            return user.getFirstName().toLowerCase().contains(str.toLowerCase())
+                    || user.getName().toLowerCase().contains(str.toLowerCase());
+        });
+    }
+    public void filterConfirmed(String str){
+        getFilteredConfirmedLijst.setPredicate(user ->{
+            return user.getFirstName().toLowerCase().contains(str.toLowerCase())
+                    || user.getName().toLowerCase().contains(str.toLowerCase());
+        });
     }
 
     public List<User> getUsersFromActivity(Activity act){
@@ -114,22 +133,26 @@ public class Domaincontroller
 
     }
     public void removeConfirmed(User u){
-        System.out.println(lijstConfirmed.toString());
         this.lijstMembers.add(u);
         this.lijstConfirmed.remove(u);
 
 
     }
     public void setLijstMembers(List<User> lijstMembers) {
-        this.lijstMembers = FXCollections.observableArrayList(lijstMembers); }
+        this.lijstMembers = FXCollections.observableArrayList(lijstMembers);
+        filteredMembersLijst = new FilteredList<>(this.lijstMembers,p -> true);
+    }
     public void setLijstConfirmed(List<User> lijstConfirmed) {
         this.lijstConfirmed = FXCollections.observableArrayList(lijstConfirmed);
+        getFilteredConfirmedLijst = new FilteredList<>(this.lijstConfirmed,p -> true);
     }
     public Activity getCurrentActivity() {
         return currentActivity;
     }
     public ObservableList<User> getLijstMembers(){
-        return FXCollections.unmodifiableObservableList(this.lijstMembers);}
-    public ObservableList<User> getLijstConfirmed(){ return FXCollections.unmodifiableObservableList(this.lijstConfirmed);}
+        return FXCollections.unmodifiableObservableList(this.filteredMembersLijst);}
+    public ObservableList<User> getLijstConfirmed(){
+        return FXCollections.unmodifiableObservableList(this.getFilteredConfirmedLijst);
+    }
 
 }

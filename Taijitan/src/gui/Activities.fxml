@@ -97,8 +97,8 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTimePicker fx:id="timeStart" prefHeight="29.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <JFXTimePicker fx:id="timeEnd" prefHeight="29.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <JFXTimePicker fx:id="timeStart" defaultColor="#336566" prefHeight="29.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <JFXTimePicker fx:id="timeEnd" defaultColor="#336566" prefHeight="29.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane prefHeight="358.0" prefWidth="794.0">
@@ -119,7 +119,7 @@
                   </JFXListView>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="392.0" text="leden">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <JFXListView fx:id="lstConfirmed" onMouseClicked="#toMember" prefHeight="24.0" prefWidth="324.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -129,11 +129,11 @@
                   </JFXListView>
                   <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="39.0" prefWidth="392.0" text="Bevestigd" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtSearchMembers" alignment="CENTER" focusColor="#336566" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Zoek leden" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <JFXTextField fx:id="txtSearchComfirmedMembers" alignment="CENTER" focusColor="#336566" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Zoek bevestigde leden" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="txtSearchMembers" alignment="CENTER" focusColor="#336566" maxWidth="-Infinity" minWidth="-Infinity" onKeyReleased="#filterMembers" prefHeight="25.0" prefWidth="250.0" promptText="Zoek leden" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <JFXTextField fx:id="txtSearchComfirmedMembers" alignment="CENTER" focusColor="#336566" maxWidth="-Infinity" minWidth="-Infinity" onKeyReleased="#filterMembersConfirmed" prefHeight="25.0" prefWidth="250.0" promptText="Zoek bevestigde leden" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

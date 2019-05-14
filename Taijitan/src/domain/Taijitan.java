@@ -92,7 +92,6 @@ public class Taijitan {
         List<User> users = new ArrayList<>(session.getUserCollection());
         return users;
     }
-
     public List<User> getSortedUsers() {
         return sortedUsers;
     }

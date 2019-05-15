@@ -10,9 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class ListPanelController <T> extends VBox  {
@@ -88,8 +85,9 @@ public class ListPanelController <T> extends VBox  {
         });
     }
     public void fillWithCourseMaterial(){
+        lstItems.getSelectionModel().clearSelection();
         cboRank.setVisible(true);
-        btnAdd.setText("Voeg Lesmateriaal toe");
+        btnAdd.setText("Voeg lesmateriaal toe");
         lstItems.setItems((ObservableList<T>)dc.getLijstCourseMaterial());
 
         cboRank.getItems().setAll(Rank.values());
@@ -137,7 +135,16 @@ public class ListPanelController <T> extends VBox  {
             fc.setBtnDeleteTextActivities("Annuleer");
             fc.setDisableDeleteActivities(false);
             fc.enableFieldsActivities();
-            fc.emptyfieldsActivities();
+            fc.emptyFieldsActivities();
+        }
+        else if(btnAdd.getText().equals("Voeg lesmateriaal toe")){
+            fc.setIsAddCourseMaterial(true);
+            this.setVisibleAdd(false);
+            fc.setBtnEditTextCourseMaterial("Voeg lesmateriaal toe");
+            fc.setBtnDeleteTextCourseMaterial("Annuleer");
+            fc.setDisableDeleteCourseMaterial(false);
+            fc.enableFieldsCourseMaterial();
+            fc.emptyFieldsCourseMaterial();
         }
     }
 

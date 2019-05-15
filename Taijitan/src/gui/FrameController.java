@@ -153,6 +153,9 @@ public class FrameController extends HBox {
         listpanel.fillWithMembers();
     }
     public void updateListPanelActivities(){ listpanel.fillWithActivities();}
+    public void updateListPanelCourseMaterial() {
+        listpanel.fillWithCourseMaterial();
+    }
 
     public boolean isAddingMember(){
         return members.getIsAdd();
@@ -177,7 +180,7 @@ public class FrameController extends HBox {
     public void emptyFieldsMember() {members.emptyFieldsMember();}
 
 
-    public void emptyfieldsActivities(){activities.emptyFields();}
+    public void emptyFieldsActivities(){activities.emptyFields();}
     public void enableFieldsActivities(){activities.enableFields();}
     public void setIsAddActivities(boolean b){activities.setIsAdd(b);}
     public void setBtnEditTextActivities(String s)
@@ -193,4 +196,22 @@ public class FrameController extends HBox {
         activities.setDisableDelete(b);
     }
     public boolean isAddingActivity(){return activities.getIsAdd();}
+
+    public void emptyFieldsCourseMaterial(){courseMaterial.emptyFields();}
+    public void enableFieldsCourseMaterial(){courseMaterial.enableFields();}
+    public void setIsAddCourseMaterial(boolean b){courseMaterial.setIsAdd(b);}
+    public void setBtnEditTextCourseMaterial(String s)
+    {
+        courseMaterial.setBtnEditText(s);
+    }
+    public void setBtnDeleteTextCourseMaterial(String s)
+    {
+        courseMaterial.setBtnDeleteText(s);
+    }
+    public void setDisableDeleteCourseMaterial(boolean b)
+    {
+        courseMaterial.setDisableDelete(b);
+    }
+
+
 }

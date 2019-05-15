@@ -72,6 +72,10 @@ public class Domaincontroller
         taijitan.deleteActivity(this.currentActivity);
         setCurrentActivity(null);
     }
+    public void deleteCourseMaterial(){
+        taijitan.deleteCourseMaterial(this.currentCourseMaterial);
+        setCurrentCourseMaterial(null);
+    }
     public void filter(String str){
         filteredMembersLijst.setPredicate(user ->{
             return user.getFirstName().toLowerCase().contains(str.toLowerCase())
@@ -178,5 +182,9 @@ public class Domaincontroller
     public void setCurrentCourseMaterial(CourseMaterial newC) {
         subjectCourseMaterial.firePropertyChange("currentCourseMaterial",this.currentCourseMaterial,newC);
         this.currentCourseMaterial = newC;
+    }
+
+    public void addCourseMaterial(CourseMaterial newC) {
+        taijitan.addCourseMaterial(newC);
     }
 }

@@ -84,12 +84,12 @@
             </GridPane>
          </children>
       </VBox>
-      <JFXButton fx:id="btnEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="276.0" layoutY="760.0" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #336566;" text="Pas lesMateriaal aan" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+      <JFXButton fx:id="btnEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="276.0" layoutY="760.0" onMouseClicked="#edit" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #336566;" text="Pas lesMateriaal aan" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="441.0" layoutY="760.0" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #336566;" text="Verwijder lesmateriaal" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+      <JFXButton fx:id="btnDelete" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="441.0" layoutY="760.0" onMouseClicked="#delete" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #336566;" text="Verwijder lesmateriaal" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

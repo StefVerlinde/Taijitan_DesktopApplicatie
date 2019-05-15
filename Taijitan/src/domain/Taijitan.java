@@ -172,4 +172,16 @@ public class Taijitan {
     {
         return this.formulaDao.findAll();
     }
+
+    public void deleteCourseMaterial(CourseMaterial currentCourseMaterial) {
+        courseMaterialDao.startTransaction();
+        courseMaterialDao.delete(currentCourseMaterial);
+        courseMaterialDao.commitTransaction();
+    }
+
+    public void addCourseMaterial(CourseMaterial newC) {
+        courseMaterialDao.startTransaction();
+        courseMaterialDao.insert(newC);
+        courseMaterialDao.commitTransaction();
+    }
 }

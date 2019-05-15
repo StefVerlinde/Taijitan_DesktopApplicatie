@@ -13,6 +13,7 @@
       <root url="jar://C:/Jars/jfoenix-9.0.8.jar!/" />
       <root url="jar://C:/Jars/mssql-jdbc-7.2.1.jre8.jar!/" />
       <root url="jar://C:/Jars/mysql-connector-java-8.0.15.jar!/" />
+      <root url="jar://C:/Jars/pdfbox-2.0.15.jar!/" />
       <root url="jar://C:/Jars/pdfbox-app-2.0.15.jar!/" />
       <root url="jar://C:/Jars/pdfbox-tools-2.0.15.jar!/" />
       <root url="jar://C:/Jars/poi-4.1.0.jar!/" />

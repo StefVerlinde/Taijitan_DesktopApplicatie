@@ -1,14 +1,25 @@
 package gui;
 
-import com.jfoenix.controls.*;
-import domain.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import domain.CourseMaterial;
+import domain.Domaincontroller;
+import domain.Image;
+import domain.Rank;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class CourseMaterialController extends AnchorPane implements PropertyChangeListener {
     @FXML
@@ -23,16 +34,23 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
     private JFXButton btnEdit;
     @FXML
     private JFXButton btnDelete;
+    @FXML
+    private JFXButton btnImages;
+    @FXML
+    private JFXTextField txfImages;
 
     private Domaincontroller dc;
     private FrameController fc;
     private boolean isAdd;
+    private Collection<Image> images;
+    private Collection<String> imageNames;
 
     public CourseMaterialController(Domaincontroller dc, FrameController fc){
         this.dc = dc;
         this.fc = fc;
         isAdd = false;
-
+        this.images = new ArrayList<>();
+        this.imageNames = new ArrayList<>();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CourseMaterial.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -46,7 +64,6 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         fc.setDisableAdd(false);
         emptyFields();
         disableFields();
-
     }
 
     private void toEditCourseMaterial(){
@@ -58,7 +75,10 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
 
     private void buildGui() {
         cboRank.getItems().setAll(Rank.values());
+        txfImages.setEditable(false);
+        txfImages.setText("Kies afbeeldingen");
     }
+
     @FXML
     private void edit(){
         if(!isAdd){
@@ -75,6 +95,15 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             newC.setFullDescription(txaDiscription.getText());
             newC.setYoutubeURL(txtYouTubeURL.getText());
             newC.setRank(cboRank.getSelectionModel().getSelectedIndex());
+
+            for(String name : this.imageNames)
+            {
+                Image newI = new Image();
+                newI.setName(String.format("%s/%s", this.txtTitle.getText(), name));
+                this.images.add(newI);
+            }
+            newC.setImageCollection(this.images);
+
 
             dc.addCourseMaterial(newC);
             toEditCourseMaterial();
@@ -105,6 +134,26 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         }
     }
 
+    @FXML
+    private void selectImages(){
+        FileChooser fileChooser = new FileChooser();
+        List<File> files = new ArrayList<File>();
+        files = fileChooser.showOpenMultipleDialog(fc.getStage());
+
+        if(files.isEmpty())
+        {
+            txfImages.setText("Kies afbeeldingen");
+        } else {
+            String uistring = "";
+            for (File file : files) {
+                uistring += file.getName() + ", ";
+                this.imageNames.add(file.getName());
+            }
+            this.txfImages.setText(uistring);
+        }
+        System.out.println(this.imageNames.toString());
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getNewValue() != null)
@@ -125,6 +174,8 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         cboRank.setDisable(false);
         btnDelete.setDisable(false);
         btnEdit.setDisable(false);
+        txfImages.setDisable(false);
+        btnImages.setDisable(false);
     }
     public void disableFields(){
         txtTitle.setDisable(true);
@@ -133,12 +184,15 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         cboRank.setDisable(true);
         btnEdit.setDisable(true);
         btnDelete.setDisable(true);
+        txfImages.setDisable(true);
+        btnImages.setDisable(true);
     }
     public void emptyFields(){
         txtTitle.setText("");
         txtYouTubeURL.setText("");
         txaDiscription.setText("");
         cboRank.getSelectionModel().clearSelection();
+        txfImages.setText("");
     }
     public void setIsAdd(boolean b)
     {

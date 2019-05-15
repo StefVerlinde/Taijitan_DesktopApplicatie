@@ -18,6 +18,7 @@ public class Taijitan {
     private ActivityDao activityDao;
     private CourseMaterialDao courseMaterialDao;
     private List<User> sortedUsers;
+    private ImageDao imageDao;
 
 
 
@@ -29,7 +30,7 @@ public class Taijitan {
         setActivityDao(new ActivityDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
         setCourseMaterialDao(new CourseMaterialDaoJpa());
-
+        setImageDao(new ImageDaoJpa());
         sortedUsers = getAllUsers();
         Collections.sort(sortedUsers, Comparator.comparing(User::getScore).reversed());
     }
@@ -54,6 +55,7 @@ public class Taijitan {
     public void setCityDao(CityDao cityDao) {
         this.cityDao = cityDao;
     }
+    public void setImageDao(ImageDao imageDao) {this.imageDao = imageDao;}
 
     public CourseMaterialDao getCourseMaterialDao() {
         return courseMaterialDao;
@@ -75,7 +77,6 @@ public class Taijitan {
     public void setFormulaDao(GenericDao formulaDao) {
         this.formulaDao = formulaDao;
     }
-
     public List<User> getAllUsers() {
         List<User> users = userDao.findAll();
         users.sort(Comparator.comparing(u -> u.getName()));
@@ -180,6 +181,12 @@ public class Taijitan {
     }
 
     public void addCourseMaterial(CourseMaterial newC) {
+//        imageDao.startTransaction();
+//        for(Image i : newC.getImageCollection())
+//        {
+//            imageDao.insert(i);
+//        }
+//        imageDao.commitTransaction();
         courseMaterialDao.startTransaction();
         courseMaterialDao.insert(newC);
         courseMaterialDao.commitTransaction();

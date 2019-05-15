@@ -11,6 +11,7 @@ import domain.User;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class FrameController extends HBox {
     private Domaincontroller dc;
@@ -27,7 +28,7 @@ public class FrameController extends HBox {
     private _OverViewRegisteredUsersController oru;
     private _OverviewActivitiesController oa;
     private ListPanelController listpanel;
-
+    private Stage stage;
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
         this.pc = new _OverviewPresentsController(dc, this);
@@ -214,4 +215,13 @@ public class FrameController extends HBox {
     }
 
 
+    public void setStage(Stage stage)
+    {
+        this.stage = stage;
+    }
+
+    public Stage getStage()
+    {
+        return this.stage;
+    }
 }

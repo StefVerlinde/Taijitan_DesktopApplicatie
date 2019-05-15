@@ -23,7 +23,8 @@ public class Taijitan extends Application {
 
     @Override
     public void start(Stage stage) {
-        Scene scene = new Scene(new FrameController(dc));
+        FrameController fc = new FrameController(dc);
+        Scene scene = new Scene(fc);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/assets/img/logo.png"));
         stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/assets/img/logo.png")));
@@ -35,6 +36,8 @@ public class Taijitan extends Application {
         });
         stage.setMaximized(true);
         stage.show();
+
+        fc.setStage(stage);
     }
 
     public static void main(String... args) {

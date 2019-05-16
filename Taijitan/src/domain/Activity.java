@@ -84,6 +84,8 @@ public class Activity implements Serializable {
     }
 
     public void setScore(int score) {
+        if(score <1)
+            throw new IllegalArgumentException("Gelieve een score in te geven die groter is dan 0");
         this.score = score;
     }
 
@@ -92,6 +94,8 @@ public class Activity implements Serializable {
     }
 
     public void setMaxParticpants(int maxp) {
+        if(maxp < 1)
+            throw new IllegalArgumentException("Je kunt geen activiteit toevoegen met minder dan 1 plek");
         this.maxParticpants = maxp;
     }
 

@@ -154,26 +154,26 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     public User(UserDTO u)
     {
-        this.firstName = u.getFirstName();
-        this.name = u.getName();
-        this.birthPlace = u.getBirthPlace();
-        this.personalNationalNumber = u.getPersonalNationalNumber();
-        this.dateOfBirth = u.getDateOfBirth();
-        this.nationality = u.getNationality();
-        this.gender = u.getGender();
-        this.formulaId = u.getFormulaId();
-        this.rank = u.getRank();
-        this.discriminator = u.getDiscriminator();
+        this.setFirstName(u.getFirstName());
+        this.setName(u.getName());
+        this.setBirthPlace(u.getBirthPlace());
+        this.setPersonalNationalNumber(u.getPersonalNationalNumber());
+        this.setDateOfBirth(u.getDateOfBirth());
+        this.setNationality(u.getNationality());
+        this.setGender(u.getGender());
+        this.setFormulaId(u.getFormulaId());
+        this.setRank(u.getRank());
+        this.setDiscriminator(u.getDiscriminator());
 
-        this.street = u.getStreet();
-        this.houseNumber = u.getHouseNumber();
-        this.country = u.getCountry();
-        this.cityPostalcode = u.getCityPostalcode();
-        this.email = u.getEmail();
-        this.landlineNumber = u.getLandlineNumber();
-        this.mailParent = u.getMailParent();
-        this.phoneNumber = u.getPhoneNumber();
-        this.dateRegistred = u.getDateRegistred();
+        this.setStreet(u.getStreet());
+        this.setHouseNumber(u.getHouseNumber());
+        this.setCountry(u.getCountry());
+        this.setCityPostalcode(u.getCityPostalcode());
+        this.setEmail(u.getEmail());
+        this.setLandlineNumber(u.getLandlineNumber());
+        this.setMailParent(u.getMailParent());
+        this.setPhoneNumber(u.getPhoneNumber());
+        this.setDateRegistred(u.getDateRegistred());
 
     }
 

@@ -1,5 +1,6 @@
 package domain;
 
+import dto.ActivityDTO;
 import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -147,9 +148,10 @@ public class Taijitan {
         userDao.commitTransaction();
     }
 
-    public void addActivity(Activity activity){
+    public void addActivity(ActivityDTO activity){
+        Activity a = new Activity(activity);
         activityDao.startTransaction();
-        activityDao.insert(activity);
+        activityDao.insert(a);
         activityDao.commitTransaction();
     }
 

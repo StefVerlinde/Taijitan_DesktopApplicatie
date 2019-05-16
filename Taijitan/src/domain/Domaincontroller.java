@@ -1,5 +1,6 @@
 package domain;
 
+import dto.ActivityDTO;
 import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,7 +103,7 @@ public class Domaincontroller
     public void addUser(UserDTO user) {
         taijitan.addUser(user);
     }
-    public void addActivity(Activity act){
+    public void addActivity(ActivityDTO act){
         taijitan.addActivity(act);
     }
     public List<City> getAllCities()

@@ -2,6 +2,7 @@ package gui;
 
 import com.jfoenix.controls.*;
 import domain.*;
+import dto.ActivityDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -260,7 +261,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
         else{
             //add activity
             List<User> users = new ArrayList<>(dc.getLijstConfirmed());
-            Activity act = new Activity();
+            ActivityDTO act = new ActivityDTO();
             try{
                 if(dtmStart.getValue() != null && dtmStart.getValue().isBefore(LocalDate.now())){
                     AlertBoxController.ConfirmationAlert("In het verleden", "Dit is een aanpassing in het verleden");

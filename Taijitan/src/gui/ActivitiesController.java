@@ -40,6 +40,8 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
     @FXML
     private JFXButton btnDelete;
     @FXML
+    private JFXButton btnTerug;
+    @FXML
     private Label lblError;
     @FXML
     private JFXTextField txtSearchMembers;
@@ -297,6 +299,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
 
     public void fillFieldWithSelectedActivity(Activity selectedActivity) {
         enableFields();
+        btnTerug.setVisible(true);
         txtName.setText(selectedActivity.getName());
         dtmStart.setValue(convertToLocalDate(selectedActivity.getStartDate()));
         dtmEnd.setValue(convertToLocalDate(selectedActivity.getEndDate()));
@@ -324,7 +327,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 .toLocalDate();
     }
 
-
-
-
+    public void terug(){
+        fc.terug();
+    }
 }

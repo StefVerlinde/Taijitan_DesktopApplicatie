@@ -319,7 +319,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             List<User> users = dc.getAllUsers();
             if(users.contains(selectedUser.getValue())){
                 System.out.println(selectedUser);
-                fc.changeToMembersWithSelectedUser(selectedUser.getValue());
+                fc.changeToMembersWithSelectedUser(selectedUser.getValue(), "registeredOverview");
             }
             else {
                 AlertBoxController.BasicAlert("Error", selectedUser.getValue().getFirstName() + " " + selectedUser.getValue().getName() + " is geen bestaand lid meer.");

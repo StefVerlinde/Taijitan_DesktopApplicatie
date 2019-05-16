@@ -71,6 +71,11 @@ public class OverviewsController extends VBox {
         this.getChildren().add(oa);
     }
 
+    public void showActivities() {
+        clearNodes();
+        this.getChildren().add(oa);
+    }
+
     @FXML
     void showChampionship(ActionEvent event) {
         clearNodes();
@@ -78,29 +83,39 @@ public class OverviewsController extends VBox {
     }
 
     @FXML
+    public void showChampionship() {
+        clearNodes();
+        this.getChildren().add(osb);
+    }
+
+    @FXML
     void showCourseMaterial(ActionEvent event) {
         clearNodes();
-
-
     }
 
     @FXML
     void showPresents(ActionEvent event) {
         clearNodes();
-
         this.getChildren().add(pc);
+    }
 
+    public void showPresents() {
+        clearNodes();
+        this.getChildren().add(pc);
     }
 
     @FXML
     void showRegistrations(ActionEvent event) {
         clearNodes();
+        this.getChildren().add(oru);
+    }
 
+    public void showRegistrations() {
+        clearNodes();
         this.getChildren().add(oru);
     }
 
     private void buildGui() {
         this.getChildren().addAll(btnActivities, btnshowRegistrations, btnPresents, btnCourseMaterial, btnActivities);
-
     }
 }

@@ -109,7 +109,7 @@ public class _OverviewActivitiesController extends AnchorPane {
             List<User> users = dc.getAllUsers();
             if(users.contains(selectedUser)){
                 System.out.println(selectedUser);
-                fc.changeToMembersWithSelectedUser(selectedUser);
+                fc.changeToMembersWithSelectedUser(selectedUser, "activitiesOverview");
             }
             else {
                 AlertBoxController.BasicAlert("Error", selectedUser.getFirstName() + " " + selectedUser.getName() + " is geen bestaand lid meer.");
@@ -124,7 +124,7 @@ public class _OverviewActivitiesController extends AnchorPane {
             List<Activity> activities = dc.getAllActivities();
 
             if(activities.contains(selectedActivity)){
-                fc.changeToActivityWithSelectedUser(selectedActivity);
+                fc.changeToActivityWithSelectedUser(selectedActivity, "activitiesOverview");
             }
             else{
                 AlertBoxController.BasicAlert("Error", selectedActivity.getName()+ " " + " is geen bestaande activiteit meer");

@@ -23,6 +23,8 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     private Domaincontroller dc;
     private FrameController fc;
     @FXML
+    private JFXButton btnTerug;
+    @FXML
     private JFXTextField txtFirstName;
     @FXML
     private JFXTextField txtLastName;
@@ -478,6 +480,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     }
 
     public void fillFieldsWithSelectedUser(User user){
+        btnTerug.setVisible(true);
         lblAddress.setText("");
         lblPersonal.setText("");
         lblContact.setText("");
@@ -550,5 +553,9 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     public void emptyFieldsMember()
     {
         this.emptyFields();
+    }
+
+    public void terug(){
+        fc.terug();
     }
 }

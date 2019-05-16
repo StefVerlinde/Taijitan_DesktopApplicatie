@@ -85,7 +85,7 @@ public class _OverviewPresentsController extends AnchorPane {
             List<User> users = dc.getAllUsers();
             if(users.contains(selectedUser)){
                 System.out.println(selectedUser);
-                fc.changeToMembersWithSelectedUser(selectedUser);
+                fc.changeToMembersWithSelectedUser(selectedUser, "presentOverview");
             }
             else {
                 AlertBoxController.BasicAlert("Error", selectedUser.getFirstName() + " " + selectedUser.getName() + " is geen bestaand lid meer.");

@@ -13,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
+
 public class FrameController extends HBox {
     private Domaincontroller dc;
     private NavController nav;
@@ -30,6 +32,8 @@ public class FrameController extends HBox {
     private _OverviewScorebord osc;
     private ListPanelController listpanel;
     private Stage stage;
+    private String afkomstig;
+
     public FrameController(Domaincontroller dc) {
         this.dc = dc;
         this.pc = new _OverviewPresentsController(dc, this);
@@ -127,19 +131,21 @@ public class FrameController extends HBox {
         }
     }
 
-    public void changeToMembersWithSelectedUser(User user){
+    public void changeToMembersWithSelectedUser(User user, String afkomstig){
         clearNodes();
         members = new MembersController(dc, this);
         current = members;
+        this.afkomstig = afkomstig;
         members.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
         members.fillFieldsWithSelectedUser(user);
         getChildren().add(members);
     }
 
-    public void changeToActivityWithSelectedUser(Activity selectedActivity) {
+    public void changeToActivityWithSelectedUser(Activity selectedActivity, String afkomstig) {
         clearNodes();
         activities = new ActivitiesController(dc, this);
         current = activities;
+        this.afkomstig = afkomstig;
         activities.setMinWidth(bounds.getWidth() - nav.getPrefWidth());
         activities.fillFieldWithSelectedActivity(selectedActivity);
         getChildren().add(activities);
@@ -150,6 +156,27 @@ public class FrameController extends HBox {
         this.getChildren().remove(oru);
         this.getChildren().remove(overviews);
         this.getChildren().remove(scorebord);
+    }
+
+    public void terug(){
+        getChildren().remove(current);
+        getChildren().remove(listpanel);
+        setupOverviews();
+
+        switch (afkomstig){
+            case "activitiesOverview":
+                overviews.showActivities();
+                break;
+            case "presentOverview":
+                overviews.showPresents();
+                break;
+            case "registeredOverview":
+                overviews.showRegistrations();
+                break;
+            case "scorebordOverview":
+                overviews.showChampionship();
+                break;
+        }
     }
 
     public void updateListPanelMembers(){

@@ -10,6 +10,7 @@ import domain.Image;
 import domain.Rank;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
@@ -38,6 +39,8 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
     private JFXButton btnImages;
     @FXML
     private JFXTextField txfImages;
+    @FXML
+    private Label lblError;
 
     private Domaincontroller dc;
     private FrameController fc;
@@ -81,6 +84,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
 
     @FXML
     private void edit(){
+        boolean canSubmit = true;
         if(!isAdd){
             //todo add coursematerial
             //todo validatie
@@ -91,24 +95,38 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             //todo validatie
             //todo lijst update nog niet goed na updaten
             CourseMaterial newC = new CourseMaterial();
-            newC.setTitle(txtTitle.getText());
-            newC.setFullDescription(txaDiscription.getText());
-            newC.setYoutubeURL(txtYouTubeURL.getText());
-            newC.setRank(cboRank.getSelectionModel().getSelectedIndex());
+            try{
+                newC.setTitle(txtTitle.getText());
+                newC.setFullDescription(txaDiscription.getText());
+                newC.setYoutubeURL(txtYouTubeURL.getText());
+                if (cboRank.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Rang mag niet leeg zijn");
+                } else {
+                    newC.setRank(cboRank.getSelectionModel().getSelectedIndex()+1);
+                }
 
-            for(String name : this.imageNames)
-            {
-                Image newI = new Image();
-                newI.setName(String.format("%s/%s", this.txtTitle.getText(), name));
-                this.images.add(newI);
+
+                for(String name : this.imageNames)
+                {
+                    Image newI = new Image();
+                    newI.setName(String.format("%s/%s", this.txtTitle.getText(), name));
+                    this.images.add(newI);
+                }
+                newC.setImageCollection(this.images);
             }
-            newC.setImageCollection(this.images);
+            catch(IllegalArgumentException e){
+                lblError.setText(e.getMessage());
+                canSubmit = false;
+            }
 
 
-            dc.addCourseMaterial(newC);
-            toEditCourseMaterial();
-            emptyFields();
-            fc.updateListPanelCourseMaterial();
+            if(canSubmit)
+            {
+                dc.addCourseMaterial(newC);
+                toEditCourseMaterial();
+                emptyFields();
+                fc.updateListPanelCourseMaterial();
+            }
         }
     }
     @FXML
@@ -162,7 +180,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             txtTitle.setText(courseM.getTitle());
             txtYouTubeURL.setText(courseM.getYoutubeURL());
             txaDiscription.setText(courseM.getFullDescription());
-            cboRank.getSelectionModel().select(courseM.getRank());
+            cboRank.getSelectionModel().select(courseM.getRank()-1);
             toEditCourseMaterial();
             enableFields();
         }
@@ -193,6 +211,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         txaDiscription.setText("");
         cboRank.getSelectionModel().clearSelection();
         txfImages.setText("");
+        lblError.setText("");
     }
     public void setIsAdd(boolean b)
     {

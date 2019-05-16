@@ -1,5 +1,7 @@
 package domain;
 
+import dto.ActivityDTO;
+import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import repository.*;
@@ -96,7 +98,7 @@ public class Taijitan {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllActivities())));
     }
     public List<CourseMaterial> getAllCourseMaterials(){
-       return courseMaterialDao.findAll();
+        return courseMaterialDao.findAll();
     }
     public List<Session> getAllSessions(){
         List<Session> sessions = sessionDao.findAll();
@@ -139,15 +141,17 @@ public class Taijitan {
         return userDao.getUserByName(lastname,firstname);
     }
 
-    public void addUser(User user) {
+    public void addUser(UserDTO user) {
+        User u = new User(user);
         userDao.startTransaction();
-        userDao.insert(user);
+        userDao.insert(u);
         userDao.commitTransaction();
     }
 
-    public void addActivity(Activity activity){
+    public void addActivity(ActivityDTO activity){
+        Activity a = new Activity(activity);
         activityDao.startTransaction();
-        activityDao.insert(activity);
+        activityDao.insert(a);
         activityDao.commitTransaction();
     }
 
@@ -181,14 +185,27 @@ public class Taijitan {
     }
 
     public void addCourseMaterial(CourseMaterial newC) {
-//        imageDao.startTransaction();
-//        for(Image i : newC.getImageCollection())
-//        {
-//            imageDao.insert(i);
-//        }
-//        imageDao.commitTransaction();
+        CourseMaterial cmNoIm = newC;
+        cmNoIm.setImageCollection(new ArrayList<>());
         courseMaterialDao.startTransaction();
-        courseMaterialDao.insert(newC);
+        courseMaterialDao.insert(cmNoIm);
+        courseMaterialDao.commitTransaction();
+
+        CourseMaterial cm = courseMaterialDao.findLast();
+        cm.setImageCollection(newC.getImageCollection());
+        System.out.println(cm.toString());
+
+        imageDao.startTransaction();
+        for(Image i : cm.getImageCollection())
+        {
+            i.setCourseMaterialMaterialId(cm);
+            imageDao.insert(i);
+        }
+        imageDao.commitTransaction();
+
+        courseMaterialDao.startTransaction();
+        courseMaterialDao.update(cm);
         courseMaterialDao.commitTransaction();
     }
+
 }

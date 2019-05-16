@@ -5,6 +5,7 @@
  */
 package domain;
 
+import dto.ActivityDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -62,8 +63,6 @@ public class Activity implements Serializable {
             @JoinColumn(name = "MemberId", referencedColumnName = "UserId")})
     @ManyToMany
     private List<User> users;
-//    @OneToMany(mappedBy = "activityId")
-//    private Collection<User> userCollection1;
 
     public Activity() {
     }
@@ -81,6 +80,17 @@ public class Activity implements Serializable {
         setUsers(users);
         setScore(score);
         setMaxParticpants(maxp);
+    }
+
+    public Activity(ActivityDTO a)
+    {
+        setName(a.getName());
+        setType(a.getType());
+        setStartDate(a.getStartDate());
+        setEndDate(a.getEndDate());
+        setUsers(a.getUsers());
+        setScore(a.getScore());
+        setMaxParticpants(a.getMaxParticpants());
     }
 
     public void setScore(int score) {

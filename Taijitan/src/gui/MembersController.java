@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.jfoenix.controls.*;
 import domain.*;
+import dto.UserDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -323,7 +324,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         } else {
 
             //region Add user
-            User user = new User();
+            UserDTO user = new UserDTO();
             //Personal data
             try {
                 lblPersonal.setText("");

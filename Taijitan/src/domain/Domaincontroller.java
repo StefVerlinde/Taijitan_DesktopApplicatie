@@ -1,5 +1,7 @@
 package domain;
 
+import dto.ActivityDTO;
+import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -23,6 +25,7 @@ public class Domaincontroller
     private FilteredList<User> getFilteredConfirmedLijst;
     private ObservableList<CourseMaterial> lijstCourseMaterial;
     private FilteredList<CourseMaterial> filteredCourseMaterialLijst;
+
 
 
 
@@ -97,10 +100,10 @@ public class Domaincontroller
     public List<User> getUsersFromActivity(Activity act){
         return act.getUsers();
     }
-    public void addUser(User user) {
+    public void addUser(UserDTO user) {
         taijitan.addUser(user);
     }
-    public void addActivity(Activity act){
+    public void addActivity(ActivityDTO act){
         taijitan.addActivity(act);
     }
     public List<City> getAllCities()

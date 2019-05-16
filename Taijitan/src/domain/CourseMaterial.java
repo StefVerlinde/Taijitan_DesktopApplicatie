@@ -15,7 +15,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "courseMaterial")
 @NamedQueries({
-        @NamedQuery(name = "CourseMaterial.findAll", query = "SELECT c FROM CourseMaterial c")})
+        @NamedQuery(name = "CourseMaterial.findLast", query = "SELECT c FROM CourseMaterial c ORDER BY c.materialId DESC")
+        }
+)
 public class CourseMaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,6 +73,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setFullDescription(String fullDescription) {
+        if(fullDescription.trim().isEmpty())
+            throw new IllegalArgumentException("Gelieve een beschrijving in te vullen");
         this.fullDescription = fullDescription;
     }
 
@@ -87,6 +91,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setTitle(String title) {
+        if(title.trim().isEmpty())
+            throw new IllegalArgumentException("Gelieve een titel in te vullen");
         this.title = title;
     }
 
@@ -103,6 +109,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setImageCollection(Collection<Image> imageCollection) {
+        if(imageCollection == null || imageCollection.isEmpty())
+            throw new IllegalArgumentException("Gelieve foto's te selecteren");
         this.imageCollection = imageCollection;
     }
 

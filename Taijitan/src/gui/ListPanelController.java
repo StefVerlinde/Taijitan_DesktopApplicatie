@@ -100,7 +100,7 @@ public class ListPanelController <T> extends VBox  {
         });
     }
     public void fillWithCourseMaterial(){
-        lstItems.getSelectionModel().clearSelection();
+        cboRank.getSelectionModel().clearSelection();
         cboRank.setVisible(true);
         btnAdd.setText("Voeg lesmateriaal toe");
         lstItems.setItems((ObservableList<T>)dc.getLijstCourseMaterial());

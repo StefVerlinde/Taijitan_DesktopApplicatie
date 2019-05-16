@@ -312,7 +312,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="lblAddress" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="281.0" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Label fx:id="lblAddress" alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="281.0" textFill="RED" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

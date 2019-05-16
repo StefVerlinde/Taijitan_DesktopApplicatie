@@ -5,6 +5,8 @@
  */
 package domain;
 
+import dto.CourseMaterialDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -45,6 +47,15 @@ public class CourseMaterial implements Serializable {
 
     public CourseMaterial(Integer materialId) {
         this.materialId = materialId;
+    }
+
+    public CourseMaterial(CourseMaterialDTO cm) {
+        setMaterialId(cm.getMaterialId());
+        setFullDescription(cm.getFullDescription());
+        setRank(cm.getRank());
+        setTitle(cm.getTitle());
+        setYoutubeURL(cm.getYoutubeURL());
+        setCommentCollection(cm.getCommentCollection());
     }
 
     public CourseMaterial(Integer materialId, int rank) {
@@ -109,6 +120,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setImageCollection(Collection<Image> imageCollection) {
+        if(imageCollection == null || imageCollection.isEmpty())
+            throw new IllegalArgumentException("Gelieve foto's te selecteren");
         this.imageCollection = imageCollection;
     }
 

@@ -99,7 +99,12 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
                 newC.setTitle(txtTitle.getText());
                 newC.setFullDescription(txaDiscription.getText());
                 newC.setYoutubeURL(txtYouTubeURL.getText());
-                newC.setRank(cboRank.getSelectionModel().getSelectedIndex());
+                if (cboRank.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Rang mag niet leeg zijn");
+                } else {
+                    newC.setRank(cboRank.getSelectionModel().getSelectedIndex()+1);
+                }
+
 
                 for(String name : this.imageNames)
                 {
@@ -175,7 +180,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             txtTitle.setText(courseM.getTitle());
             txtYouTubeURL.setText(courseM.getYoutubeURL());
             txaDiscription.setText(courseM.getFullDescription());
-            cboRank.getSelectionModel().select(courseM.getRank());
+            cboRank.getSelectionModel().select(courseM.getRank()-1);
             toEditCourseMaterial();
             enableFields();
         }
@@ -206,6 +211,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         txaDiscription.setText("");
         cboRank.getSelectionModel().clearSelection();
         txfImages.setText("");
+        lblError.setText("");
     }
     public void setIsAdd(boolean b)
     {

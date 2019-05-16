@@ -47,6 +47,14 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
+                  <JFXTextArea fx:id="txaDiscription" focusColor="#336566" prefHeight="257.0" prefWidth="558.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXTextArea>
                   <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Volledige beschrijving*" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -57,7 +65,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Afbeeldingen" GridPane.rowIndex="6">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Afbeeldingen*" GridPane.rowIndex="6">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -73,14 +81,6 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextArea fx:id="txaDiscription" focusColor="#336566" prefHeight="257.0" prefWidth="558.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="10.0" top="5.0" />
-                     </GridPane.margin>
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </JFXTextArea>
                   <JFXTextField fx:id="txfImages" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets right="200.0" />

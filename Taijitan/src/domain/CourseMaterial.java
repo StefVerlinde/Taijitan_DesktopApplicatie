@@ -109,6 +109,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setImageCollection(Collection<Image> imageCollection) {
+        if(imageCollection == null || imageCollection.isEmpty())
+            throw new IllegalArgumentException("Gelieve foto's te selecteren");
         this.imageCollection = imageCollection;
     }
 

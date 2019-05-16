@@ -62,8 +62,6 @@ public class Activity implements Serializable {
             @JoinColumn(name = "MemberId", referencedColumnName = "UserId")})
     @ManyToMany
     private List<User> users;
-//    @OneToMany(mappedBy = "activityId")
-//    private Collection<User> userCollection1;
 
     public Activity() {
     }

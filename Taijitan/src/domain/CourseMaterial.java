@@ -15,7 +15,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "courseMaterial")
 @NamedQueries({
-        @NamedQuery(name = "CourseMaterial.findAll", query = "SELECT c FROM CourseMaterial c")})
+        @NamedQuery(name = "CourseMaterial.findLast", query = "SELECT c FROM CourseMaterial c ORDER BY c.materialId DESC")
+        }
+)
 public class CourseMaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -123,6 +123,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     @OneToMany(mappedBy = "teacherUserId")
     private Collection<Session> sessionCollection1;
+
     //endregion
 
     //properties for table

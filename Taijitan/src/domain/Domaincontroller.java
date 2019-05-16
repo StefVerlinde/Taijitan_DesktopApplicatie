@@ -26,6 +26,7 @@ public class Domaincontroller
 
 
 
+
     public Domaincontroller(){
         this.taijitan = new Taijitan();
         this.subjectUsers = new PropertyChangeSupport(this);

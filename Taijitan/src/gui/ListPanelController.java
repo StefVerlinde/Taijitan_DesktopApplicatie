@@ -61,6 +61,21 @@ public class ListPanelController <T> extends VBox  {
             }
         });
     }
+
+    public void fillWithMembersScore(){
+        btnAdd.setVisible(false);
+        lstItems.setItems((ObservableList<T>)dc.getAllMembersFX());
+
+        lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
+        {
+            if(newValue != null)
+            {
+                User usr = (User)newValue;
+                this.dc.setCurrentUserScore(usr);
+            }
+        });
+    }
+
     public void fillWithActivities(){
         btnAdd.setText("Voeg activiteit toe");
         lstItems.setItems((ObservableList<T>) dc.getAllActivitiesFX());

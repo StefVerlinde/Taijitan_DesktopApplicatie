@@ -15,6 +15,7 @@ public class Domaincontroller
     private Activity currentActivity;
     private CourseMaterial currentCourseMaterial;
     private final PropertyChangeSupport subjectUsers;
+    private final PropertyChangeSupport subjectUsersScore;
     private final PropertyChangeSupport subjectActivities;
     private final PropertyChangeSupport subjectCourseMaterial;
     private ObservableList<User> lijstMembers;
@@ -30,6 +31,7 @@ public class Domaincontroller
     public Domaincontroller(){
         this.taijitan = new Taijitan();
         this.subjectUsers = new PropertyChangeSupport(this);
+        this.subjectUsersScore = new PropertyChangeSupport(this);
         this.subjectActivities = new PropertyChangeSupport(this);
         this.subjectCourseMaterial = new PropertyChangeSupport(this);
         lijstMembers = FXCollections.observableArrayList(getAllUsers());
@@ -45,10 +47,7 @@ public class Domaincontroller
     public List<User> getAllUsers() {
         return taijitan.getAllUsers();
     }
-    public ObservableList<User> getAllMembersFX()
-    {
-        return taijitan.getAllMembersFX();
-    }
+    public ObservableList<User> getAllMembersFX(){return taijitan.getAllMembersFX();}
     public ObservableList<Activity> getAllActivitiesFX(){return taijitan.getAllActivitiesFX();}
     public List<Session> getAllSessions(){
         return taijitan.getAllSessions();
@@ -126,11 +125,19 @@ public class Domaincontroller
         subjectUsers.firePropertyChange("currentUser",this.currentUser,newUser);
         this.currentUser = newUser;
     }
+    public void setCurrentUserScore(User newUser) {
+        subjectUsersScore.firePropertyChange("currentUser",this.currentUser,newUser);
+        this.currentUser = newUser;
+    }
     public List<User> getAllMembers(){
         return taijitan.getAllMembers();
     }
     public void addPropertyChangeListenerCurrentUser(PropertyChangeListener pcl) {
         subjectUsers.addPropertyChangeListener(pcl);
+        pcl.propertyChange(new PropertyChangeEvent(pcl, "currentUser", null, this.currentUser));
+    }
+    public void addPropertyChangeListenerCurrentUserScore(PropertyChangeListener pcl) {
+        subjectUsersScore.addPropertyChangeListener(pcl);
         pcl.propertyChange(new PropertyChangeEvent(pcl, "currentUser", null, this.currentUser));
     }
     public void setCurrentActivity(Activity act){
@@ -145,6 +152,7 @@ public class Domaincontroller
         subjectCourseMaterial.addPropertyChangeListener(pcl);
         pcl.propertyChange(new PropertyChangeEvent(pcl,"currentCourseMaterial",null,this.currentCourseMaterial));
     }
+
     public void addConfirmed(User u){
         this.lijstConfirmed.add(u);
         this.lijstMembers.remove(u);

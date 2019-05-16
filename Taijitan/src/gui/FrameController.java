@@ -100,9 +100,14 @@ public class FrameController extends HBox {
     }
 
     public void setupScorebord(){
-        this.scorebord = new ScorebordController(dc, this);
+        this.listpanel = new ListPanelController(dc, this);
+        this.setVisibleAdd(true);
+        this.dc.setCurrentUser(null);
+        scorebord = new ScorebordController(dc, this);
+        this.dc.addPropertyChangeListenerCurrentUserScore(scorebord);
         current = scorebord;
-        getChildren().add(scorebord);
+        listpanel.fillWithMembersScore();
+        getChildren().addAll(listpanel,scorebord);
     }
 
     public void changeContent(String string) {
@@ -187,9 +192,7 @@ public class FrameController extends HBox {
         listpanel.fillWithCourseMaterial();
     }
 
-    public boolean isAddingMember(){
-        return members.getIsAdd();
-    }
+    public boolean isAddingMember(){return members.getIsAdd();}
     public void setDisableAdd(boolean b){listpanel.setDisableAdd(b);}
     public void setVisibleAdd(boolean b){listpanel.setVisibleAdd(b);}
 

@@ -16,6 +16,7 @@ public class Taijitan {
     private CityDao cityDao;
     private GenericDao formulaDao;
     private ActivityDao activityDao;
+    private ScoreDao scoreDao;
     private CourseMaterialDao courseMaterialDao;
     private List<User> sortedUsers;
     private ImageDao imageDao;
@@ -71,6 +72,15 @@ public class Taijitan {
     public void setActivityDao(ActivityDao act){
         this.activityDao = act;
     }
+
+    public ScoreDao getScoreDao(){
+        return  this.scoreDao;
+    }
+
+    public void setScoreDao(ScoreDao sdao){
+        this.scoreDao = sdao;
+    }
+
     public GenericDao getFormulaDao() {
         return formulaDao;
     }
@@ -85,12 +95,17 @@ public class Taijitan {
     public List<User> getAllMembers(){
         return getAllUsers().stream().collect(Collectors.toList());
     }
+    public List<Score> getAllScores(){return scoreDao.findAll();}
     public List<Activity> getAllActivities(){
         return activityDao.findAll();
     }
     public ObservableList<User> getAllMembersFX()
     {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllMembers()));
+    }
+    public ObservableList<Score> getAllScoreFX()
+    {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getAllScores()));
     }
     public ObservableList<Activity> getAllActivitiesFX(){
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllActivities())));

@@ -21,6 +21,7 @@
             <property name="javax.persistence.jdbc.user" value="taijitanadmin"/>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
             <property name="javax.persistence.jdbc.password" value="P2P1819_G08"/>
+            <property name="eclipselink.canonicalmodel.subpackage" value="taijitan"/>
         </properties>
     </persistence-unit>
 </persistence>

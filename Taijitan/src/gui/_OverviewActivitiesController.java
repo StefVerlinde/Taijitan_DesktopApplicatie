@@ -49,6 +49,8 @@ public class _OverviewActivitiesController extends AnchorPane {
 
     @FXML
     private JFXButton btnPrintExcell;
+    @FXML
+    private JFXButton btnPrintSellected;
 
 
 
@@ -268,6 +270,90 @@ public class _OverviewActivitiesController extends AnchorPane {
         } catch (IOException e) {
             System.out.println("locatie niet gevonden");
             e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    void printSellected(ActionEvent event) {
+
+        Activity sellectedActivity = lstActivities.getSelectionModel().getSelectedItem();
+
+        if(sellectedActivity == null){
+            AlertBoxController.BasicAlert("Geen activiteit geselecteerd", "Sellecteer een activiteit uit de lijst, klik vervolgens op deze knop om deze activiteit te exporteren");
+        }
+        else{
+            try {
+                String[] columns = {"Naam", "Start", "Einde", "Type", "Deelnemers"};
+                //https://www.callicoder.com/java-write-excel-file-apache-poi/
+                Workbook workbook = new XSSFWorkbook();
+
+                CreationHelper createHelper = workbook.getCreationHelper();
+
+                Sheet sheet = workbook.createSheet("OvezichtActiviteiten");
+
+                Font headerFont = workbook.createFont();
+                headerFont.setBold(true);
+                headerFont.setFontHeightInPoints((short) 14);
+                headerFont.setColor(IndexedColors.RED.getIndex());
+
+                CellStyle headerCellStyle = workbook.createCellStyle();
+                headerCellStyle.setFont(headerFont);
+
+                Row headerRow = sheet.createRow(0);
+
+                for (int i = 0; i < columns.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(columns[i]);
+                    cell.setCellStyle(headerCellStyle);
+                }
+
+                CellStyle dateCellStyle = workbook.createCellStyle();
+                dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
+
+
+                int rownum = 1;
+
+                    rownum++;
+                    Row row = sheet.createRow(rownum);
+
+                    row.createCell(0).setCellValue(sellectedActivity.getName());
+                    row.createCell(1).setCellValue(formatter.format(sellectedActivity.getStartDate()));
+                    row.createCell(2).setCellValue(formatter.format(sellectedActivity.getEndDate()));
+                    if(sellectedActivity.getType() == 0){
+                        row.createCell(3).setCellValue("excursie");
+                    }
+                    else{
+                        row.createCell(3).setCellValue("stage");
+                    }
+
+                    for(User u : sellectedActivity.getUsers()){
+                        rownum++;
+                        Row subrow = sheet.createRow(rownum);
+                        subrow.createCell(4).setCellValue(u.getFirstName() +" "+ u.getName());
+                    }
+
+
+                for (int i = 0; i < columns.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+//            FileOutputStream fileOut = new FileOutputStream(askPath(".xlsx"));
+                String docname = String.format("%s %s %s", "Activiteit-", sellectedActivity.getName(), sellectedActivity.getStartDate());
+                FileOutputStream fileOut = new FileOutputStream(AskPath.execute(docname, "xlsx"));
+                workbook.write(fileOut);
+                fileOut.close();
+
+
+                workbook.close();
+
+            } catch (FileNotFoundException e) {
+                System.out.println("file not found");
+                e.printStackTrace();
+            }
+            catch (IOException e){
+                System.out.println("IO Exception");
+                e.printStackTrace();
+            }
         }
     }
 

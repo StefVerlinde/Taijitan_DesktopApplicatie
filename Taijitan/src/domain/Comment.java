@@ -38,6 +38,8 @@ public class Comment implements Serializable {
     @JoinColumn(name = "MemberUserId", referencedColumnName = "UserId")
     @ManyToOne
     private User memberUserId;
+
+
     @JoinColumn(name = "UserId", referencedColumnName = "UserId")
     @ManyToOne
     private User userId;

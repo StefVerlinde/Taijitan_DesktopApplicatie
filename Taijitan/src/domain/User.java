@@ -90,14 +90,17 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     @Column(name = "Rank")
     private int rank;
 
-    @Column(name = "Score")
-    private int score;
+    @Transient
+    private int _score;
 
     @ManyToMany(mappedBy = "userCollection")
     private Collection<Session> sessionCollection;
 
     @OneToMany(mappedBy = "memberUserId")
     private Collection<Comment> commentCollection;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Score> score;
 
     @OneToMany(mappedBy = "userId")
     private Collection<Comment> commentCollection1;
@@ -332,9 +335,9 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.rank = rank;
     }
 
-    public int getScore(){return score;}
+    public int getScore(){return _score;}
 
-    public void setScore(int score){this.score = score;}
+    public void setScore(int score){this._score = score;}
 
     public Collection<Session> getSessionCollection() {
         return sessionCollection;
@@ -437,7 +440,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public SimpleStringProperty scoreProperty(){
-        this.scoreProperty = new SimpleStringProperty(String.format("%s", score));
+        this.scoreProperty = new SimpleStringProperty(String.format("%s", _score));
         return this.scoreProperty;
     }
 

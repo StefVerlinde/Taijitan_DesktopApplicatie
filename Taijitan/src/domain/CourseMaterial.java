@@ -71,6 +71,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setFullDescription(String fullDescription) {
+        if(fullDescription.trim().isEmpty())
+            throw new IllegalArgumentException("Gelieve een beschrijving in te vullen");
         this.fullDescription = fullDescription;
     }
 
@@ -87,6 +89,8 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setTitle(String title) {
+        if(title.trim().isEmpty())
+            throw new IllegalArgumentException("Gelieve een titel in te vullen");
         this.title = title;
     }
 

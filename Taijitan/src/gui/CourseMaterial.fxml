@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="872.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="872.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="56.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="711.0" prefWidth="783.0" spacing="30.0">
          <children>
@@ -29,6 +29,7 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="276.8" minHeight="10.0" prefHeight="276.8" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -36,43 +37,43 @@
                   <RowConstraints maxHeight="30.199951171875" minHeight="0.0" prefHeight="30.199951171875" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Titel*">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Titel*" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtTitle" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="157.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1">
+                  <JFXTextField fx:id="txtTitle" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="157.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Volledige beschrijving*" GridPane.rowIndex="1">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Volledige beschrijving*" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Rang*" GridPane.rowIndex="2">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Rang*" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Afbeeldingen" GridPane.rowIndex="5">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Afbeeldingen" GridPane.rowIndex="6">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="cboRank" focusColor="#336566" prefHeight="27.0" prefWidth="569.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="YoutubeURL" GridPane.rowIndex="3">
+                  <JFXComboBox fx:id="cboRank" focusColor="#336566" prefHeight="27.0" prefWidth="569.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="YoutubeURL" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtYouTubeURL" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="157.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <JFXTextField fx:id="txtYouTubeURL" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="157.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextArea fx:id="txaDiscription" focusColor="#336566" prefHeight="257.0" prefWidth="558.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <JFXTextArea fx:id="txaDiscription" focusColor="#336566" prefHeight="257.0" prefWidth="558.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="10.0" top="5.0" />
                      </GridPane.margin>
@@ -80,16 +81,21 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextArea>
-                  <JFXTextField fx:id="txfImages" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <JFXTextField fx:id="txfImages" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets right="200.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXButton fx:id="btnImages" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" onMouseClicked="#selectImages" prefHeight="30.0" prefWidth="161.0" style="-fx-background-color: #336566;" text="Voeg afbeeldingen toe" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                  <JFXButton fx:id="btnImages" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" onMouseClicked="#selectImages" prefHeight="30.0" prefWidth="161.0" style="-fx-background-color: #336566;" text="Voeg afbeeldingen toe" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXButton>
+                  <Label fx:id="lblError" prefHeight="56.0" prefWidth="558.0" textFill="RED" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </children>

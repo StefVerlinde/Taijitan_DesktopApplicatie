@@ -1,9 +1,8 @@
 package domain;
 
+import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.Date;
 
 
@@ -20,20 +19,20 @@ public class ActivityTest {
     public void testValidActivityId(){
         int id = 1;
         activity.setActivityId(id);
-        assertEquals(id, activity.getActivityId());
+        Assert.assertEquals(id, activity.getActivityId());
     }
 
     @Test
     public void testValidName(){
         String name = "testName";
         activity.setName(name);
-        assertEquals(name, activity.getName());
+        Assert.assertEquals(name, activity.getName());
     }
 
     @Test
     public void testValidType(){
         activity.setType(1);
-        assertEquals(1, activity.getType());
+        Assert.assertEquals(1, activity.getType());
     }
 
     @Test(expected = IllegalArgumentException.class)

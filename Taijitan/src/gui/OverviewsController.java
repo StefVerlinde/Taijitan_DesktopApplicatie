@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-import static org.bouncycastle.crypto.tls.ContentType.alert;
 
 
 public class OverviewsController extends VBox {

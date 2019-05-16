@@ -1,6 +1,7 @@
 package domain;
 
 import dto.ActivityDTO;
+import dto.CourseMaterialDTO;
 import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -187,7 +188,7 @@ public class Domaincontroller
         this.currentCourseMaterial = newC;
     }
 
-    public void addCourseMaterial(CourseMaterial newC) {
+    public void addCourseMaterial(CourseMaterialDTO newC) {
         taijitan.addCourseMaterial(newC);
     }
 }

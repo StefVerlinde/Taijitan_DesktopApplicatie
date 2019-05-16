@@ -8,6 +8,7 @@ import domain.CourseMaterial;
 import domain.Domaincontroller;
 import domain.Image;
 import domain.Rank;
+import dto.CourseMaterialDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -94,7 +95,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             //add coursematerial
             //todo validatie
             //todo lijst update nog niet goed na updaten
-            CourseMaterial newC = new CourseMaterial();
+            CourseMaterialDTO newC = new CourseMaterialDTO();
             try{
                 newC.setTitle(txtTitle.getText());
                 newC.setFullDescription(txaDiscription.getText());

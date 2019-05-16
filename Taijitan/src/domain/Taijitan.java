@@ -1,5 +1,6 @@
 package domain;
 
+import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import repository.*;
@@ -139,9 +140,10 @@ public class Taijitan {
         return userDao.getUserByName(lastname,firstname);
     }
 
-    public void addUser(User user) {
+    public void addUser(UserDTO user) {
+        User u = new User(user);
         userDao.startTransaction();
-        userDao.insert(user);
+        userDao.insert(u);
         userDao.commitTransaction();
     }
 

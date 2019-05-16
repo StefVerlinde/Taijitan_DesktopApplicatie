@@ -6,6 +6,7 @@
 package domain;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import dto.UserDTO;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -149,6 +150,31 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     public User(Integer userId) {
         this.userId = userId;
+    }
+
+    public User(UserDTO u)
+    {
+        this.firstName = u.getFirstName();
+        this.name = u.getName();
+        this.birthPlace = u.getBirthPlace();
+        this.personalNationalNumber = u.getPersonalNationalNumber();
+        this.dateOfBirth = u.getDateOfBirth();
+        this.nationality = u.getNationality();
+        this.gender = u.getGender();
+        this.formulaId = u.getFormulaId();
+        this.rank = u.getRank();
+        this.discriminator = u.getDiscriminator();
+
+        this.street = u.getStreet();
+        this.houseNumber = u.getHouseNumber();
+        this.country = u.getCountry();
+        this.cityPostalcode = u.getCityPostalcode();
+        this.email = u.getEmail();
+        this.landlineNumber = u.getLandlineNumber();
+        this.mailParent = u.getMailParent();
+        this.phoneNumber = u.getPhoneNumber();
+        this.dateRegistred = u.getDateRegistred();
+
     }
 
     public User(Integer userId, Date dateOfBirth, int country, Date dateRegistred, int gender, int nationality, String discriminator) {

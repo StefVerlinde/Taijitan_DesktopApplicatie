@@ -29,43 +29,30 @@ import java.util.List;
 public class _OverviewActivitiesController extends AnchorPane {
     @FXML
     private JFXListView<Activity> lstActivities;
-
     @FXML
     private Label lblName;
-
     @FXML
     private Label lblStart;
-
     @FXML
     private JFXListView<User> lstPressents;
-
     @FXML
     private Label lblEnd;
-
     @FXML
     private Label lblType;
     @FXML
     private JFXButton btnPrintPdf;
-
     @FXML
     private JFXButton btnPrintExcell;
     @FXML
     private JFXButton btnPrintSellected;
 
-
-
-
-
-
     private Domaincontroller dc;
     private  FrameController fc;
     private  SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-
     public _OverviewActivitiesController(Domaincontroller dc, FrameController fc) {
         this.dc = dc;
         this.fc = fc;
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("_OverviewActivities.fxml"));
         loader.setRoot(this);
@@ -132,7 +119,6 @@ public class _OverviewActivitiesController extends AnchorPane {
                 AlertBoxController.BasicAlert("Error", selectedActivity.getName()+ " " + " is geen bestaande activiteit meer");
 
             }
-
         }
     }
 
@@ -196,7 +182,6 @@ public class _OverviewActivitiesController extends AnchorPane {
             FileOutputStream fileOut = new FileOutputStream(AskPath.execute("Activiteiten", "xlsx"));
             workbook.write(fileOut);
             fileOut.close();
-
 
             workbook.close();
 

@@ -20,7 +20,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-        <Label layoutX="878.0" layoutY="75.0" prefHeight="38.0" prefWidth="80.0" text="Details" textAlignment="CENTER" textFill="#336566">
+        <Label layoutX="877.0" layoutY="75.0" prefHeight="38.0" prefWidth="80.0" text="Details" textAlignment="CENTER" textFill="#336566">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
@@ -29,12 +29,17 @@
         <Label fx:id="lblDate" layoutX="666.0" layoutY="141.0" text="Datum:" />
         <Label layoutX="666.0" layoutY="174.0" text="Aanwezigen:" />
         <JFXListView fx:id="lstPressents" layoutX="666.0" layoutY="192.0" onMouseClicked="#selectMemberFromList" prefHeight="387.0" prefWidth="503.0" />
-      <JFXButton fx:id="btnPrintPdf" alignment="CENTER" buttonType="RAISED" layoutX="277.0" layoutY="655.0" onAction="#printOverviewPdf" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="PDF" textFill="WHITE">
+      <JFXButton fx:id="btnPrintPdf" alignment="CENTER" buttonType="RAISED" layoutX="92.0" layoutY="651.0" onAction="#printOverviewPdf" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="PDF" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnPrintExcell" alignment="CENTER" buttonType="RAISED" layoutX="666.0" layoutY="655.0" onAction="#printOverviewExcell" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="EXCEL" textFill="WHITE">
+      <JFXButton fx:id="btnPrintExcell" alignment="CENTER" buttonType="RAISED" layoutX="462.0" layoutY="651.0" onAction="#printOverviewExcell" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="EXCEL" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnPrintSellected" alignment="CENTER" buttonType="RAISED" layoutX="825.0" layoutY="651.0" onAction="#printSellected" prefHeight="50.0" prefWidth="297.0" style="-fx-background-color: #336566;" text="geselecteerde activiteit" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>

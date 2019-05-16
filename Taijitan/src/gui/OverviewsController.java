@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
+import static org.bouncycastle.crypto.tls.ContentType.alert;
+
 
 public class OverviewsController extends VBox {
 
@@ -34,14 +36,16 @@ public class OverviewsController extends VBox {
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
     private  _OverviewActivitiesController oa;
+    private _OverviewScorebord osb;
 
 
-    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru, _OverviewActivitiesController oa) {
+    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru, _OverviewActivitiesController oa, _OverviewScorebord osb) {
         this.dc = dc;
         this.fc = fc;
         this.pc = pc;
         this.oru = oru;
         this.oa = oa;
+        this.osb = osb;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("overviews.fxml"));
         loader.setRoot(this);
@@ -58,21 +62,19 @@ public class OverviewsController extends VBox {
         this.getChildren().remove(pc);
         this.getChildren().remove(oru);
         this.getChildren().remove(oa);
-
+        this.getChildren().remove((osb));
     }
 
     @FXML
     void showActivities(ActionEvent event) {
         clearNodes();
-
         this.getChildren().add(oa);
     }
 
     @FXML
     void showChampionship(ActionEvent event) {
         clearNodes();
-
-
+        this.getChildren().add(osb);
     }
 
     @FXML

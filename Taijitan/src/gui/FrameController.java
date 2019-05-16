@@ -27,6 +27,7 @@ public class FrameController extends HBox {
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
     private _OverviewActivitiesController oa;
+    private _OverviewScorebord osc;
     private ListPanelController listpanel;
     private Stage stage;
     public FrameController(Domaincontroller dc) {
@@ -34,6 +35,7 @@ public class FrameController extends HBox {
         this.pc = new _OverviewPresentsController(dc, this);
         this.oru = new _OverViewRegisteredUsersController(dc,this);
         this.oa = new _OverviewActivitiesController(dc, this);
+        this.osc = new _OverviewScorebord(dc, this);
         this.listpanel = new ListPanelController(dc, this);
         setupStart();
 
@@ -69,7 +71,7 @@ public class FrameController extends HBox {
     }
 
     private void setupOverviews() {
-        overviews = new OverviewsController(dc, this, pc, oru, oa);
+        overviews = new OverviewsController(dc, this, pc, oru, oa, osc);
         current = overviews;
         getChildren().add(overviews);
     }

@@ -338,8 +338,7 @@ public class _OverviewActivitiesController extends AnchorPane {
                     sheet.autoSizeColumn(i);
                 }
 //            FileOutputStream fileOut = new FileOutputStream(askPath(".xlsx"));
-                String docname = String.format("%s %s %s", "Activiteit-", sellectedActivity.getName(), sellectedActivity.getStartDate());
-                FileOutputStream fileOut = new FileOutputStream(AskPath.execute(docname, "xlsx"));
+                FileOutputStream fileOut = new FileOutputStream(AskPath.execute("geselecteerdeActiviteit", "xlsx"));
                 workbook.write(fileOut);
                 fileOut.close();
 

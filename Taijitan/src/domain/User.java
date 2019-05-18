@@ -6,6 +6,7 @@
 package domain;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import dto.ScoreDTO;
 import dto.UserDTO;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,6 +17,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.regex.Pattern;
+import java.util.stream.Collector;
 
 @Entity
 @Table(name = "users")
@@ -91,9 +93,6 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     @Column(name = "Rank")
     private int rank;
 
-    @Transient
-    private int _score;
-
     @ManyToMany(mappedBy = "userCollection")
     private Collection<Session> sessionCollection;
 
@@ -101,7 +100,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     private Collection<Comment> commentCollection;
 
     @OneToMany(mappedBy = "user")
-    private Collection<Score> score;
+    private Collection<Score> scores;
 
     @OneToMany(mappedBy = "userId")
     private Collection<Comment> commentCollection1;
@@ -164,7 +163,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.setFormulaId(u.getFormulaId());
         this.setRank(u.getRank());
         this.setDiscriminator(u.getDiscriminator());
-
+        this.setScores(u.getScores());
         this.setStreet(u.getStreet());
         this.setHouseNumber(u.getHouseNumber());
         this.setCountry(u.getCountry());
@@ -185,7 +184,6 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.gender = gender;
         this.nationality = nationality;
         this.discriminator = discriminator;
-
     }
 
     //region Getters and Setters
@@ -362,9 +360,17 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.rank = rank;
     }
 
-    public int getScore(){return _score;}
+    public Collection<Score> getScores(){return scores;}
 
-    public void setScore(int score){this._score = score;}
+    public int getTotaleScore(){
+        return this.scores.stream().mapToInt(Score::getAmount).sum();
+    }
+
+    public void addScoreTotScores(Score score){
+        this.scores.add(score);
+    }
+
+    public void setScores(Collection<Score> score){this.scores = score;}
 
     public Collection<Session> getSessionCollection() {
         return sessionCollection;
@@ -467,6 +473,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public SimpleStringProperty scoreProperty(){
+        int _score = scores.stream().mapToInt(Score::getAmount).sum();
         this.scoreProperty = new SimpleStringProperty(String.format("%s", _score));
         return this.scoreProperty;
     }

@@ -6,7 +6,7 @@ public class ScoreDTO {
     private  int scoreId;
     private int amount;
     private String type;
-    private  int name;
+    private String name;
     private User user;
 
     public int getScoreId() {
@@ -29,15 +29,13 @@ public class ScoreDTO {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    public void setType(String type) {this.type = type;}
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

@@ -246,9 +246,12 @@ public class UserTest {
 
 
     @Test
-    public void setScore() {
-        user.setScore(5);
-        Assert.assertEquals(5, user.getScore());
+    public void setScoreCollection() {
+        Collection<Score> scoreCollection = new ArrayList();
+        scoreCollection.add(new Score());
+        scoreCollection.add(new Score());
+        user.setScores(scoreCollection);
+        Assert.assertEquals(scoreCollection.size(), user.getSessionCollection().size());
     }
 
 

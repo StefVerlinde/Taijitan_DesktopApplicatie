@@ -219,15 +219,15 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 act.setEndDate(einde);
 
 
-                for(User u : act.getUsers()) {
-                    int updated = u.getScore() - act.getScore();
-                    u.setScore(updated);
-                }
-                act.setScore(Integer.valueOf(txtScore.getText()));
-                for(User u : act.getUsers()){
-                    int newScore = u.getScore() + Integer.valueOf(txtScore.getText());
-                    u.setScore(newScore);
-                }
+                //for(User u : act.getUsers()) {
+                //    int updated = u.getScore() - act.getScore();
+                //    u.setScore(updated);
+                //}
+                //act.setScore(Integer.valueOf(txtScore.getText()));
+                //for(User u : act.getUsers()){
+                //    int newScore = u.getScore() + Integer.valueOf(txtScore.getText());
+                //    u.setScore(newScore);
+                //}
                 act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));
 
                 if (cboType.getSelectionModel().isEmpty()) {
@@ -250,68 +250,74 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 lblError.setText(e.getMessage());
             }
 
-
-            if(canSubmit) {
-                dc.updateActivity();
-                disableFields();
-                emptyFields();
-                fc.updateListPanelActivities();
+            try {
+                if(canSubmit) {
+                    dc.updateActivity();
+                    disableFields();
+                    emptyFields();
+                    fc.updateListPanelActivities();
+                }
+            }
+            catch (IllegalArgumentException e){
+                lblError.setText(e.getMessage());
             }
         }
         else{
             //add activity
             List<User> users = new ArrayList<>(dc.getLijstConfirmed());
             ActivityDTO act = new ActivityDTO();
-            try{
-                if(dtmStart.getValue() != null && dtmStart.getValue().isBefore(LocalDate.now())){
-                    AlertBoxController.ConfirmationAlert("In het verleden", "Dit is een aanpassing in het verleden");
-                }
-                act.setName(txtName.getText());
-                act.setUsers(users);
-                act.setScore(Integer.valueOf(txtScore.getText()));
-                act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));
-                Date start;
-                start = Dates.convertToDate(dtmStart.getValue());
-                long startuur = timeStart.getValue().getHour();
-                long startMinuut = timeStart.getValue().getMinute();
-                start.setHours((int) startuur);
-                start.setMinutes((int) startMinuut);
-                act.setStartDate(start);
-                Date einde;
-                einde  = Dates.convertToDate(dtmEnd.getValue());
-                long einduur = timeEnd.getValue().getHour();
-                long eindminuut = timeEnd.getValue().getMinute();
-                einde.setHours((int) einduur);
-                einde.setMinutes((int) eindminuut);
-                act.setEndDate(einde);
-
-                if (cboType.getSelectionModel().isEmpty()) {
-                    throw new IllegalArgumentException("Type mag niet leeg zijn");
-                } else {
-                    act.setType(cboType.getSelectionModel().getSelectedIndex());
-                }
-
-                for(User u : act.getUsers()){
-                    int newScore = u.getScore() + Integer.valueOf(txtScore.getText());
-                    u.setScore(newScore);
-                }
-
-
-
+        try{
+            if(dtmStart.getValue() != null && dtmStart.getValue().isBefore(LocalDate.now())){
+                AlertBoxController.ConfirmationAlert("In het verleden", "Dit is een aanpassing in het verleden");
             }
-            catch (NullPointerException e){
-                canSubmit = false;
-                lblError.setText("Gelieve de datums en tijdstippen in te vullen");
+            act.setName(txtName.getText());
+            act.setUsers(users);
+            act.setScore(Integer.valueOf(txtScore.getText()));
+            act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));
+            Date start;
+            start = Dates.convertToDate(dtmStart.getValue());
+            long startuur = timeStart.getValue().getHour();
+            long startMinuut = timeStart.getValue().getMinute();
+            start.setHours((int) startuur);
+            start.setMinutes((int) startMinuut);
+            act.setStartDate(start);
+            Date einde;
+            einde  = Dates.convertToDate(dtmEnd.getValue());
+            long einduur = timeEnd.getValue().getHour();
+            long eindminuut = timeEnd.getValue().getMinute();
+            einde.setHours((int) einduur);
+            einde.setMinutes((int) eindminuut);
+            act.setEndDate(einde);
+
+            if (cboType.getSelectionModel().isEmpty()) {
+                throw new IllegalArgumentException("Type mag niet leeg zijn");
+            } else {
+                act.setType(cboType.getSelectionModel().getSelectedIndex());
             }
-            catch (NumberFormatException e){
-                canSubmit = false;
-                lblError.setText("Gelieve getallen in te geven als er gevraagd worden");
-            }
-            catch(IllegalArgumentException e)
-            {
-                canSubmit = false;
-                lblError.setText(e.getMessage());
-            }
+
+            //for(User u : act.getUsers()){
+            //    int newScore = u.getScore() + Integer.valueOf(txtScore.getText());
+            //    u.setScore(newScore);
+            //}
+
+
+
+        }
+        catch (NullPointerException e){
+            canSubmit = false;
+            lblError.setText("Gelieve de datums en tijdstippen in te vullen");
+        }
+        catch (NumberFormatException e){
+            canSubmit = false;
+            lblError.setText("Gelieve getallen in te geven als er gevraagd worden");
+        }
+        catch(IllegalArgumentException e)
+        {
+            canSubmit = false;
+            lblError.setText(e.getMessage());
+        }
+
+        try {
             if(canSubmit) {
                 dc.addActivity(act);
                 toEditUser();
@@ -319,8 +325,10 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 fc.updateListPanelActivities();
             }
         }
-
-
+        catch (IllegalArgumentException e){
+            lblError.setText(e.getMessage());
+        }
+    }
     }
 
     @FXML

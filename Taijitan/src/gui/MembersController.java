@@ -315,10 +315,15 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 //endregion
 
                 //submit
-                if (canSubmit) {
-                    dc.setCurrentUser(user);
-                    dc.updateUser();
-                    fc.updateListPanelMembers();
+                try {
+                    if (canSubmit) {
+                        dc.setCurrentUser(user);
+                        dc.updateUser();
+                        fc.updateListPanelMembers();
+                    }
+                }
+                catch (IllegalArgumentException e){
+                    lblPersonal.setText(e.getMessage());
                 }
             }
         } else {
@@ -414,16 +419,19 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             //endregion
 
             //submit
-            if (canSubmit) {
-                dc.addUser(user);
-                toEditUser();
-                emptyFields();
-                fc.updateListPanelMembers();
+            try {
+                if (canSubmit) {
+                    dc.addUser(user);
+                    toEditUser();
+                    emptyFields();
+                    fc.updateListPanelMembers();
+                }
+            }
+            catch (IllegalArgumentException e) {
+                lblPersonal.setText(e.getMessage());
             }
         }
     }
-
-
 
     private String formatDate(Date date) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

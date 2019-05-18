@@ -72,7 +72,6 @@ public class Activity implements Serializable {
     }
 
     public Activity(String name, int type, Date startDate, Date endDate, List<User> users, int score, int maxp) {
-        //this.activityId = activityId;
         setName(name);
         setType(type);
         setStartDate(startDate);

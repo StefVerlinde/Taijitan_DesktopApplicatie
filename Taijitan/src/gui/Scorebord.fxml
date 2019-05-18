@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
@@ -31,39 +32,54 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Naam">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Lid">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtName" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="157.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1">
+                  <Label fx:id="lblNaamLid" contentDisplay="RIGHT" prefHeight="19.0" prefWidth="551.0" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Naam" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="txtName" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="157.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Lid" GridPane.rowIndex="3">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Score " GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Score " GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <JFXTextField fx:id="txtScore" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="349.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="txtScore" alignment="TOP_LEFT" focusColor="#336566" prefHeight="30.0" prefWidth="349.0" style="-fx-text-fill: #336566;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Type" GridPane.rowIndex="2">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Type" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="cboType" focusColor="#336566" prefHeight="27.0" prefWidth="569.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXComboBox fx:id="cboType" focusColor="#336566" prefHeight="27.0" prefWidth="569.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
+            <JFXButton fx:id="btnConfirm" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onMouseClicked="#confirm" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #336566;" text="Voeg score toe" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="lblError" alignment="CENTER" prefHeight="41.0" prefWidth="566.0" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </children>

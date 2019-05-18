@@ -2,6 +2,7 @@ package domain;
 
 import dto.ActivityDTO;
 import dto.CourseMaterialDTO;
+import dto.ScoreDTO;
 import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,10 +34,11 @@ public class Taijitan {
         setUserDao(new UserDaoJpa());
         setActivityDao(new ActivityDaoJpa());
         setFormulaDao(new GenericDaoJpa(Formula.class));
+        setScoreDao(new ScoreDaoJpa());
         setCourseMaterialDao(new CourseMaterialDaoJpa());
         setImageDao(new ImageDaoJpa());
         sortedUsers = getAllUsers();
-        Collections.sort(sortedUsers, Comparator.comparing(User::getScore).reversed());
+        Collections.sort(sortedUsers, Comparator.comparing(User::getTotaleScore).reversed());
     }
 
 
@@ -46,6 +48,9 @@ public class Taijitan {
     }
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+    public void setScoreDao(ScoreDao scoreDao) {
+        this.scoreDao = scoreDao;
     }
     public SessionDao getSessionDao() {
         return sessionDao;
@@ -78,10 +83,6 @@ public class Taijitan {
 
     public ScoreDao getScoreDao(){
         return  this.scoreDao;
-    }
-
-    public void setScoreDao(ScoreDao sdao){
-        this.scoreDao = sdao;
     }
 
     public GenericDao getFormulaDao() {
@@ -169,6 +170,13 @@ public class Taijitan {
         activityDao.startTransaction();
         activityDao.insert(a);
         activityDao.commitTransaction();
+    }
+
+    public void addScore(ScoreDTO score){
+        Score s = new Score(score);
+        scoreDao.startTransaction();
+        scoreDao.insert(s);
+        scoreDao.commitTransaction();
     }
 
     public List<City> getAllCities()

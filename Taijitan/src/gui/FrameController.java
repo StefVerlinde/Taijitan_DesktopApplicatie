@@ -13,8 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
-
 public class FrameController extends HBox {
     private Domaincontroller dc;
     private NavController nav;
@@ -29,7 +27,7 @@ public class FrameController extends HBox {
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
     private _OverviewActivitiesController oa;
-    private _OverviewScorebord osc;
+    private _OverviewScorebordController osc;
     private ListPanelController listpanel;
     private Stage stage;
     private String afkomstig;
@@ -39,7 +37,7 @@ public class FrameController extends HBox {
         this.pc = new _OverviewPresentsController(dc, this);
         this.oru = new _OverViewRegisteredUsersController(dc,this);
         this.oa = new _OverviewActivitiesController(dc, this);
-        this.osc = new _OverviewScorebord(dc, this);
+        this.osc = new _OverviewScorebordController(dc, this);
         this.listpanel = new ListPanelController(dc, this);
         setupStart();
 

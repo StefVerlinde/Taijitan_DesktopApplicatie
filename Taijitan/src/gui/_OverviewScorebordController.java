@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class _OverviewScorebord extends AnchorPane {
+public class _OverviewScorebordController extends AnchorPane {
 
     @FXML
     private JFXTreeTableView<User> tblScorebord;
@@ -69,7 +69,7 @@ public class _OverviewScorebord extends AnchorPane {
     private Domaincontroller dc;
     private FrameController fc;
 
-    public _OverviewScorebord(Domaincontroller dc,FrameController fc) {
+    public _OverviewScorebordController(Domaincontroller dc, FrameController fc) {
         this.dc = dc;
         this.fc = fc;
 
@@ -89,7 +89,7 @@ public class _OverviewScorebord extends AnchorPane {
     private void buildGui(){
         buildColumns();
         ObservableList<User> users = FXCollections.observableArrayList(dc.getAllUsers());
-        Collections.sort(users, Comparator.comparing(User::getScore).reversed());
+        Collections.sort(users, Comparator.comparing(User::getTotaleScore).reversed());
         //opvullen tabel
         final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
         System.out.println(users.size());
@@ -184,7 +184,7 @@ public class _OverviewScorebord extends AnchorPane {
 
             int counter = 0;
             List<User> gesorteerdeUsers = dc.getAllUsers();
-            Collections.sort(gesorteerdeUsers, Comparator.comparing(User::getScore).reversed());
+            Collections.sort(gesorteerdeUsers, Comparator.comparing(User::getTotaleScore).reversed());
             for(User u : gesorteerdeUsers){
                 counter+=1;
                 contentStream.beginText();
@@ -195,7 +195,7 @@ public class _OverviewScorebord extends AnchorPane {
                 List<User> users = dc.getSortedUsers();
                 int rank = users.indexOf(u) + 1;
 
-                text = String.format("%-5s %-15s %-15s %-15s %-15s %-15s %-15s", String.format("%d", rank), "|",   u.getFirstName(),"|", u.getName(),"|", u.getScore());
+                text = String.format("%-5s %-15s %-15s %-15s %-15s %-15s %-15s", String.format("%d", rank), "|",   u.getFirstName(),"|", u.getName(),"|", u.getTotaleScore());
                 contentStream.showText(text);
                 contentStream.endText();
             }
@@ -245,7 +245,7 @@ public class _OverviewScorebord extends AnchorPane {
 
             int rownum = 1;
             List<User> gesorteerdeUsers = dc.getAllUsers();
-            Collections.sort(gesorteerdeUsers, Comparator.comparing(User::getScore).reversed());
+            Collections.sort(gesorteerdeUsers, Comparator.comparing(User::getTotaleScore).reversed());
             for (User u : gesorteerdeUsers) {
                 rownum++;
                 Row row = sheet.createRow(rownum);
@@ -257,7 +257,7 @@ public class _OverviewScorebord extends AnchorPane {
                 row.createCell(0).setCellValue(rank);
                 row.createCell(1).setCellValue(u.getFirstName());
                 row.createCell(2).setCellValue(u.getName());
-                row.createCell(3).setCellValue(u.getScore());
+                row.createCell(3).setCellValue(u.getTotaleScore());
             }
 
             for (int i = 0; i < columns.length; i++) {

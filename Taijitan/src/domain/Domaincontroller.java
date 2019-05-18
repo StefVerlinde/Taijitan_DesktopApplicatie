@@ -2,6 +2,7 @@ package domain;
 
 import dto.ActivityDTO;
 import dto.CourseMaterialDTO;
+import dto.ScoreDTO;
 import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,6 +107,7 @@ public class Domaincontroller
     public void addActivity(ActivityDTO act){
         taijitan.addActivity(act);
     }
+    public void addScore(ScoreDTO sco){taijitan.addScore(sco);}
     public List<City> getAllCities()
     {
        return taijitan.getAllCities();

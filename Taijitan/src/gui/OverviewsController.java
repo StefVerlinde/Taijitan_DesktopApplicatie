@@ -35,10 +35,10 @@ public class OverviewsController extends VBox {
     private _OverviewPresentsController pc;
     private _OverViewRegisteredUsersController oru;
     private  _OverviewActivitiesController oa;
-    private _OverviewScorebord osb;
+    private _OverviewScorebordController osb;
 
 
-    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru, _OverviewActivitiesController oa, _OverviewScorebord osb) {
+    public OverviewsController(Domaincontroller dc, FrameController fc, _OverviewPresentsController pc, _OverViewRegisteredUsersController oru, _OverviewActivitiesController oa, _OverviewScorebordController osb) {
         this.dc = dc;
         this.fc = fc;
         this.pc = pc;
@@ -67,6 +67,7 @@ public class OverviewsController extends VBox {
     @FXML
     void showActivities(ActionEvent event) {
         clearNodes();
+        oa = new _OverviewActivitiesController(dc, fc);
         this.getChildren().add(oa);
     }
 
@@ -78,10 +79,10 @@ public class OverviewsController extends VBox {
     @FXML
     void showChampionship(ActionEvent event) {
         clearNodes();
+        osb = new _OverviewScorebordController(dc, fc);
         this.getChildren().add(osb);
     }
 
-    @FXML
     public void showChampionship() {
         clearNodes();
         this.getChildren().add(osb);
@@ -95,6 +96,7 @@ public class OverviewsController extends VBox {
     @FXML
     void showPresents(ActionEvent event) {
         clearNodes();
+        pc = new _OverviewPresentsController(dc, fc);
         this.getChildren().add(pc);
     }
 
@@ -106,6 +108,7 @@ public class OverviewsController extends VBox {
     @FXML
     void showRegistrations(ActionEvent event) {
         clearNodes();
+        oru = new _OverViewRegisteredUsersController(dc, fc);
         this.getChildren().add(oru);
     }
 

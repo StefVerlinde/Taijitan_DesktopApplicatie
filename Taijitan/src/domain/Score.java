@@ -1,5 +1,7 @@
 package domain;
 
+import dto.ScoreDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,12 +19,12 @@ public class Score implements Serializable {
     private int amount;
 
     @Column(name= "Type")
-    private int type;
+    private String type;
 
     @Column(name= "Name")
     private String name;
 
-    @JoinColumn(name = "UserId", referencedColumnName = "UserId")
+    @JoinColumn(name = "MemberId", referencedColumnName = "UserId")
     @ManyToOne
     private User user;
 
@@ -33,11 +35,18 @@ public class Score implements Serializable {
         this.scoreId = scoreId;
     }
 
-    public Score(String name, int type, int amount) {
-        //this.activityId = activityId;
+    public Score(String name, String type, int amount, User user) {
         setName(name);
         setType(type);
         setAmount(amount);
+        setUser(user);
+    }
+
+    public Score(ScoreDTO scdto) {
+        setName(scdto.getName());
+        setType(scdto.getType());
+        setAmount(scdto.getAmount());
+        setUser(scdto.getUser());
     }
 
     public void setAmount(int score) {
@@ -59,12 +68,22 @@ public class Score implements Serializable {
             throw new IllegalArgumentException("Naam is verplicht");
         this.name = name;
     }
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
+        if(type.trim().isEmpty())
+            throw new IllegalArgumentException("Type is verplicht");
         this.type = type;
+    }
+
+    public User getUser(){return user;}
+
+    public void setUser(User user){
+        if(user == null)
+            throw new IllegalArgumentException("Gebruiker is verplicht");
+        this.user = user;
     }
 
     @Override

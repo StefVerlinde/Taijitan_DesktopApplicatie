@@ -1,9 +1,6 @@
 package dto;
 
-import domain.City;
-import domain.Comment;
-import domain.Formula;
-import domain.Session;
+import domain.*;
 
 import java.util.Collection;
 import java.util.Date;
@@ -27,7 +24,7 @@ public class UserDTO {
     private String mailParent;
     private String discriminator;
     private int rank;
-    private int score;
+    private Collection<Score> scoreCollection;
     private Collection<Session> sessionCollection;
     private Collection<Comment> commentCollection;
     private Collection<Comment> commentCollection1;
@@ -181,12 +178,12 @@ public class UserDTO {
         this.rank = rank;
     }
 
-    public int getScore() {
-        return score;
+    public Collection<Score> getScores() {
+        return scoreCollection;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScores(Collection<Score> score) {
+        this.scoreCollection = score;
     }
 
     public Collection<Session> getSessionCollection() {

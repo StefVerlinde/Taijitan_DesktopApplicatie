@@ -23,8 +23,6 @@ public class OverviewsController extends VBox {
     @FXML
     private JFXButton btnPresents;
     @FXML
-    private JFXButton btnCourseMaterial;
-    @FXML
     private JFXButton btnChampionship;
     @FXML
     private TableView<User> table = new TableView();
@@ -49,6 +47,7 @@ public class OverviewsController extends VBox {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("overviews.fxml"));
         loader.setRoot(this);
         loader.setController(this);
+
 
         try {
             loader.load();
@@ -100,6 +99,7 @@ public class OverviewsController extends VBox {
         this.getChildren().add(pc);
     }
 
+
     public void showPresents() {
         clearNodes();
         this.getChildren().add(pc);
@@ -118,6 +118,7 @@ public class OverviewsController extends VBox {
     }
 
     private void buildGui() {
-        this.getChildren().addAll(btnActivities, btnshowRegistrations, btnPresents, btnCourseMaterial, btnActivities);
+        clearNodes();
+        this.getChildren().addAll(btnActivities, btnshowRegistrations, btnPresents,  btnActivities);
     }
 }

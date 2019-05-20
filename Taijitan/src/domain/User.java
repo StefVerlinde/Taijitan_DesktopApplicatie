@@ -22,7 +22,8 @@ import java.util.stream.Collector;
 @Entity
 @Table(name = "users")
 @NamedQueries({
-        //@NamedQuery(name = "User.findByFullName", query = "SELECT u FROM user u WHERE u.name = :userName and u.firstName = :first")
+        @NamedQuery(name = "User.deleteActivities", query = "DELETE FROM ActivityMember am WHERE am.memberId = :id"),
+        @NamedQuery(name = "User.deleteSessions", query = "DELETE from SessionMember sm where sm.memberId = :id")
 })
 public class User extends RecursiveTreeObject<User> implements Serializable {
 

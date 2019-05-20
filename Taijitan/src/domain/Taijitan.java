@@ -145,6 +145,7 @@ public class Taijitan {
 
     public void deleteUser(User user) {
         userDao.startTransaction();
+        userDao.removeSessionsAndActivities(user.getUserId());
         userDao.delete(user);
         userDao.commitTransaction();
     }

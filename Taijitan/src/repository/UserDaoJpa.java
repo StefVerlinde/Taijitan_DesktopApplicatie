@@ -20,4 +20,10 @@ public class UserDaoJpa extends GenericDaoJpa<User> implements UserDao {
             throw new EntityNotFoundException();
         }
     }
+
+    @Override
+    public void removeSessionsAndActivities(int id) {
+        em.createNamedQuery("User.deleteActivities", User.class).setParameter("id", id).executeUpdate();
+        em.createNamedQuery("User.deleteSessions", User.class).setParameter("id", id).executeUpdate();
+    }
 }

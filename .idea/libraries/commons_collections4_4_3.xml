@@ -1,31 +1,31 @@
 <component name="libraryTable">
   <library name="commons-collections4-4.3">
     <CLASSES>
-      <root url="jar://C:/jars/commons-collections4-4.3.jar!/" />
-      <root url="jar://C:/jars/commons-compress-1.18.jar!/" />
-      <root url="jar://C:/jars/derbyclient-10.14.2.0.jar!/" />
-      <root url="jar://C:/jars/dom4j-1.6.1.jar!/" />
-      <root url="jar://C:/jars/eclipselink.jar!/" />
-      <root url="jar://C:/jars/fontbox-2.0.15.jar!/" />
-      <root url="jar://C:/jars/javax.annotation_1.2.0.v201602091430.jar!/" />
-      <root url="jar://C:/jars/javax.persistence.jar!/" />
-      <root url="jar://C:/jars/jfilechooser-bookmarks-0.1.0.jar!/" />
-      <root url="jar://C:/jars/jfoenix-9.0.8.jar!/" />
-      <root url="jar://C:/jars/mssql-jdbc-7.2.1.jre8.jar!/" />
-      <root url="jar://C:/jars/mysql-connector-java-8.0.15.jar!/" />
+      <root url="jar://C:/Jars/commons-collections4-4.3.jar!/" />
+      <root url="jar://C:/Jars/commons-compress-1.18.jar!/" />
+      <root url="jar://C:/Jars/derbyclient-10.14.2.0.jar!/" />
+      <root url="jar://C:/Jars/dom4j-1.6.1.jar!/" />
+      <root url="jar://C:/Jars/eclipselink.jar!/" />
+      <root url="jar://C:/Jars/fontbox-2.0.15.jar!/" />
+      <root url="jar://C:/Jars/javax.annotation_1.2.0.v201602091430.jar!/" />
+      <root url="jar://C:/Jars/javax.persistence.jar!/" />
+      <root url="jar://C:/Jars/jfilechooser-bookmarks-0.1.0.jar!/" />
+      <root url="jar://C:/Jars/jfoenix-9.0.8.jar!/" />
+      <root url="jar://C:/Jars/mssql-jdbc-7.2.1.jre8.jar!/" />
+      <root url="jar://C:/Jars/mysql-connector-java-8.0.15.jar!/" />
       <root url="jar://C:/Jars/pdfbox-2.0.15.jar!/" />
-      <root url="jar://C:/jars/pdfbox-app-2.0.15.jar!/" />
-      <root url="jar://C:/jars/pdfbox-tools-2.0.15.jar!/" />
-      <root url="jar://C:/jars/poi-4.1.0.jar!/" />
-      <root url="jar://C:/jars/poi-examples-4.1.0.jar!/" />
-      <root url="jar://C:/jars/poi-excelant-4.1.0.jar!/" />
-      <root url="jar://C:/jars/poi-ooxml-4.1.0.jar!/" />
-      <root url="jar://C:/jars/poi-ooxml-schemas-4.1.0.jar!/" />
-      <root url="jar://C:/jars/poi-scratchpad-4.1.0.jar!/" />
-      <root url="jar://C:/jars/preflight-app-2.0.15.jar!/" />
-      <root url="jar://C:/jars/xmlbeans-3.1.0.jar!/" />
-      <root url="jar://C:/jars/xmpbox-2.0.15.jar!/" />
-      <root url="jar://C:/jars/junit-4.13-beta-3.jar!/" />
+      <root url="jar://C:/Jars/pdfbox-app-2.0.15.jar!/" />
+      <root url="jar://C:/Jars/pdfbox-tools-2.0.15.jar!/" />
+      <root url="jar://C:/Jars/poi-4.1.0.jar!/" />
+      <root url="jar://C:/Jars/poi-examples-4.1.0.jar!/" />
+      <root url="jar://C:/Jars/poi-excelant-4.1.0.jar!/" />
+      <root url="jar://C:/Jars/poi-ooxml-4.1.0.jar!/" />
+      <root url="jar://C:/Jars/poi-ooxml-schemas-4.1.0.jar!/" />
+      <root url="jar://C:/Jars/poi-scratchpad-4.1.0.jar!/" />
+      <root url="jar://C:/Jars/preflight-app-2.0.15.jar!/" />
+      <root url="jar://C:/Jars/xmlbeans-3.1.0.jar!/" />
+      <root url="jar://C:/Jars/xmpbox-2.0.15.jar!/" />
+      <root url="jar://C:/Jars/junit-4.13-beta-3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

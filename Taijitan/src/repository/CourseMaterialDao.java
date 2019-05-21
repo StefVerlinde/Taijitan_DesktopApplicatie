@@ -8,4 +8,5 @@ import javax.persistence.EntityNotFoundException;
 public interface CourseMaterialDao extends  GenericDao<CourseMaterial>{
     CourseMaterial findLast()
             throws EntityNotFoundException;
+    void removeCommentsAndImages(CourseMaterial cm);
 }

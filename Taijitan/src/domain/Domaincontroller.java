@@ -53,6 +53,8 @@ public class Domaincontroller
     }
     public ObservableList<User> getAllMembersFX(){return taijitan.getAllMembersFX();}
     public ObservableList<Activity> getAllActivitiesFX(){return taijitan.getAllActivitiesFX();}
+    public ObservableList<CourseMaterial> getAllCourseMaterialsFX(){return taijitan.getAllCourseMaterialsFX();}
+
     public List<Session> getAllSessions(){
         return taijitan.getAllSessions();
     }
@@ -65,6 +67,7 @@ public class Domaincontroller
         taijitan.updateUser(currentUser);
     }
     public void updateActivity(){taijitan.updateActivity(currentActivity);}
+    public void updateCourseMaterial(){taijitan.updateCourseMaterial(currentCourseMaterial);}
     public void deleteUser() {
         taijitan.deleteUser(currentUser);
         setCurrentUser(null);

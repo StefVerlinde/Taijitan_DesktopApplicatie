@@ -89,6 +89,43 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         if(!isAdd){
             //todo add coursematerial
             //todo validatie
+            //edit activity
+            try{
+                CourseMaterial cm = dc.getCurrentCourseMaterial();
+                cm.setTitle(txtTitle.getText());
+                cm.setYoutubeURL(txtYouTubeURL.getText());
+                cm.setFullDescription(txaDiscription.getText());
+                cm.setCommentCollection(cm.getCommentCollection());
+
+                for(String name : this.imageNames)
+                {
+                    Image newI = new Image();
+                    newI.setName(String.format("%s/%s", this.txtTitle.getText(), name));
+                    this.images.add(newI);
+                }
+                cm.setImageCollection(this.images);
+
+                if (cboRank.getSelectionModel().isEmpty()) {
+                    throw new IllegalArgumentException("Rank mag niet leeg zijn");
+                } else {
+                    cm.setRank(cboRank.getSelectionModel().getSelectedIndex());
+                }
+            }
+            catch(IllegalArgumentException e)
+            {
+                canSubmit = false;
+                lblError.setText(e.getMessage());
+            }
+            try {
+                if(canSubmit) {
+                    dc.updateCourseMaterial();
+                    this.lblError.setText("");
+                    fc.updateListPanelCourseMaterial();
+                }
+            }
+            catch (IllegalArgumentException e){
+                lblError.setText(e.getMessage());
+            }
         }
         else
         {
@@ -105,7 +142,6 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
                 } else {
                     newC.setRank(cboRank.getSelectionModel().getSelectedIndex()+1);
                 }
-
 
                 for(String name : this.imageNames)
                 {
@@ -133,6 +169,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
     @FXML
     private void delete(){
         if(!isAdd){
+            System.out.println((dc.getCurrentCourseMaterial()));
             if (dc.getCurrentCourseMaterial() != null) {
                 if(AlertBoxController.ConfirmationAlert("Delete", "Wil je lesmateriaal " + dc.getCurrentCourseMaterial().getTitle() + " verwijderen?")){
                     dc.deleteCourseMaterial();

@@ -114,6 +114,9 @@ public class Taijitan {
     public ObservableList<Activity> getAllActivitiesFX(){
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllActivities())));
     }
+    public ObservableList<CourseMaterial> getAllCourseMaterialsFX(){
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList((getAllCourseMaterials())));
+    }
     public List<CourseMaterial> getAllCourseMaterials(){
         return courseMaterialDao.findAll();
     }
@@ -139,6 +142,11 @@ public class Taijitan {
         activityDao.startTransaction();
         activityDao.update(act);
         activityDao.commitTransaction();
+    }
+    public void updateCourseMaterial(CourseMaterial cm){
+        courseMaterialDao.startTransaction();
+        courseMaterialDao.update(cm);
+        courseMaterialDao.commitTransaction();
     }
 
     public void deleteUser(User user) {
@@ -202,6 +210,7 @@ public class Taijitan {
 
     public void deleteCourseMaterial(CourseMaterial currentCourseMaterial) {
         courseMaterialDao.startTransaction();
+        courseMaterialDao.removeCommentsAndImages(currentCourseMaterial);
         courseMaterialDao.delete(currentCourseMaterial);
         courseMaterialDao.commitTransaction();
     }

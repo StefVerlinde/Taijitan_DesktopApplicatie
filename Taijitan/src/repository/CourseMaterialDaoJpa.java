@@ -19,4 +19,10 @@ public class CourseMaterialDaoJpa extends GenericDaoJpa<CourseMaterial> implemen
             throw new EntityNotFoundException();
         }
     }
+
+    @Override
+    public void removeCommentsAndImages(CourseMaterial cm) {
+        em.createNamedQuery("CourseMaterial.removeComments", CourseMaterial.class).setParameter("id", cm).executeUpdate();
+        em.createNamedQuery("CourseMaterial.removeImages", CourseMaterial.class).setParameter("id", cm).executeUpdate();
+    }
 }

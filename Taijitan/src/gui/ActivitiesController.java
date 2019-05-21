@@ -224,16 +224,6 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 start.setMinutes((int) eindminuut);
                 act.setEndDate(einde);
 
-
-                //for(User u : act.getUsers()) {
-                //    int updated = u.getScore() - act.getScore();
-                //    u.setScore(updated);
-                //}
-                //act.setScore(Integer.valueOf(txtScore.getText()));
-                //for(User u : act.getUsers()){
-                //    int newScore = u.getScore() + Integer.valueOf(txtScore.getText());
-                //    u.setScore(newScore);
-                //}
                 act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));
 
                 if (cboType.getSelectionModel().isEmpty()) {

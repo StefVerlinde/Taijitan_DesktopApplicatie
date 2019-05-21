@@ -17,7 +17,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "courseMaterial")
 @NamedQueries({
-        @NamedQuery(name = "CourseMaterial.findLast", query = "SELECT c FROM CourseMaterial c ORDER BY c.materialId DESC")
+        @NamedQuery(name = "CourseMaterial.findLast", query = "SELECT c FROM CourseMaterial c ORDER BY c.materialId DESC"),
+        @NamedQuery(name = "CourseMaterial.removeComments", query = "DELETE FROM Comment c WHERE c.courseMaterialId = :id"),
+        @NamedQuery(name = "CourseMaterial.removeImages", query = "DELETE FROM Image i WHERE i.courseMaterialMaterialId = :id")
         }
 )
 public class CourseMaterial implements Serializable {
@@ -120,7 +122,7 @@ public class CourseMaterial implements Serializable {
     }
 
     public void setImageCollection(Collection<Image> imageCollection) {
-        if(imageCollection == null || imageCollection.isEmpty())
+        if(imageCollection == null)
             throw new IllegalArgumentException("Gelieve foto's te selecteren");
         this.imageCollection = imageCollection;
     }

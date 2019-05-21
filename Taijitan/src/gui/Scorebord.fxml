@@ -15,7 +15,7 @@
    <children>
       <VBox alignment="TOP_CENTER" layoutX="66.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="711.0" prefWidth="783.0" spacing="30.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="71.0" prefWidth="867.0" text="Scorebord" textAlignment="CENTER" textFill="#336566">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="71.0" prefWidth="867.0" text="Scores" textAlignment="CENTER" textFill="#336566">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>

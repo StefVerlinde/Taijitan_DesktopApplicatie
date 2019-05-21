@@ -162,11 +162,14 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
         try{
 
             if(dc.getLijstConfirmed().size() < Integer.valueOf(txtMaxParticipants.getText())){
-                User u = lstMembers.getSelectionModel().getSelectedItem();
-                dc.addConfirmed(u);
-                lstMembers.setItems(dc.getLijstMembers());
-                lstConfirmed.setItems(dc.getLijstConfirmed());
-                lstMembers.getSelectionModel().clearSelection();
+                if(lstMembers.getSelectionModel().getSelectedItem() != null)
+                {
+                    User u = lstMembers.getSelectionModel().getSelectedItem();
+                    dc.addConfirmed(u);
+                    lstMembers.setItems(dc.getLijstMembers());
+                    lstConfirmed.setItems(dc.getLijstConfirmed());
+                    lstMembers.getSelectionModel().clearSelection();
+                }
             }
             else{
                 AlertBoxController.BasicAlert("Maximum aantal bereikt", "het maximum aantal deelnemers voor deze activiteit is bereikt");
@@ -180,13 +183,16 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
 
     @FXML
     void toMember(MouseEvent event) {
-        User u = lstConfirmed.getSelectionModel().getSelectedItem();
+        if(lstConfirmed.getSelectionModel().getSelectedItem() != null)
+        {
+            User u = lstConfirmed.getSelectionModel().getSelectedItem();
 
-        dc.removeConfirmed(u);
-        lstMembers.setItems(dc.getLijstMembers());
-        lstConfirmed.setItems(dc.getLijstConfirmed());
+            dc.removeConfirmed(u);
+            lstMembers.setItems(dc.getLijstMembers());
+            lstConfirmed.setItems(dc.getLijstConfirmed());
 
-        lstConfirmed.getSelectionModel().clearSelection();
+            lstConfirmed.getSelectionModel().clearSelection();
+        }
     }
 
     @FXML

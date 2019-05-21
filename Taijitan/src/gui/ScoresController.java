@@ -14,7 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 
 
-public class ScorebordController extends AnchorPane implements PropertyChangeListener {
+public class ScoresController extends AnchorPane implements PropertyChangeListener {
     @FXML
     private JFXTextField txtName;
     @FXML
@@ -36,11 +36,11 @@ public class ScorebordController extends AnchorPane implements PropertyChangeLis
             ScoreType.Sportproef.toString(), ScoreType.Andere.toString());
 
 
-    public ScorebordController(Domaincontroller dc,FrameController fc) {
+    public ScoresController(Domaincontroller dc, FrameController fc) {
         this.dc = dc;
         this.fc = fc;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scorebord.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scores.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 

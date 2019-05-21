@@ -20,7 +20,7 @@ public class FrameController extends HBox {
     private MembersController members;
     private OverviewsController overviews;
     private ActivitiesController activities;
-    private ScorebordController scorebord;
+    private ScoresController scorebord;
     private CourseMaterialController courseMaterial;
     private Object current;
     Rectangle2D bounds;
@@ -101,7 +101,7 @@ public class FrameController extends HBox {
         this.listpanel = new ListPanelController(dc, this);
         this.setVisibleAdd(true);
         this.dc.setCurrentUser(null);
-        scorebord = new ScorebordController(dc, this);
+        scorebord = new ScoresController(dc, this);
         this.dc.addPropertyChangeListenerCurrentUserScore(scorebord);
         current = scorebord;
         listpanel.fillWithMembersScore();

@@ -3,6 +3,7 @@ package gui;
 import com.jfoenix.controls.*;
 import domain.*;
 import dto.ActivityDTO;
+import dto.ScoreDTO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -261,6 +262,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
             //add activity
             List<User> users = new ArrayList<>(dc.getLijstConfirmed());
             ActivityDTO act = new ActivityDTO();
+            List<ScoreDTO> scoList = new ArrayList<>();
         try{
             if(dtmStart.getValue() != null && dtmStart.getValue().isBefore(LocalDate.now())){
                 AlertBoxController.ConfirmationAlert("In het verleden", "Dit is een aanpassing in het verleden");
@@ -295,7 +297,15 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
             //    u.setScore(newScore);
             //}
 
-
+            //Score toevoegen
+            for(User u : act.getUsers()){
+                ScoreDTO sco = new ScoreDTO();
+                sco.setName(act.getName());
+                sco.setUser(u);
+                sco.setAmount(act.getScore());
+                sco.setType(ScoreType.Activiteit.toString());
+                scoList.add(sco);
+            }
 
         }
         catch (NullPointerException e){
@@ -315,6 +325,10 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
         try {
             if(canSubmit) {
                 dc.addActivity(act);
+                for(ScoreDTO sco: scoList){
+                    sco.getUser().addScoreTotScores(new Score(sco));
+                    dc.addScore(sco);
+                }
                 toEditUser();
                 emptyFields();
                 fc.updateListPanelActivities();

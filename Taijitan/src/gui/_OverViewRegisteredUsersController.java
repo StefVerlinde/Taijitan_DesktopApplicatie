@@ -96,7 +96,7 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 
         //opvullen tabel
         final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
-        System.out.println(users.size());
+
 
 //        tblRegistredUsers = new JFXTreeTableView<>();
         tblRegistredUsers.getColumns().setAll(clmUserFamilyName, clmUserFirstName,clmKyu, clmDiscriminator, clmUserDateOfBirth, clmUserEmail, clmUserTelephone);
@@ -222,7 +222,6 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
                         contentStream.showText(text);
                         contentStream.endText();
                     }
-                    System.out.println("content added");
                     contentStream.close();
             document.addPage(pageOne);
             String path = AskPath.execute("overzichtLeden", "pdf");
@@ -230,7 +229,6 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
 //            document.save("D:/my_doc.pdf");
             document.close();
         } catch (IOException e) {
-            System.out.println("locatie niet gevonden");
             e.printStackTrace();
         }
     }
@@ -318,13 +316,16 @@ public class _OverViewRegisteredUsersController extends AnchorPane {
             TreeItem<User> selectedUser = tblRegistredUsers.getSelectionModel().getSelectedItem();
             List<User> users = dc.getAllUsers();
             if(users.contains(selectedUser.getValue())){
-                System.out.println(selectedUser);
                 fc.changeToMembersWithSelectedUser(selectedUser.getValue(), "registeredOverview");
             }
             else {
                 AlertBoxController.BasicAlert("Error", selectedUser.getValue().getFirstName() + " " + selectedUser.getValue().getName() + " is geen bestaand lid meer.");
             }
         }
+    }
+
+    public void refresh(){
+        this.tblRegistredUsers.refresh();
     }
 }
 

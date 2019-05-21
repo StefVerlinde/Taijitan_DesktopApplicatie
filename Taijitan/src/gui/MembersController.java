@@ -206,6 +206,11 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     fc.setDisableAdd(false);
                     fc.updateListPanelMembers();
                 }
+                if(!(fc.getAfkomstig() == null))
+                {
+                    if(!fc.getAfkomstig().equals(""))
+                        fc.terug();
+                }
             }
         } else {
             toEditUser();
@@ -320,6 +325,11 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                         dc.setCurrentUser(user);
                         dc.updateUser();
                         fc.updateListPanelMembers();
+                    }
+                    if(!(fc.getAfkomstig() == null))
+                    {
+                        if(!fc.getAfkomstig().equals(""))
+                            fc.terug();
                     }
                 }
                 catch (IllegalArgumentException e){
@@ -489,6 +499,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     }
 
     public void fillFieldsWithSelectedUser(User user){
+        dc.setCurrentUser(user);
         btnTerug.setVisible(true);
         lblAddress.setText("");
         lblPersonal.setText("");
@@ -531,12 +542,6 @@ public class MembersController extends BorderPane implements PropertyChangeListe
 
         dpBirthDate.setValue(Dates.convertToLocalDate(user.getDateOfBirth()));
         lblDateRegistered.setText(formatDate(user.getDateRegistred()));
-        if (user.getDiscriminator().equals("Members"))
-        {
-            btnDelete.setDisable(false);
-        } else {
-            btnDelete.setDisable(true);
-        }
     }
 
     public void setIsAdd(boolean b)

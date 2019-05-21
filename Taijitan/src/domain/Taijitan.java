@@ -134,13 +134,11 @@ public class Taijitan {
         userDao.startTransaction();
         userDao.update(user);
         userDao.commitTransaction();
-        System.out.println("update user success");
     }
     public void updateActivity(Activity act){
         activityDao.startTransaction();
         activityDao.update(act);
         activityDao.commitTransaction();
-        System.out.println("update activity success");
     }
 
     public void deleteUser(User user) {
@@ -194,7 +192,6 @@ public class Taijitan {
     public City getCityByPostal(String postal)
     {
         City city = cityDao.getByPostal(postal);
-        System.out.println(city.toString());
         return city;
     }
 
@@ -219,7 +216,6 @@ public class Taijitan {
 
         CourseMaterial cml = courseMaterialDao.findLast();
         cml.setImageCollection(newC.getImageCollection());
-        System.out.println(cml.toString());
 
         imageDao.startTransaction();
         for(Image i : cml.getImageCollection())

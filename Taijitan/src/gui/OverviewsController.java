@@ -121,4 +121,20 @@ public class OverviewsController extends VBox {
         clearNodes();
         this.getChildren().addAll(btnActivities, btnshowRegistrations, btnPresents,  btnActivities);
     }
+
+    public void refreshActivities() {
+        this.oa.refresh();
+    }
+
+    public void refreshPresents() {
+        this.pc.refresh();
+    }
+
+    public void refreshRegistered() {
+        this.oru.refresh();
+    }
+
+    public void refreshChampionship() {
+        this.osb.refresh();
+    }
 }

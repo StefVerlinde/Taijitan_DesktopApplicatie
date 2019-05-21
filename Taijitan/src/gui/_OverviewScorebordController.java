@@ -92,7 +92,6 @@ public class _OverviewScorebordController extends AnchorPane {
         Collections.sort(users, Comparator.comparing(User::getTotaleScore).reversed());
         //opvullen tabel
         final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
-        System.out.println(users.size());
 
         tblScorebord.getColumns().setAll( clmRanking, clmUserFamilyName, clmUserFirstName,clmScore);
         tblScorebord.setRoot(root);
@@ -199,7 +198,6 @@ public class _OverviewScorebordController extends AnchorPane {
                 contentStream.showText(text);
                 contentStream.endText();
             }
-            System.out.println("content added");
             contentStream.close();
             document.addPage(pageOne);
 //            String path = askPath(".pdf");
@@ -288,12 +286,15 @@ public class _OverviewScorebordController extends AnchorPane {
             TreeItem<User> selectedUser = tblScorebord.getSelectionModel().getSelectedItem();
             List<User> users = dc.getAllUsers();
             if(users.contains(selectedUser.getValue())){
-                System.out.println(selectedUser);
                 fc.changeToMembersWithSelectedUser(selectedUser.getValue(), "scorebordOverview");
             }
             else {
                 AlertBoxController.BasicAlert("Error", selectedUser.getValue().getFirstName() + " " + selectedUser.getValue().getName() + " is geen bestaand lid meer.");
             }
         }
+    }
+
+    public void refresh(){
+        this.tblScorebord.refresh();
     }
 }

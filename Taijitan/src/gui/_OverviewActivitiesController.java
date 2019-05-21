@@ -97,7 +97,6 @@ public class _OverviewActivitiesController extends AnchorPane {
             User selectedUser = (User) lstPressents.getSelectionModel().getSelectedItem();
             List<User> users = dc.getAllUsers();
             if(users.contains(selectedUser)){
-                System.out.println(selectedUser);
                 fc.changeToMembersWithSelectedUser(selectedUser, "activitiesOverview");
             }
             else {
@@ -246,7 +245,6 @@ public class _OverviewActivitiesController extends AnchorPane {
                 contentStream.showText(text);
                 contentStream.endText();
             }
-            System.out.println("content added");
             contentStream.close();
             document.addPage(pageOne);
             String path = AskPath.execute("ActiviteitenTest", "pdf");
@@ -341,5 +339,7 @@ public class _OverviewActivitiesController extends AnchorPane {
         }
     }
 
-
+    public void refresh(){
+        this.lstPressents.refresh();
+    }
 }

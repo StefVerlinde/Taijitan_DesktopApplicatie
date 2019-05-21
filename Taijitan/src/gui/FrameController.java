@@ -168,15 +168,23 @@ public class FrameController extends HBox {
 
         switch (afkomstig){
             case "activitiesOverview":
+                this.afkomstig = "";
+                overviews.refreshActivities();
                 overviews.showActivities();
                 break;
             case "presentOverview":
+                this.afkomstig = "";
+                overviews.refreshPresents();
                 overviews.showPresents();
                 break;
             case "registeredOverview":
+                this.afkomstig = "";
+                overviews.refreshRegistered();
                 overviews.showRegistrations();
                 break;
             case "scorebordOverview":
+                this.afkomstig = "";
+                overviews.refreshChampionship();
                 overviews.showChampionship();
                 break;
         }
@@ -248,6 +256,10 @@ public class FrameController extends HBox {
     public void setStage(Stage stage)
     {
         this.stage = stage;
+    }
+
+    public String getAfkomstig() {
+        return afkomstig;
     }
 
     public Stage getStage()

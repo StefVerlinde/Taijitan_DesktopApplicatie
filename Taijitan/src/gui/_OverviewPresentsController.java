@@ -61,10 +61,6 @@ public class _OverviewPresentsController extends AnchorPane {
                 Session sellectedSession = (Session) newValue;
 
 
-                System.out.println("tekst voor in lbl: " + sellectedSession.toString());
-                System.out.println("tekst voor in lbl2: " + sellectedSession.getTeacherUserId().getFirstName());
-
-
                 lblDate.setText(String.format("Datum: %s", sellectedSession.toString()));
                 lblTeacher.setText(String.format("Trainer: %s %s", sellectedSession.getTeacherUserId().getFirstName(), sellectedSession.getTeacherUserId().getName()));
                 lblTeacher = new Label(sellectedSession.getTeacherUserId().getFirstName());
@@ -102,7 +98,6 @@ public class _OverviewPresentsController extends AnchorPane {
             User selectedUser = (User) lstPressents.getSelectionModel().getSelectedItem();
             List<User> users = dc.getAllUsers();
             if (users.contains(selectedUser)) {
-                System.out.println(selectedUser);
                 fc.changeToMembersWithSelectedUser(selectedUser, "presentOverview");
             } else {
                 AlertBoxController.BasicAlert("Error", selectedUser.getFirstName() + " " + selectedUser.getName() + " is geen bestaand lid meer.");
@@ -173,10 +168,8 @@ public class _OverviewPresentsController extends AnchorPane {
             workbook.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("file not found");
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("IO Exception");
             e.printStackTrace();
         }
     }
@@ -226,14 +219,12 @@ public class _OverviewPresentsController extends AnchorPane {
                 contentStream.showText(text);
                 contentStream.endText();
             }
-            System.out.println("content added");
             contentStream.close();
             document.addPage(pageOne);
             String path = AskPath.execute("Aanwezigheden", "pdf");
             document.save(path);
             document.close();
         } catch (IOException e) {
-            System.out.println("locatie niet gevonden");
             e.printStackTrace();
         }
     }
@@ -313,5 +304,9 @@ public class _OverviewPresentsController extends AnchorPane {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void refresh(){
+        this.lstPressents.refresh();
     }
 }

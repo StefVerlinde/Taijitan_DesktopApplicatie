@@ -14,10 +14,8 @@ public class AlertBoxController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            System.out.println("Okay");
             return true;
         } else {
-            System.out.println("Annuleer");
             return false;
         }
     }

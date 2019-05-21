@@ -186,7 +186,6 @@ public class Session implements Serializable {
     @Override
     public String toString() {
         String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        System.out.println(newstring); // 2011-01-18
         return String.format("%s", dateFormatter(getDate()));
     }
 

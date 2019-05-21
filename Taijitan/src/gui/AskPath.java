@@ -20,7 +20,6 @@ public class AskPath {
 
 //        String fileName = String.format("%s%s%d%d%d%s", path, "/OverzichtGeregistreerdeLeden", Year, Month, day, extension);
         String fileName = String.format("%s/%s_%d-%d-%d.%s", path, docName, Year, Month, day, extension);
-        System.out.println(fileName);
 
         return fileName;
     }

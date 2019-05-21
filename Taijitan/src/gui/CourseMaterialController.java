@@ -170,7 +170,6 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             }
             this.txfImages.setText(uistring);
         }
-        System.out.println(this.imageNames.toString());
     }
 
     @Override

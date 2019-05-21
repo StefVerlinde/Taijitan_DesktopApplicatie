@@ -253,8 +253,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
             try {
                 if(canSubmit) {
                     dc.updateActivity();
-                    disableFields();
-                    emptyFields();
+                    this.lblError.setText("");
                     fc.updateListPanelActivities();
                 }
             }

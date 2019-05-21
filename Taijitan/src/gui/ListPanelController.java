@@ -79,7 +79,7 @@ public class ListPanelController <T> extends VBox  {
     public void fillWithActivities(){
         btnAdd.setText("Voeg activiteit toe");
         lstItems.setItems((ObservableList<T>) dc.getAllActivitiesFX());
-
+        lstItems.getSelectionModel().clearSelection();
         lstItems.getSelectionModel().selectedItemProperty().addListener((ObservableValue,oldValue,newValue) ->
         {
             if(newValue != null)

@@ -220,8 +220,8 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 einde  = Dates.convertToDate(dtmEnd.getValue());
                 long einduur = timeEnd.getValue().getHour();
                 long eindminuut = timeEnd.getValue().getMinute();
-                start.setHours((int) einduur);
-                start.setMinutes((int) eindminuut);
+                einde.setHours((int) einduur);
+                einde.setMinutes((int) eindminuut);
                 act.setEndDate(einde);
 
                 act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));

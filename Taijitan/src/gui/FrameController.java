@@ -195,7 +195,7 @@ public class FrameController extends HBox {
     }
     public void updateListPanelActivities(){ listpanel.fillWithActivities();}
     public void updateListPanelCourseMaterial() {
-        listpanel.fillWithCourseMaterial();
+        changeContent("coursematerial");
     }
 
     public boolean isAddingMember(){return members.getIsAdd();}

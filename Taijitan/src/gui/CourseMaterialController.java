@@ -108,7 +108,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
                 if (cboRank.getSelectionModel().isEmpty()) {
                     throw new IllegalArgumentException("Rank mag niet leeg zijn");
                 } else {
-                    cm.setRank(cboRank.getSelectionModel().getSelectedIndex());
+                    cm.setRank(cboRank.getSelectionModel().getSelectedIndex()+1);
                 }
             }
             catch(IllegalArgumentException e)
@@ -196,7 +196,7 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
         List<File> files = new ArrayList<File>();
         files = fileChooser.showOpenMultipleDialog(fc.getStage());
 
-        if(files.isEmpty())
+        if(files == null ||files.isEmpty())
         {
             txfImages.setText("Kies afbeeldingen");
         } else {

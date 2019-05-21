@@ -67,7 +67,11 @@ public class Domaincontroller
         taijitan.updateUser(currentUser);
     }
     public void updateActivity(){taijitan.updateActivity(currentActivity);}
-    public void updateCourseMaterial(){taijitan.updateCourseMaterial(currentCourseMaterial);}
+    public void updateCourseMaterial(){
+        taijitan.updateCourseMaterial(currentCourseMaterial);
+        lijstCourseMaterial = FXCollections.observableArrayList(taijitan.getAllCourseMaterials());
+        filteredCourseMaterialLijst = new FilteredList<>(lijstCourseMaterial,p -> true);
+    }
     public void deleteUser() {
         taijitan.deleteUser(currentUser);
         setCurrentUser(null);
@@ -82,23 +86,22 @@ public class Domaincontroller
     public void deleteCourseMaterial(){
         taijitan.deleteCourseMaterial(this.currentCourseMaterial);
         setCurrentCourseMaterial(null);
+        lijstCourseMaterial = FXCollections.observableArrayList(taijitan.getAllCourseMaterials());
+        filteredCourseMaterialLijst = new FilteredList<>(lijstCourseMaterial,p -> true);
     }
     public void filter(String str){
-        filteredMembersLijst.setPredicate(user ->{
-            return user.getFirstName().toLowerCase().contains(str.toLowerCase())
-                    || user.getName().toLowerCase().contains(str.toLowerCase());
-        });
+        filteredMembersLijst.setPredicate(user -> user.getFirstName().toLowerCase().contains(str.toLowerCase())
+                || user.getName().toLowerCase().contains(str.toLowerCase()));
     }
     public void filterConfirmed(String str){
-        getFilteredConfirmedLijst.setPredicate(user ->{
-            return user.getFirstName().toLowerCase().contains(str.toLowerCase())
-                    || user.getName().toLowerCase().contains(str.toLowerCase());
-        });
+        getFilteredConfirmedLijst.setPredicate(user -> user.getFirstName().toLowerCase().contains(str.toLowerCase())
+                || user.getName().toLowerCase().contains(str.toLowerCase()));
     }
     public void filterCourseMaterial(Rank rank){
-        filteredCourseMaterialLijst.setPredicate(course -> {
-            return course.getRank() == rank.getId();
-        });
+        if(rank == null)
+            filteredCourseMaterialLijst.setPredicate(course -> true);
+        else
+            filteredCourseMaterialLijst.setPredicate(course -> course.getRank() == rank.getId());
     }
 
     public List<User> getUsersFromActivity(Activity act){
@@ -199,9 +202,12 @@ public class Domaincontroller
     public void setCurrentCourseMaterial(CourseMaterial newC) {
         subjectCourseMaterial.firePropertyChange("currentCourseMaterial",this.currentCourseMaterial,newC);
         this.currentCourseMaterial = newC;
+
     }
 
     public void addCourseMaterial(CourseMaterialDTO newC) {
         taijitan.addCourseMaterial(newC);
+        lijstCourseMaterial = FXCollections.observableArrayList(taijitan.getAllCourseMaterials());
+        filteredCourseMaterialLijst = new FilteredList<>(lijstCourseMaterial,p -> true);
     }
 }

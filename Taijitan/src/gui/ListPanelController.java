@@ -103,7 +103,7 @@ public class ListPanelController <T> extends VBox  {
         cboRank.getSelectionModel().clearSelection();
         cboRank.setVisible(true);
         btnAdd.setText("Voeg lesmateriaal toe");
-        lstItems.setItems((ObservableList<T>)dc.getAllCourseMaterialsFX());
+        lstItems.setItems((ObservableList<T>)dc.getLijstCourseMaterial());
 
         cboRank.getItems().setAll(Rank.values());
 

@@ -81,7 +81,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txfImages" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <JFXTextField fx:id="txfImages" focusColor="#336566" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets right="200.0" />
                      </GridPane.margin>

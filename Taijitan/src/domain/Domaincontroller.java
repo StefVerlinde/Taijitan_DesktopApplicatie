@@ -66,6 +66,10 @@ public class Domaincontroller
     {
         taijitan.updateUser(currentUser);
     }
+    public void updateUser(User u)
+    {
+        taijitan.updateUser(u);
+    }
     public void updateActivity(){taijitan.updateActivity(currentActivity);}
     public void updateCourseMaterial(){
         taijitan.updateCourseMaterial(currentCourseMaterial);

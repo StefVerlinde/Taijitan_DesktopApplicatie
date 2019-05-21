@@ -64,11 +64,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     @FXML
     private JFXButton btnEdit;
     @FXML
-    private Label lblPersonal;
-    @FXML
-    private Label lblAddress;
-    @FXML
-    private Label lblContact;
+    private Label lblError;
     @FXML
     private JFXComboBox cmbFormula;
     @FXML
@@ -131,9 +127,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
 
         dpBirthDate.getEditor().clear();
         lblDateRegistered.setText("");
-        lblContact.setText("");
-        lblPersonal.setText("");
-        lblAddress.setText("");
+        lblError.setText("");
     }
 
     private void enableFields() {
@@ -230,7 +224,6 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 User user = dc.getCurrentUser();
                 //Personal data
                 try {
-                    lblPersonal.setText("");
 
                     user.setFirstName(txtFirstName.getText());
                     user.setName(txtLastName.getText());
@@ -276,13 +269,12 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     }
                 } catch (IllegalArgumentException e) {
                     canSubmit = false;
-                    lblPersonal.setText(e.getMessage());
+                    lblError.setText(e.getMessage());
                 }
 
 
                 //Address
                 try {
-                    lblAddress.setText("");
                     user.setStreet(txtStreet.getText());
                     user.setHouseNumber(txtHouseNumber.getText());
                     if (cmbCountry.getSelectionModel().isEmpty()) {
@@ -302,20 +294,19 @@ public class MembersController extends BorderPane implements PropertyChangeListe
 
                 } catch (IllegalArgumentException e) {
                     canSubmit = false;
-                    lblAddress.setText(e.getMessage());
+                    lblError.setText(e.getMessage());
                 }
 
 
                 //contact
                 try {
-                    lblContact.setText("");
                     user.setEmail(txtEmail.getText());
                     user.setLandlineNumber(txtLandLineNumber.getText());
                     user.setMailParent(txtMailParent.getText());
                     user.setPhoneNumber(txtPhoneNumber.getText());
                 } catch (IllegalArgumentException e) {
                     canSubmit = false;
-                    lblContact.setText(e.getMessage());
+                    lblError.setText(e.getMessage());
                 }
                 //endregion
 
@@ -325,6 +316,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                         dc.setCurrentUser(user);
                         dc.updateUser();
                         fc.updateListPanelMembers();
+                        emptyFields();
                     }
                     if(!(fc.getAfkomstig() == null))
                     {
@@ -333,7 +325,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                     }
                 }
                 catch (IllegalArgumentException e){
-                    lblPersonal.setText(e.getMessage());
+                    lblError.setText(e.getMessage());
                 }
             }
         } else {
@@ -342,7 +334,6 @@ public class MembersController extends BorderPane implements PropertyChangeListe
             UserDTO user = new UserDTO();
             //Personal data
             try {
-                lblPersonal.setText("");
                 user.setFirstName(txtFirstName.getText());
                 user.setName(txtLastName.getText());
                 user.setBirthPlace(txtBirthPlace.getText());
@@ -387,12 +378,11 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 }
             } catch (IllegalArgumentException e) {
                 canSubmit = false;
-                lblPersonal.setText(e.getMessage());
+                lblError.setText(e.getMessage());
             }
 
             //Address
             try {
-                lblAddress.setText("");
                 user.setStreet(txtStreet.getText());
                 user.setHouseNumber(txtHouseNumber.getText());
                 if (cmbCountry.getSelectionModel().isEmpty()) {
@@ -409,19 +399,18 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 }
             } catch (IllegalArgumentException e) {
                 canSubmit = false;
-                lblAddress.setText(e.getMessage());
+                lblError.setText(e.getMessage());
             }
 
             //contact
             try {
-                lblContact.setText("");
                 user.setEmail(txtEmail.getText());
                 user.setLandlineNumber(txtLandLineNumber.getText());
                 user.setMailParent(txtMailParent.getText());
                 user.setPhoneNumber(txtPhoneNumber.getText());
             } catch (IllegalArgumentException e) {
                 canSubmit = false;
-                lblContact.setText(e.getMessage());
+                lblError.setText(e.getMessage());
             }
 
             //extra required properties
@@ -438,7 +427,12 @@ public class MembersController extends BorderPane implements PropertyChangeListe
                 }
             }
             catch (IllegalArgumentException e) {
-                lblPersonal.setText(e.getMessage());
+                canSubmit = false;
+                lblError.setText(e.getMessage());
+            }
+            catch (NullPointerException e) {
+                canSubmit = false;
+                lblError.setText("Gelieve alle verplichte velden in te vullen");
             }
         }
     }
@@ -453,9 +447,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
         if(evt.getNewValue() != null)
         {
             User user = (User)evt.getNewValue();
-            lblAddress.setText("");
-            lblPersonal.setText("");
-            lblContact.setText("");
+            lblError.setText("");
             toEditUser();
             enableFields();
             txtFirstName.setText(user.getFirstName());
@@ -501,9 +493,7 @@ public class MembersController extends BorderPane implements PropertyChangeListe
     public void fillFieldsWithSelectedUser(User user){
         dc.setCurrentUser(user);
         btnTerug.setVisible(true);
-        lblAddress.setText("");
-        lblPersonal.setText("");
-        lblContact.setText("");
+        lblError.setText("");
         toEditUser();
         enableFields();
         txtFirstName.setText(user.getFirstName());

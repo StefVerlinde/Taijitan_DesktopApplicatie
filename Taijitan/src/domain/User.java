@@ -329,7 +329,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setLandlineNumber(String landlineNumber) {
-        if (!landlineNumber.trim().isEmpty() && (landlineNumber.length() < 10 || landlineNumber.length() > 20))
+        if (!landlineNumber.trim().isEmpty() && (landlineNumber.length() < 9 || landlineNumber.length() > 20))
             throw new IllegalArgumentException("Geen geldig nummer");
         this.landlineNumber = landlineNumber;
     }

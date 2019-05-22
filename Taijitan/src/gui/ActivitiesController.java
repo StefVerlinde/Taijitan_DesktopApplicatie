@@ -206,18 +206,13 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 }
 
                 Activity act = dc.getCurrentActivity();
-                act.setName(txtName.getText());
-
                 act.setScore(Integer.parseInt(txtScore.getText()));
-
                 for(User user: act.getUsers()){
                     Score sco = dc.getScoreByUserIdAndActivityName(user, act.getName());
                     user.removeScoreFromScores(sco);
                     dc.deleteScore(sco);
                 }
-
                 act.setUsers(dc.getLijstConfirmed());
-
                 Date start;
                 start = Dates.convertToDate(dtmStart.getValue());
                 long startuur = timeStart.getValue().getHour();
@@ -235,6 +230,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 act.setEndDate(einde);
 
                 act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));
+                act.setName(txtName.getText());
 
                 for(User u : act.getUsers()){
                     ScoreDTO sco = new ScoreDTO();

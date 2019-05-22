@@ -44,7 +44,7 @@ public class OverviewsController extends VBox {
         this.oa = oa;
         this.osb = osb;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("overviews.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Overviews.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 

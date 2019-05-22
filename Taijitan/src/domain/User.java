@@ -329,7 +329,7 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
     }
 
     public void setLandlineNumber(String landlineNumber) {
-        if (!landlineNumber.trim().isEmpty() && (landlineNumber.length() < 10 || landlineNumber.length() > 20))
+        if (!landlineNumber.trim().isEmpty() && (landlineNumber.length() < 9 || landlineNumber.length() > 20))
             throw new IllegalArgumentException("Geen geldig nummer");
         this.landlineNumber = landlineNumber;
     }
@@ -369,6 +369,10 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
 
     public void addScoreTotScores(Score score){
         this.scores.add(score);
+    }
+
+    public void removeScoreFromScores(Score score){
+        this.scores.remove(score);
     }
 
     public void setScores(Collection<Score> score){this.scores = score;}

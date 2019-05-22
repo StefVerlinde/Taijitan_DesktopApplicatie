@@ -40,7 +40,6 @@ public class FrameController extends HBox {
         this.osc = new _OverviewScorebordController(dc, this);
         this.listpanel = new ListPanelController(dc, this);
         setupStart();
-
     }
 
     private void setupStart() {

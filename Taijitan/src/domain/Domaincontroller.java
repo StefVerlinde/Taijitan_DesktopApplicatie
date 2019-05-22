@@ -87,6 +87,10 @@ public class Domaincontroller
         taijitan.deleteActivity(this.currentActivity);
         setCurrentActivity(null);
     }
+    public void deleteScore(Score score){
+
+        taijitan.deleteScore(score);
+    }
     public void deleteCourseMaterial(){
         taijitan.deleteCourseMaterial(this.currentCourseMaterial);
         setCurrentCourseMaterial(null);
@@ -213,5 +217,9 @@ public class Domaincontroller
         taijitan.addCourseMaterial(newC);
         lijstCourseMaterial = FXCollections.observableArrayList(taijitan.getAllCourseMaterials());
         filteredCourseMaterialLijst = new FilteredList<>(lijstCourseMaterial,p -> true);
+    }
+
+    public Score getScoreByUserIdAndActivityName(User user, String name){
+        return taijitan.getScoreByUserIdAndActivityName(user, name);
     }
 }

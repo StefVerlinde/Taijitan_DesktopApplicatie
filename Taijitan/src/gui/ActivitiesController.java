@@ -4,16 +4,14 @@ import com.jfoenix.controls.*;
 import domain.*;
 import dto.ActivityDTO;
 import dto.ScoreDTO;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -445,6 +443,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
 
     public void fillFieldWithSelectedActivity(Activity selectedActivity) {
         enableFields();
+        dc.setCurrentActivity(selectedActivity);
         btnTerug.setVisible(true);
         txtName.setText(selectedActivity.getName());
         dtmStart.setValue(convertToLocalDate(selectedActivity.getStartDate()));

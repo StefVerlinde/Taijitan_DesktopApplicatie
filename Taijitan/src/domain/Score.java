@@ -73,7 +73,7 @@ public class Score implements Serializable {
     }
 
     public void setType(String type) {
-        if(type.trim().isEmpty())
+        if( type == null || type.trim().isEmpty())
             throw new IllegalArgumentException("Type is verplicht");
         this.type = type;
     }

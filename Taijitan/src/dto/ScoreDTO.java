@@ -22,6 +22,9 @@ public class ScoreDTO {
     }
 
     public void setAmount(int amount) {
+        System.out.println(amount);
+        if(amount <1)
+            throw new IllegalArgumentException("Score is verplicht en kan niet negatief zijn");
         this.amount = amount;
     }
 

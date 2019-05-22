@@ -327,7 +327,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 dc.addActivity(act);
                 for(ScoreDTO sco: scoList){
                     sco.getUser().addScoreTotScores(new Score(sco));
-                    dc.addScore(sco);
+                    dc.updateUser(sco.getUser());
                 }
                 toEditUser();
                 emptyFields();

@@ -157,12 +157,22 @@ public class CourseMaterialController extends AnchorPane implements PropertyChan
             }
 
 
-            if(canSubmit)
-            {
-                dc.addCourseMaterial(newC);
-                toEditCourseMaterial();
-                emptyFields();
-                fc.updateListPanelCourseMaterial();
+            try{
+                if(canSubmit)
+                {
+                    dc.addCourseMaterial(newC);
+                    toEditCourseMaterial();
+                    emptyFields();
+                    fc.updateListPanelCourseMaterial();
+                }
+            }
+            catch(IllegalArgumentException e){
+                lblError.setText(e.getMessage());
+                canSubmit = false;
+            }
+            catch(NullPointerException no){
+                lblError.setText("Gelieve alle verplichte velden in te vullen");
+                canSubmit = false;
             }
         }
     }

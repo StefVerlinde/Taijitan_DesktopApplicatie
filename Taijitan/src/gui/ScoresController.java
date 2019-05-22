@@ -85,6 +85,7 @@ public class ScoresController extends AnchorPane implements PropertyChangeListen
 
     @FXML
     void confirm(){
+        boolean canSubmit = true;
         ScoreDTO sco = new ScoreDTO();
         try {
             sco.setName(txtName.getText());
@@ -97,19 +98,30 @@ public class ScoresController extends AnchorPane implements PropertyChangeListen
                 sco.setType(cboType.getSelectionModel().getSelectedItem().toString());
             }
         }
-        catch (IllegalArgumentException e){
+        catch (NumberFormatException e){
+            canSubmit = false;
+            lblError.setText("Gelieve een geldige score in te geven");
+        }
+        catch(IllegalArgumentException e)
+        {
+            canSubmit = false;
             lblError.setText(e.getMessage());
         }
 
+
         try {
-            selectedUser.addScoreTotScores(new Score(sco));
-            dc.updateUser();
-        //  dc.addScore(sco);
-            emptyFields();
-            disableFields();
-            fc.updateListPanelMembers();
+            if(canSubmit)
+            {
+                selectedUser.addScoreTotScores(new Score(sco));
+                dc.updateUser();
+                //  dc.addScore(sco);
+                emptyFields();
+                disableFields();
+                fc.updateListPanelMembers();
+            }
         }
         catch (IllegalArgumentException e){
+            canSubmit =false;
             lblError.setText(e.getMessage());
         }
     }

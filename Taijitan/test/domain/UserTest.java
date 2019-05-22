@@ -251,7 +251,7 @@ public class UserTest {
         scoreCollection.add(new Score());
         scoreCollection.add(new Score());
         user.setScores(scoreCollection);
-        Assert.assertEquals(scoreCollection.size(), user.getSessionCollection().size());
+        Assert.assertEquals(scoreCollection.size(), user.getScores().size());
     }
 
 
@@ -331,5 +331,225 @@ public class UserTest {
         sessionCollection.add(new Session());
         user.setSessionCollection1(sessionCollection);
         Assert.assertEquals(sessionCollection.size(), user.getSessionCollection1().size());
+    }
+
+    @Test
+    public void getUserId() {
+    }
+
+    @Test
+    public void getName() {
+    }
+
+    @Test
+    public void setName() {
+    }
+
+    @Test
+    public void getFirstName() {
+    }
+
+    @Test
+    public void setFirstName() {
+    }
+
+    @Test
+    public void getDateOfBirth() {
+    }
+
+    @Test
+    public void setDateOfBirth() {
+    }
+
+    @Test
+    public void getStreet() {
+    }
+
+    @Test
+    public void setStreet() {
+    }
+
+    @Test
+    public void getCountry() {
+    }
+
+    @Test
+    public void getHouseNumber() {
+    }
+
+    @Test
+    public void setHouseNumber() {
+    }
+
+    @Test
+    public void getPhoneNumber() {
+    }
+
+    @Test
+    public void setPhoneNumber() {
+    }
+
+    @Test
+    public void getEmail() {
+    }
+
+    @Test
+    public void setEmail() {
+    }
+
+    @Test
+    public void getDateRegistred() {
+    }
+
+    @Test
+    public void getGender() {
+    }
+
+    @Test
+    public void getNationality() {
+    }
+
+    @Test
+    public void getPersonalNationalNumber() {
+    }
+
+    @Test
+    public void setPersonalNationalNumber() {
+    }
+
+    @Test
+    public void getBirthPlace() {
+    }
+
+    @Test
+    public void setBirthPlace() {
+    }
+
+    @Test
+    public void getLandlineNumber() {
+    }
+
+    @Test
+    public void setLandlineNumber() {
+    }
+
+    @Test
+    public void getMailParent() {
+    }
+
+    @Test
+    public void setMailParent() {
+    }
+
+    @Test
+    public void getDiscriminator() {
+    }
+
+    @Test
+    public void getRank() {
+    }
+
+    @Test
+    public void getScores() {
+    }
+
+    @Test
+    public void getTotaleScore() {
+    }
+
+    @Test
+    public void addScoreTotScores() {
+    }
+
+    @Test
+    public void removeScoreFromScores() {
+    }
+
+    @Test
+    public void setScores() {
+    }
+
+    @Test
+    public void getSessionCollection() {
+    }
+
+    @Test
+    public void getCommentCollection() {
+    }
+
+    @Test
+    public void getCommentCollection1() {
+    }
+
+    @Test
+    public void getCityPostalcode() {
+    }
+
+    @Test
+    public void setCityPostalcode() {
+    }
+
+    @Test
+    public void getFormulaId() {
+    }
+
+    @Test
+    public void getSessionId() {
+    }
+
+    @Test
+    public void getSessionId1() {
+    }
+
+    @Test
+    public void getSessionCollection1() {
+    }
+
+    @Test
+    public void hashCode1() {
+    }
+
+    @Test
+    public void equals1() {
+    }
+
+    @Test
+    public void toString1() {
+    }
+
+    @Test
+    public void familyNameProperty() {
+    }
+
+    @Test
+    public void scoreProperty() {
+    }
+
+    @Test
+    public void dateFormatter() {
+    }
+
+    @Test
+    public void firstNameProperty() {
+    }
+
+    @Test
+    public void dateOfBirthProperty() {
+    }
+
+    @Test
+    public void kyuProperty() {
+    }
+
+    @Test
+    public void discriminatorProperty() {
+    }
+
+    @Test
+    public void telephoneProperty() {
+    }
+
+    @Test
+    public void emailProperty() {
     }
 }

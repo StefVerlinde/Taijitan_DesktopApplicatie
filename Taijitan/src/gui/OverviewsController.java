@@ -85,6 +85,7 @@ public class OverviewsController extends VBox {
     public void showChampionship() {
         clearNodes();
         this.getChildren().add(osb);
+        osb.refresh();
     }
 
     @FXML

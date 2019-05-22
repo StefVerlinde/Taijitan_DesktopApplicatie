@@ -8,6 +8,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name ="Score")
+@NamedQueries({
+        @NamedQuery(name = "Score.findByUserIdActivityName", query = "SELECT s FROM Score s WHERE s.name=:Name and s.user =:MemberId")
+})
 public class Score implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

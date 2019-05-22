@@ -201,6 +201,7 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
         boolean canSubmit = true;
         if(!isAdd){
             //edit activity
+            List<ScoreDTO> scoList = new ArrayList<>();
             try{
                 if(dtmStart.getValue() != null && dtmStart.getValue().isBefore(LocalDate.now())){
                     AlertBoxController.ConfirmationAlert("In het verleden", "Dit is een aanpassing in het verleden");
@@ -208,7 +209,17 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
 
                 Activity act = dc.getCurrentActivity();
                 act.setName(txtName.getText());
+
+                act.setScore(Integer.parseInt(txtScore.getText()));
+
+                for(User user: act.getUsers()){
+                    Score sco = dc.getScoreByUserIdAndActivityName(user, act.getName());
+                    user.removeScoreFromScores(sco);
+                    dc.deleteScore(sco);
+                }
+
                 act.setUsers(dc.getLijstConfirmed());
+
                 Date start;
                 start = Dates.convertToDate(dtmStart.getValue());
                 long startuur = timeStart.getValue().getHour();
@@ -226,6 +237,15 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
                 act.setEndDate(einde);
 
                 act.setMaxParticpants(Integer.valueOf(txtMaxParticipants.getText()));
+
+                for(User u : act.getUsers()){
+                    ScoreDTO sco = new ScoreDTO();
+                    sco.setName(act.getName());
+                    sco.setUser(u);
+                    sco.setAmount(act.getScore());
+                    sco.setType(ScoreType.Activiteit.toString());
+                    scoList.add(sco);
+                }
 
                 if (cboType.getSelectionModel().isEmpty()) {
                     throw new IllegalArgumentException("Type mag niet leeg zijn");
@@ -250,6 +270,10 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
             try {
                 if(canSubmit) {
                     dc.updateActivity();
+                    for(ScoreDTO sco: scoList){
+                        sco.getUser().addScoreTotScores(new Score(sco));
+                        dc.updateUser(sco.getUser());
+                    }
                     this.lblError.setText("");
                     fc.updateListPanelActivities();
                 }
@@ -345,6 +369,12 @@ public class ActivitiesController extends AnchorPane implements PropertyChangeLi
         if (!isAdd) {
             if (dc.getCurrentActivity() != null) {
                 if(AlertBoxController.ConfirmationAlert("Delete", "Wil je activiteit " + dc.getCurrentActivity().getName() + " verwijderen?")){
+                    Activity currentActi = dc.getCurrentActivity();
+                    for(User user: currentActi.getUsers()){
+                        Score sco = dc.getScoreByUserIdAndActivityName(user, currentActi.getName());
+                        user.removeScoreFromScores(sco);
+                        dc.deleteScore(sco);
+                    }
                     dc.deleteActivity();
                     emptyFields();
                     disableFields();

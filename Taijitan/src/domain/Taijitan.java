@@ -160,9 +160,18 @@ public class Taijitan {
         activityDao.delete(act);
         activityDao.commitTransaction();
     }
+    public void deleteScore(Score sco){
+        scoreDao.startTransaction();
+        scoreDao.delete(sco);
+        scoreDao.commitTransaction();
+    }
     public User getUserByFullName(String firstname,String lastname)
     {
         return userDao.getUserByName(lastname,firstname);
+    }
+
+    public Score getScoreByUserIdAndActivityName(User user, String activityName){
+        return scoreDao.getScoreByUserIdAndActivityName(user, activityName);
     }
 
     public void addUser(UserDTO user) {

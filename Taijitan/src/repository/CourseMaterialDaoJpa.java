@@ -1,8 +1,6 @@
 package repository;
 
-import domain.City;
 import domain.CourseMaterial;
-import domain.User;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;

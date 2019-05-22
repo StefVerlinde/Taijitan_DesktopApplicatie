@@ -371,6 +371,10 @@ public class User extends RecursiveTreeObject<User> implements Serializable {
         this.scores.add(score);
     }
 
+    public void removeScoreFromScores(Score score){
+        this.scores.remove(score);
+    }
+
     public void setScores(Collection<Score> score){this.scores = score;}
 
     public Collection<Session> getSessionCollection() {

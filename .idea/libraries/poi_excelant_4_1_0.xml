@@ -24,7 +24,7 @@
       <root url="jar://C:/Jars/javax.annotation_1.2.0.v201602091430.jar!/" />
       <root url="jar://C:/Jars/fontbox-2.0.15.jar!/" />
       <root url="jar://C:/Jars/jfilechooser-bookmarks-0.1.0.jar!/" />
-      <root url="jar://C:/Jars/junit-4.13-beta-3.jar!/" />
+      <root url="jar://C:/Jars/junit.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

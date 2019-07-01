@@ -7,7 +7,7 @@ From All the projects that were created by students from HoGent, Taijitan chose 
 This project was created in collaboration with: 
 * Jarne Deschacht --> https://github.com/JarneDeschacht
 * Robbe Dekien --> https://github.com/robbedekien 
-* Stef Verlinde --> https://github.com/StefVerlinde
+* Tijs Martens --> https://github.com/TijsM
 
 
 The project consisted out of 2 parts
@@ -16,7 +16,7 @@ The project consisted out of 2 parts
 
 # .Net
 
-The .Net project can be found at: https://github.com/TijsM/Taijitan_DotNet
+The .Net project can be found at: https://github.com/StefVerlinde/Taijitan_WebApplicatie
 
 
 The goal was to create a web application where a trainer can start a training and where the ji-jitsu students can consult documentation about what they are learning.
